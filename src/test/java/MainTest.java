@@ -161,5 +161,45 @@ public class MainTest {
 
     }
 
+    @Test(/*enabled = false/*, priority = 2*/)
+    public void test6_signUpUser() {
+        MobileElement linkSignUp = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_form_sign_up_text\"]/android.widget.TextView\n");
+        linkSignUp.click();
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_role_plate_doctor\"]/android.widget.TextView[1]").isDisplayed(), true);
+
+        MobileElement inputEmail = (MobileElement) androidDriver.findElementById("sign_up_email");
+        inputEmail.click();
+        String email = newEmail();
+        String name = newName();
+        String surname = newSurname();
+        //inputEmail.setValue(name+"."+surname+"@gmail.com");
+        inputEmail.setValue(email);
+        MobileElement inputFirstName = (MobileElement) androidDriver.findElementById("sign_up_firstname");
+        inputFirstName.click();
+        inputFirstName.setValue(name);
+        MobileElement inputLastName = (MobileElement) androidDriver.findElementById("sign_up_lastname");
+        inputLastName.click();
+        inputLastName.setValue(surname);
+        MobileElement inputPassword = (MobileElement) androidDriver.findElementById("sign_up_password");
+        inputPassword.click();
+        String password = newPassword();
+        inputPassword.setValue(password);
+        MobileElement inputConfirmPassword = (MobileElement) androidDriver.findElementById("sign_up_confirm_password");
+        inputConfirmPassword.click();
+        inputConfirmPassword.setValue(password);
+
+        androidDriver.hideKeyboard();
+        MobileElement buttonAgree = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.Switch");
+        buttonAgree.click();
+        MobileElement buttonSignUp = (MobileElement) androidDriver.findElementById("sign_up_button");
+        buttonSignUp.click();
+
+        Assert.assertEquals(androidDriver.findElementById("android:id/alertTitle").getText(), "Success");
+        Assert.assertEquals(androidDriver.findElementById("android:id/message").getText(), "Your account has been created");
+        MobileElement buttonOk = (MobileElement) androidDriver.findElementById("android:id/button1");
+        buttonOk.click();
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(), true);
+    }
+
 
 }
