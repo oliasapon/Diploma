@@ -12,9 +12,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Random;
+import java.util.*;
 
 public class MainTest {
     private AndroidDriver<AndroidElement> androidDriver;
@@ -45,6 +43,44 @@ public class MainTest {
         String newMail = "mailForTest" + formatDate + "@gmail.com";
         return newMail;
     }
+
+    public String recordsHistoryDateDay() {
+        /*DateFormat pattern = new SimpleDateFormat("dd"); //y
+        Date todayDate = Calendar.getInstance().getTime();
+        String formatDate = pattern.format(todayDate);
+        String historyDate = formatDate;
+        String newHistoryDate;
+        char[] chArray = historyDate.toCharArray();
+            if(chArray[0] == '0') {
+                newHistoryDate = historyDate.substring(1);
+            }
+            else {
+                newHistoryDate = historyDate;
+            }*/
+
+        GregorianCalendar gcalendar = new GregorianCalendar();
+        String date = String.valueOf(gcalendar.get(Calendar.DATE));
+        return date;
+    }
+
+    public String recordsHistoryDateMonth() {
+        Calendar calendar = Calendar.getInstance();
+        String month = calendar.getDisplayName(Calendar.MONTH,
+                Calendar.LONG_FORMAT, new Locale("eng"));
+        return month;
+    }
+
+    /*int Date;
+    int Month;
+    int Year;
+
+    public static void main(String args[]) {
+
+        Calendar calendar = Calendar.getInstance();
+
+        Date = calendar.get(Calendar.DAY_OF_MONTH);
+        Month = calendar.get(Calendar.MONTH);
+        Year = calendar.get(Calendar.YEAR);*/
 
     public String newPassword(){
         Random random = new Random();
@@ -264,11 +300,16 @@ public class MainTest {
         inputPassword.click();
         inputPassword.setValue("12344321");
 
+        MobileElement buttonShowPassword = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView\n");
+        buttonShowPassword.click();
+        Thread.sleep(5000, 30);
+        buttonShowPassword.click();
+
         androidDriver.hideKeyboard();
         MobileElement buttonSignIn = (MobileElement) androidDriver.findElementById("sign_in_form_submit_button");
         buttonSignIn.click();
 
-        Thread.sleep(10000, 30);
+        Thread.sleep(5000, 30);
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_pre_measurement_screen\"]/android.widget.TextView[1]").getText(),"Let's get started");
     }
 
@@ -325,6 +366,72 @@ public class MainTest {
         buttonOk.click();
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(), true);
     }
+
+    @Test
+    public void test9_signInDoctor() throws InterruptedException {
+        MobileElement inputEmail = (MobileElement) androidDriver.findElementById("sign_in_form_email_field");
+        inputEmail.click();
+        inputEmail.setValue("aria34@gmail.com");
+        MobileElement inputPassword = (MobileElement) androidDriver.findElementById("sign_in_form_password_field");
+        inputPassword.click();
+        inputPassword.setValue("doctorAria34");
+
+        MobileElement buttonShowPassword = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView\n");
+        buttonShowPassword.click();
+        Thread.sleep(5000, 30);
+        buttonShowPassword.click();
+
+        androidDriver.hideKeyboard();
+        MobileElement buttonSignIn = (MobileElement) androidDriver.findElementById("sign_in_form_submit_button");
+        buttonSignIn.click();
+
+        Thread.sleep(5000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.widget.TextView\n").getText(),"Records history");
+
+        MobileElement buttonSettings = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[5]");
+        buttonSettings.click();
+        MobileElement linkSignOut = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_out_text\"]/android.widget.TextView\n");
+        linkSignOut.click();
+        Thread.sleep(5000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(), true);
+
+    }
+
+    @Test
+    public void test10_signOutDoctor() throws InterruptedException {
+        MobileElement buttonSettings = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[5]");
+        buttonSettings.click();
+        MobileElement linkSignOut = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_out_text\"]/android.widget.TextView\n");
+        linkSignOut.click();
+        Thread.sleep(5000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(), true);
+    }
+
+    @Test
+    public void test11_liveDemoUser() throws InterruptedException {
+        MobileElement buttonLiveDemo = (MobileElement) androidDriver.findElementById("live_demo_button");
+        buttonLiveDemo.click();
+        MobileElement buttonUser = (MobileElement) androidDriver.findElementById("sign_up_role_plate_patient");
+        buttonUser.click();
+        Thread.sleep(5000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.view.ViewGroup[1]\n").isEnabled(), true);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_dashboard_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView\n").getText(), "Dashboard");
+        Assert.assertEquals(androidDriver.findElementById("dashboard_week_period_tab").isEnabled(), true);
+    }
+
+    @Test
+    public void test12_liveDemoDoctor() throws InterruptedException {
+        MobileElement buttonLiveDemo = (MobileElement) androidDriver.findElementById("live_demo_button");
+        buttonLiveDemo.click();
+        MobileElement buttonDoctor = (MobileElement) androidDriver.findElementById("sign_up_role_plate_doctor");
+        buttonDoctor.click();
+        Thread.sleep(5000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.view.ViewGroup[1]\n").isEnabled(), true);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.widget.TextView\n").getText(), "Records history");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView\n").getText(), recordsHistoryDateMonth() + " " + recordsHistoryDateDay());
+    }
+
+
 
 
 }
