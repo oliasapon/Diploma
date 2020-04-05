@@ -418,14 +418,19 @@ public class MainTest {
         buttonLiveDemo.click();
         MobileElement buttonUser = (MobileElement) androidDriver.findElementById("sign_up_role_plate_patient");
         buttonUser.click();
-        Thread.sleep(5000, 30);
-        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.view.ViewGroup[1]\n").isEnabled(), true);
+        Thread.sleep(9000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_dashboard_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[1]\n").isEnabled(), true);
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_dashboard_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView\n").getText(), "Dashboard");
         Assert.assertEquals(androidDriver.findElementById("dashboard_week_period_tab").isEnabled(), true);
     }
 
     @Test
-    public void test12_userDemoViewDashboard() throws InterruptedException {
+    public void test12_userDemoViewHistory(){
+
+    }
+
+    @Test
+    public void test13_userDemoViewDashboard() throws InterruptedException {
         //DELETE
         MobileElement buttonLiveDemo = (MobileElement) androidDriver.findElementById("live_demo_button");
         buttonLiveDemo.click();
