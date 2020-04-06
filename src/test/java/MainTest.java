@@ -5,7 +5,9 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.MobileCapabilityType;
 
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -425,12 +427,7 @@ public class MainTest {
     }
 
     @Test
-    public void test12_userDemoViewHistory(){
-
-    }
-
-    @Test
-    public void test13_userDemoViewDashboard() throws InterruptedException {
+    public void test12_userDemoViewDashboard() throws InterruptedException {
         //DELETE
         MobileElement buttonLiveDemo = (MobileElement) androidDriver.findElementById("live_demo_button");
         buttonLiveDemo.click();
@@ -470,6 +467,59 @@ public class MainTest {
         //androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(false).instance(0)).scrollIntoView(new UiSelector().textContains(\""+"Sep"+"\").instance(0))");
         //androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(false).instance(0)).scrollIntoView(new UiSelector().textContains(\"" + "87" + "\").instance(0))");
     }
+
+    @Test
+    public void test13_userDemoViewHistory() throws InterruptedException {
+        MobileElement buttonHistory = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[2]\n");
+        buttonHistory.click();
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_history_screen\"]/android.widget.TextView\n").getText(),
+                "Recording history");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView\n").getText(),
+                recordsHistoryDateMonth() + " " + recordsHistoryDateDay());
+    }
+
+    @Test
+    public void test14_userDemoHistoryNormalState() throws InterruptedException {
+        //DELETE
+        MobileElement buttonLiveDemo = (MobileElement) androidDriver.findElementById("live_demo_button");
+        buttonLiveDemo.click();
+        MobileElement buttonUser = (MobileElement) androidDriver.findElementById("sign_up_role_plate_patient");
+        buttonUser.click();
+        //----------------------------------------------------
+        Thread.sleep(10000, 30);
+        MobileElement buttonHistory = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[2]\n");
+        buttonHistory.click();
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_history_screen\"]/android.widget.TextView\n").getText(),
+                "Recording history");
+        androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+"Apr 6"+"\").instance(0))");
+        MobileElement buttonHistoryForNormalApr6 = (MobileElement) androidDriver.findElementByXPath("(//android.view.ViewGroup[@content-desc=\"patient_record_0\"])[1]");
+        buttonHistoryForNormalApr6.click();
+
+        Thread.sleep(5000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.widget.TextView").getText(),
+                "Result");
+        MobileElement buttonOverallWellbeing78Info = (MobileElement) androidDriver.findElementById("overall_plate_78");
+        buttonOverallWellbeing78Info.click();
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[1]\n").getText(),
+                "Overall heart wellbeing score is a general estimation of your current physical and emotional wellbeing on the scale from ideal state (100-75%) to a bit imbalanced (75-50%) and moderately imbalanced (50-25%).");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[3]").getText(),
+                "Heart general conditions and your functional conditions (ANS) are normal.");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[5]\n").getText(),
+                "Enjoy your life and please take the measurements on a regular basis.");
+        //MobileElement buttonGetOutOfInfo = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.widget.ScrollView/android.view.ViewGroup");
+        //buttonGetOutOfInfo.click();
+
+        /*TouchAction action = new TouchAction(androidDriver);
+        action.press(50, 50);
+        action.release();
+        action.perform();*/
+        new TouchAction(androidDriver).tap(PointOption.point(50,50)).perform();
+
+
+        //ok
+
+    }
+
 
     @Test
     public void test1_liveDemoDoctor() throws InterruptedException {
