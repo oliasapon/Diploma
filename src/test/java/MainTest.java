@@ -67,6 +67,7 @@ public class MainTest {
 
         GregorianCalendar gcalendar = new GregorianCalendar();
         String date = String.valueOf(gcalendar.get(Calendar.DATE));
+        //System.out.print(date);
         return date;
     }
 
@@ -74,6 +75,7 @@ public class MainTest {
         Calendar calendar = Calendar.getInstance();
         String month = calendar.getDisplayName(Calendar.MONTH,
                 Calendar.LONG_FORMAT, new Locale("eng"));
+        //System.out.print(month);
         return month;
     }
 
@@ -428,12 +430,7 @@ public class MainTest {
 
     @Test
     public void test12_userDemoViewDashboard() throws InterruptedException {
-        //DELETE
-        MobileElement buttonLiveDemo = (MobileElement) androidDriver.findElementById("live_demo_button");
-        buttonLiveDemo.click();
-        MobileElement buttonUser = (MobileElement) androidDriver.findElementById("sign_up_role_plate_patient");
-        buttonUser.click();
-        //----------------------------------------------------
+
         Thread.sleep(2000, 30);
         androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+"Energy score"+"\").instance(0))");
 
@@ -470,28 +467,34 @@ public class MainTest {
 
     @Test
     public void test13_userDemoViewHistory() throws InterruptedException {
-        MobileElement buttonHistory = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[2]\n");
-        buttonHistory.click();
-        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_history_screen\"]/android.widget.TextView\n").getText(),
-                "Recording history");
-        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView\n").getText(),
-                recordsHistoryDateMonth() + " " + recordsHistoryDateDay());
-    }
 
-    @Test
-    public void test14_userDemoHistoryNormalState() throws InterruptedException {
         //DELETE
         MobileElement buttonLiveDemo = (MobileElement) androidDriver.findElementById("live_demo_button");
         buttonLiveDemo.click();
         MobileElement buttonUser = (MobileElement) androidDriver.findElementById("sign_up_role_plate_patient");
         buttonUser.click();
+        Thread.sleep(4000, 30);
         //----------------------------------------------------
-        Thread.sleep(10000, 30);
+
         MobileElement buttonHistory = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[2]\n");
         buttonHistory.click();
+        Thread.sleep(5000, 30);
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_history_screen\"]/android.widget.TextView\n").getText(),
                 "Recording history");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_history_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView[1]\n").getText(),
+                recordsHistoryDateMonth() + " " + recordsHistoryDateDay());
+
+        Thread.sleep(2000, 30);
+        androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+"Apr 1"+"\").instance(0))");
+        Thread.sleep(2000, 30);
         androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+"Apr 6"+"\").instance(0))");
+
+    }
+
+    @Test
+    public void test14_userDemoHistoryNormalState() throws InterruptedException {
+
+        //androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+"Apr 6"+"\").instance(0))");
         MobileElement buttonHistoryForNormalApr6 = (MobileElement) androidDriver.findElementByXPath("(//android.view.ViewGroup[@content-desc=\"patient_record_0\"])[1]");
         buttonHistoryForNormalApr6.click();
 
@@ -506,19 +509,161 @@ public class MainTest {
                 "Heart general conditions and your functional conditions (ANS) are normal.");
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[5]\n").getText(),
                 "Enjoy your life and please take the measurements on a regular basis.");
-        //MobileElement buttonGetOutOfInfo = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.widget.ScrollView/android.view.ViewGroup");
-        //buttonGetOutOfInfo.click();
 
-        /*TouchAction action = new TouchAction(androidDriver);
-        action.press(50, 50);
-        action.release();
-        action.perform();*/
-        new TouchAction(androidDriver).tap(PointOption.point(50,50)).perform();
+        TouchAction actionWithTouch = new TouchAction(androidDriver);
+        actionWithTouch.tap(PointOption.point(100,100)).release().perform();
+
+        MobileElement buttonEnergyScore75Info = (MobileElement) androidDriver.findElementById("stamina_plate_75");
+        buttonEnergyScore75Info.click();
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[1]\n").getText(),
+                "Stamina is a measure of the total adaptive capacities of your body. This indicator is based on various parameters of Heart Rate Variability. Heart Rate Variability (HRV) - multilevel autonomic regulation of heart rate.");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[3]").getText(),
+                "There are no alarm symptoms.");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[5]\n").getText(),
+                "Please take the measurements on a regular basis.");
+        actionWithTouch.tap(PointOption.point(100,100)).release().perform();
+
+        MobileElement buttonMyocardiumScore84Info = (MobileElement) androidDriver.findElementById("myocardium_plate_84");
+        buttonMyocardiumScore84Info.click();
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[2]\n").getText(),
+                "No heart muscle disturbance is revealed. Good news.");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[4]\n").getText(),
+                "Please take the measurements on the regular basis.");
+        actionWithTouch.tap(PointOption.point(100,100)).release().perform();
+
+        MobileElement buttonEmotionScoreSignificantDisorderInfo = (MobileElement) androidDriver.findElementById("emotional_plate_22");
+        buttonEmotionScoreSignificantDisorderInfo.click();
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView\n").getText(),
+                "Emotional Score reflects the state of your unconscious emotions.");
+        actionWithTouch.tap(PointOption.point(100,100)).release().perform();
+
+        MobileElement buttonRiskOfHearDisordersVeryLowInfo = (MobileElement) androidDriver.findElementById("heart_risk_plate_1");
+        buttonRiskOfHearDisordersVeryLowInfo.click();
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[1]\n").getText(),
+                "Risk of heart disorders is an integral score reflecting the probability of sudden cardiac death based on HRV and ECG time and amplitude parameters.");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[3]").getText(),
+                "Probability of heart disorders is very low.");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[5]\n").getText(),
+                "Enjoy your life and please take the measurements on a regular basis.");
+        actionWithTouch.tap(PointOption.point(100,100)).release().perform();
+
+        MobileElement buttonStressLevelNormalInfo = (MobileElement) androidDriver.findElementById("stress_plate_82");
+        buttonStressLevelNormalInfo.click();
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[1]\n").getText(),
+                "Stress is a physical, mental, or emotional factor that causes bodily or mental tension. Stress Index measures physiological stress, which has proven to be a reliable predictor of future health problems in cases of prolonged high physiological stress levels.");
+        actionWithTouch.tap(PointOption.point(100,100)).release().perform();
+
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"heart_age_plate_27_37\"]/android.widget.TextView[1]\n").getText(),
+                "Heart biological age");
+
+        Thread.sleep(2000, 30);
+        MobileElement buttonComeBack = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"back_button\"]/android.widget.ImageView");
+        buttonComeBack.click();
+
+        Thread.sleep(5000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_history_screen\"]/android.widget.TextView\n").getText(),
+                "Recording history");
+    }
+
+    @Test
+    public void test15_userDemoHistoryMildDisorderState() throws InterruptedException {
+
+        androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+"Apr 5"+"\").instance(0))");
+        MobileElement buttonHistoryForNormalApr5 = (MobileElement) androidDriver.findElementByXPath("(//android.view.ViewGroup[@content-desc=\"patient_record_0\"])[2]");
+        buttonHistoryForNormalApr5.click();
+
+        Thread.sleep(5000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.widget.TextView").getText(),
+                "Result");
 
 
-        //ok
+        MobileElement buttonOverallWellbeing64Info = (MobileElement) androidDriver.findElementById("overall_plate_64");
+        buttonOverallWellbeing64Info.click();
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[1]\n").getText(),
+                "Overall heart wellbeing score is a general estimation of your current physical and emotional wellbeing on the scale from ideal state (100-75%) to a bit imbalanced (75-50%) and moderately imbalanced (50-25%).");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[3]").getText(),
+                "Heart general conditions and your functional conditions (ANS) are slightly decreased.");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[5]\n").getText(),
+                "Take the measurements at least once per day when you do your routine actions or activities.");
+
+
+        TouchAction actionWithTouch = new TouchAction(androidDriver);
+        //action.press(50, 50);
+        actionWithTouch.tap(PointOption.point(100,100)).release().perform();
+        //new TouchAction(androidDriver).tap(PointOption.point(200,200)).release().perform();
+
+        MobileElement buttonEnergyScore35Info = (MobileElement) androidDriver.findElementById("stamina_plate_35");
+        buttonEnergyScore35Info.click();
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[1]\n").getText(),
+                "Stamina is a measure of the total adaptive capacities of your body. This indicator is based on various parameters of Heart Rate Variability. Heart Rate Variability (HRV) - multilevel autonomic regulation of heart rate.");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[3]").getText(),
+                "Abnormalities are revealed that may indicate cardiac disease.");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[5]\n").getText(),
+                "You need to schedule a visit to the doctor within a short time. Please send your ECG to your doctor ASAP. Take the measurements not less than twice per day.");
+        actionWithTouch.tap(PointOption.point(100,100)).release().perform();
+
+        MobileElement buttonMyocardiumScore82Info = (MobileElement) androidDriver.findElementById("myocardium_plate_82");
+        buttonMyocardiumScore82Info.click();
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[2]\n").getText(),
+                "No heart muscle disturbance is revealed. Good news.");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[4]\n").getText(),
+                "Please take the measurements on the regular basis.");
+        actionWithTouch.tap(PointOption.point(100,100)).release().perform();
+
+
+        /*MobileElement buttonRiskOfHearDisordersInfo = (MobileElement) androidDriver.findElementById("heart_risk_plate_1");
+        buttonRiskOfHearDisordersInfo.click();
+        Assert.assertEquals(androidDriver.findElementByXPath("").getText(),
+                "");
+        Assert.assertEquals(androidDriver.findElementByXPath("").getText(),
+                "");
+        Assert.assertEquals(androidDriver.findElementByXPath("").getText(),
+                "");
+        actionWithTouch.tap(PointOption.point(100,100)).release().perform();*/
+
+
+        MobileElement buttonEmotionScoreNormalInfo = (MobileElement) androidDriver.findElementById("emotional_plate_100");
+        buttonEmotionScoreNormalInfo.click();
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[1]\n").getText(),
+                "Emotional Score reflects the state of your unconscious emotions.");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[3]").getText(),
+                "You are in good balance of mind. Congratulations!");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[5]\n").getText(),
+                "Enjoy your life and please take the measurements on a regular basis.");
+        actionWithTouch.tap(PointOption.point(100,100)).release().perform();
+
+
+        MobileElement buttonRiskOfHearDisordersVeryLowInfo = (MobileElement) androidDriver.findElementById("heart_risk_plate_1");
+        buttonRiskOfHearDisordersVeryLowInfo.click();
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[1]\n").getText(),
+                "Risk of heart disorders is an integral score reflecting the probability of sudden cardiac death based on HRV and ECG time and amplitude parameters.");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[3]").getText(),
+                "Probability of heart disorders is very low.");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[5]\n").getText(),
+                "Enjoy your life and please take the measurements on a regular basis.");
+        actionWithTouch.tap(PointOption.point(100,100)).release().perform();
+
+
+
+        MobileElement buttonStressLevelSevereDisorderInfo = (MobileElement) androidDriver.findElementById("stress_plate_1073");
+        buttonStressLevelSevereDisorderInfo.click();
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[1]\n").getText(),
+                "Stress is a physical, mental, or emotional factor that causes bodily or mental tension. Stress Index measures physiological stress, which has proven to be a reliable predictor of future health problems in cases of prolonged high physiological stress levels.");
+        actionWithTouch.tap(PointOption.point(100,100)).release().perform();
+
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"heart_age_plate_18_29\"]/android.widget.TextView[1]\n").getText(),
+                "Heart biological age");
+
+        Thread.sleep(2000, 30);
+        MobileElement buttonComeBack = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"back_button\"]/android.widget.ImageView");
+        buttonComeBack.click();
+
+        Thread.sleep(5000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_history_screen\"]/android.widget.TextView\n").getText(),
+                "Recording history");
 
     }
+
 
 
     @Test
