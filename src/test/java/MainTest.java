@@ -5,6 +5,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.MobileCapabilityType;
 
+import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.interactions.touch.TouchActions;
@@ -430,10 +431,7 @@ public class MainTest {
 
     @Test
     public void test12_userDemoViewDashboard() throws InterruptedException {
-
-        Thread.sleep(2000, 30);
-        androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+"Energy score"+"\").instance(0))");
-
+  //-------------------------------------
         /*String uiSelector = "new UiSelector().textMatches(\"" + "Energy score" + "\")";
         String command = "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView("+ uiSelector + ");";
         Thread.sleep(5000, 30);
@@ -442,39 +440,47 @@ public class MainTest {
         String command1 = "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView("+ uiSelector + ");";
         Thread.sleep(5000, 30);
         androidDriver.findElementByAndroidUIAutomator(command1);*/
+//----------------------------------
 
+        TouchAction actionWithTouch = new TouchAction(androidDriver);
+        Dimension size = androidDriver.manage().window().getSize();
+        int anchor = (int) (size.height / 2.0);
+        int startPoint = (int) (size.width * 0.1);
+        int endPoint = (int) (size.width * 0.9);
+        TouchAction horizontalSwipe = actionWithTouch
+                .press(PointOption.point(startPoint, anchor))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+                .moveTo(PointOption.point(endPoint, anchor))
+                .release();
+        Thread.sleep(5000, 30);
+        androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+"Energy score"+"\").instance(0))");
         Thread.sleep(2000, 30);
         androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(false).instance(0)).scrollIntoView(new UiSelector().textContains(\""+"Overall wellbeing"+"\").instance(0))");
 
         MobileElement buttonMonth = (MobileElement) androidDriver.findElementById("dashboard_month_period_tab");
         buttonMonth.click();
-        Thread.sleep(2000, 30);
+        Thread.sleep(5000, 30);
         androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+"Energy score"+"\").instance(0))");
         Thread.sleep(2000, 30);
         androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(false).instance(0)).scrollIntoView(new UiSelector().textContains(\""+"Overall wellbeing"+"\").instance(0))");
+        horizontalSwipe.perform();
 
+        TouchAction horizontalSwipe1 = actionWithTouch
+                .press(PointOption.point(startPoint, anchor))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+                .moveTo(PointOption.point(endPoint, anchor))
+                .release();
         MobileElement buttonYear = (MobileElement) androidDriver.findElementById("dashboard_year_period_tab");
         buttonYear.click();
         Thread.sleep(5000, 30);
         androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+"Energy score"+"\").instance(0))");
         Thread.sleep(2000, 30);
         androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(false).instance(0)).scrollIntoView(new UiSelector().textContains(\""+"Overall wellbeing"+"\").instance(0))");
-
-        //androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"" + "Risk of heart disorders" + "\").instance(0))");
-        //androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(false).instance(0)).scrollIntoView(new UiSelector().textContains(\""+"Sep"+"\").instance(0))");
-        //androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(false).instance(0)).scrollIntoView(new UiSelector().textContains(\"" + "87" + "\").instance(0))");
+        horizontalSwipe1.perform();
     }
 
     @Test
     public void test13_userDemoViewHistory() throws InterruptedException {
-
-        //DELETE
-        MobileElement buttonLiveDemo = (MobileElement) androidDriver.findElementById("live_demo_button");
-        buttonLiveDemo.click();
-        MobileElement buttonUser = (MobileElement) androidDriver.findElementById("sign_up_role_plate_patient");
-        buttonUser.click();
-        Thread.sleep(4000, 30);
-        //----------------------------------------------------
 
         MobileElement buttonHistory = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[2]\n");
         buttonHistory.click();
@@ -493,8 +499,6 @@ public class MainTest {
 
     @Test
     public void test14_userDemoHistoryNormalState() throws InterruptedException {
-
-        //androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+"Apr 6"+"\").instance(0))");
         MobileElement buttonHistoryForNormalApr6 = (MobileElement) androidDriver.findElementByXPath("(//android.view.ViewGroup[@content-desc=\"patient_record_0\"])[1]");
         buttonHistoryForNormalApr6.click();
 
@@ -567,7 +571,6 @@ public class MainTest {
 
     @Test
     public void test15_userDemoHistoryMildDisorderState() throws InterruptedException {
-
         androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+"Apr 5"+"\").instance(0))");
         MobileElement buttonHistoryForNormalApr5 = (MobileElement) androidDriver.findElementByXPath("(//android.view.ViewGroup[@content-desc=\"patient_record_0\"])[2]");
         buttonHistoryForNormalApr5.click();
@@ -661,10 +664,75 @@ public class MainTest {
         Thread.sleep(5000, 30);
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_history_screen\"]/android.widget.TextView\n").getText(),
                 "Recording history");
-
     }
 
+    @Test
+    public void test16_userDemoGetStartedView() throws InterruptedException {
+        MobileElement buttonGetStarted = (MobileElement) androidDriver.findElementById("record_screen_bottom_tab");
+        buttonGetStarted.click();
+        Thread.sleep(2000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_pre_measurement_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup[1]\n").isDisplayed(),
+                true);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_pre_measurement_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.TextView[1]\n").getText(),
+                "Hello!");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_pre_measurement_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.TextView[2]\n").getText(),
+                "Let's register your account as a doctor or patient");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"demo_modal_sign_up_button\"]/android.widget.TextView\n").getText(),
+                "Sign up");
+    }
 
+    @Test
+    public void test17_userDemoGetStartedSignUp() throws InterruptedException {
+        MobileElement buttonSignUp = (MobileElement) androidDriver.findElementById("demo_modal_sign_up_button");
+        buttonSignUp.click();
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[1]\n").getText(),
+                "I agree to");
+        MobileElement buttonComeBack = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"back_button\"]/android.widget.ImageView");
+        buttonComeBack.click();
+    }
+
+    @Test
+    public void test18_userDemoGetStartedTap() throws InterruptedException {
+        MobileElement buttonLiveDemo = (MobileElement) androidDriver.findElementById("live_demo_button");
+        buttonLiveDemo.click();
+        MobileElement buttonUser = (MobileElement) androidDriver.findElementById("sign_up_role_plate_patient");
+        buttonUser.click();
+
+        MobileElement buttonGetStarted = (MobileElement) androidDriver.findElementById("record_screen_bottom_tab");
+        buttonGetStarted.click();
+        Thread.sleep(2000, 30);
+        TouchAction actionWithTouch = new TouchAction(androidDriver);
+        actionWithTouch
+                .tap(PointOption.point(100,100))
+                .release().perform();
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_dashboard_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView\n").getText(),
+                "Dashboard");
+    }
+
+    @Test
+    public void test19_userDemoMyDoctorView() throws InterruptedException {
+        MobileElement buttonMyDoctor = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[4]");
+        buttonMyDoctor.click();
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"my_doctor_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup\n").isDisplayed(),
+                true);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"my_doctor_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup/android.widget.ImageView\n").isDisplayed(),
+                true);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"my_doctor_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup/android.widget.TextView[1]\n").getText(),
+                "My doctor");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"my_doctor_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup/android.widget.TextView[2]").getText(),
+                "This page is under construction");
+    }
+
+    @Test
+    public void test20_userDemoSettingsViewLognOut() throws InterruptedException {
+        //Thread.sleep(2000, 30);
+        MobileElement buttonSettings = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[5]");
+        buttonSettings.click();
+        MobileElement linkSignOut = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_out_text\"]/android.widget.TextView\n");
+        linkSignOut.click();
+        Thread.sleep(5000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(), true);
+    }
 
     @Test
     public void test1_liveDemoDoctor() throws InterruptedException {
