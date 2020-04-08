@@ -932,6 +932,7 @@ public class MainTest {
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.widget.TextView\n").getText(),
                 "Records history");
 
+
     }
 
 
