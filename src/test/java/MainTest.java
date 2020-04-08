@@ -24,6 +24,7 @@ import java.util.*;
 
 public class MainTest {
     private AndroidDriver<AndroidElement> androidDriver;
+    String overallEdmondHalley;
 
     @BeforeClass
     public void init() throws MalformedURLException, InterruptedException {
@@ -40,7 +41,7 @@ public class MainTest {
     }
 
     @Test
-    public void test1_openSignPage() {
+    public void test01_openSignPage() {
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(), true);
     }
 
@@ -115,15 +116,19 @@ public class MainTest {
     }
 
     @Test//(enabled = false/*, priority = 2*/)
-    public void test2_signUpUserWithoutDiabetes() throws InterruptedException {
+    public void test02_signUpUserWithoutDiabetes() throws InterruptedException {
         MobileElement linkSignUp = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_form_sign_up_text\"]/android.widget.TextView\n");
         linkSignUp.click();
+        Thread.sleep(3000, 30);
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"role_select_screen\"]/android.widget.TextView[1]\n").getText(), "I am");
 
+        Thread.sleep(5000, 30);
         MobileElement buttonUser = (MobileElement) androidDriver.findElementById("sign_up_role_plate_patient");
         buttonUser.click();
+        Thread.sleep(5000, 30);
         MobileElement buttonContinue1 = (MobileElement) androidDriver.findElementById("role_select_submit_button");
         buttonContinue1.click();
+        Thread.sleep(5000, 30);
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"chronic_condition_select_screen\"]/android.widget.TextView[1]\n").getText(), "Diabetes");
         Thread.sleep(5000, 30);
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_chronic_condition_absent\"]/android.widget.TextView[1]\n").isDisplayed(), true);
@@ -166,7 +171,7 @@ public class MainTest {
     }
 
     @Test
-    public void test3_signUpUserWithDiabetesFirstType() throws InterruptedException {
+    public void test03_signUpUserWithDiabetesFirstType() throws InterruptedException {
         MobileElement linkSignUp = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_form_sign_up_text\"]/android.widget.TextView\n");
         linkSignUp.click();
 
@@ -225,7 +230,7 @@ public class MainTest {
     }
 
     @Test
-    public void test4_signUpUserWithDiabetesSecondType() throws InterruptedException {
+    public void test04_signUpUserWithDiabetesSecondType() throws InterruptedException {
         MobileElement linkSignUp = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_form_sign_up_text\"]/android.widget.TextView\n");
         linkSignUp.click();
 
@@ -284,7 +289,7 @@ public class MainTest {
     }
 
     @Test
-    public void test5_forgotPassword() {
+    public void test05_forgotPassword() {
         MobileElement linkForgotPassword = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_form_forgot_password_text\"]/android.widget.TextView");
         linkForgotPassword.click();
 
@@ -302,7 +307,7 @@ public class MainTest {
     }
 
     @Test
-    public void test6_signInUser() throws InterruptedException {
+    public void test06_signInUser() throws InterruptedException {
         MobileElement inputEmail = (MobileElement) androidDriver.findElementById("sign_in_form_email_field");
         inputEmail.click();
         inputEmail.setValue("olia.sapon@gmail.com");
@@ -324,7 +329,7 @@ public class MainTest {
     }
 
     @Test
-    public void test7_signOutUser() throws InterruptedException {
+    public void test07_signOutUser() throws InterruptedException {
         MobileElement buttonSettings = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[5]");
         buttonSettings.click();
         MobileElement linkSignOut = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_out_text\"]/android.widget.TextView");
@@ -334,7 +339,7 @@ public class MainTest {
     }
 
     @Test
-    public void test8_signUpDoctor() throws InterruptedException {
+    public void test08_signUpDoctor() throws InterruptedException {
         MobileElement linkSignUp = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_form_sign_up_text\"]/android.widget.TextView\n");
         linkSignUp.click();
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"role_select_screen\"]/android.widget.TextView[1]\n").getText(), "I am");
@@ -378,7 +383,7 @@ public class MainTest {
     }
 
     @Test
-    public void test9_signInDoctor() throws InterruptedException {
+    public void test09_signInDoctor() throws InterruptedException {
         MobileElement inputEmail = (MobileElement) androidDriver.findElementById("sign_in_form_email_field");
         inputEmail.click();
         inputEmail.setValue("aria34@gmail.com");
@@ -499,9 +504,10 @@ public class MainTest {
 
     @Test
     public void test14_userDemoHistoryNormalState() throws InterruptedException {
+
         MobileElement buttonHistoryForNormalApr6 = (MobileElement) androidDriver.findElementByXPath("(//android.view.ViewGroup[@content-desc=\"patient_record_0\"])[1]");
         buttonHistoryForNormalApr6.click();
-
+        overallEdmondHalley = androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"overall_plate_78\"]/android.widget.TextView[3]\n").getText();
         Thread.sleep(5000, 30);
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.widget.TextView").getText(),
                 "Result");
@@ -731,19 +737,49 @@ public class MainTest {
         MobileElement linkSignOut = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_out_text\"]/android.widget.TextView\n");
         linkSignOut.click();
         Thread.sleep(5000, 30);
-        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(), true);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
+                true);
     }
 
     @Test
-    public void test1_liveDemoDoctor() throws InterruptedException {
+    public void test21_liveDemoDoctor() throws InterruptedException {
         MobileElement buttonLiveDemo = (MobileElement) androidDriver.findElementById("live_demo_button");
         buttonLiveDemo.click();
         MobileElement buttonDoctor = (MobileElement) androidDriver.findElementById("sign_up_role_plate_doctor");
         buttonDoctor.click();
         Thread.sleep(5000, 30);
-        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.view.ViewGroup[1]\n").isEnabled(), true);
-        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.widget.TextView\n").getText(), "Records history");
-        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView\n").getText(), recordsHistoryDateMonth() + " " + recordsHistoryDateDay());
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.view.ViewGroup[1]\n").isEnabled(),
+                true);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.widget.TextView\n").getText(),
+                "Records history");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView\n").getText(),
+                recordsHistoryDateMonth() + " " + recordsHistoryDateDay());
+    }
+
+    @Test
+    public void test22_doctorDemoHistoryView() throws InterruptedException {
+        //DELETE
+        MobileElement buttonLiveDemo = (MobileElement) androidDriver.findElementById("live_demo_button");
+        buttonLiveDemo.click();
+        MobileElement buttonDoctor = (MobileElement) androidDriver.findElementById("sign_up_role_plate_doctor");
+        buttonDoctor.click();
+        Thread.sleep(5000, 30);
+        //----------------------------------------------
+        Assert.assertEquals(androidDriver.findElementByXPath("(//android.view.ViewGroup[@content-desc=\"history_record_0\"])[1]/android.widget.TextView").getText(),
+                "Edmond Halley");
+        Assert.assertEquals(androidDriver.findElementByXPath("(//android.view.ViewGroup[@content-desc=\"history_record_1\"])[1]/android.widget.TextView").getText(),
+                "Johannes Kepler");
+        Assert.assertEquals(androidDriver.findElementByXPath("(//android.view.ViewGroup[@content-desc=\"history_record_2\"])[1]/android.widget.TextView").getText(),
+                "Sarah Boysen");
+
+        Thread.sleep(2000, 30);
+        androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+"Apr 6"+"\").instance(0))");
+
+    }
+
+    @Test
+    public void test23_doctorDemoHistoryApr6(){
+
     }
 
 
