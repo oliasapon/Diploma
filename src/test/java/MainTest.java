@@ -115,7 +115,7 @@ public class MainTest {
         return faker.name().lastName();
     }
 
-    @Test//(enabled = false/*, priority = 2*/)
+  /*  @Test//(enabled = false, priority = 2)
     public void test02_signUpUserWithoutDiabetes() throws InterruptedException {
         MobileElement linkSignUp = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_form_sign_up_text\"]/android.widget.TextView\n");
         linkSignUp.click();
@@ -305,7 +305,7 @@ public class MainTest {
         buttonOk.click();
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(), true);
     }
-
+*/
     @Test
     public void test06_signInUser() throws InterruptedException {
         MobileElement inputEmail = (MobileElement) androidDriver.findElementById("sign_in_form_email_field");
@@ -315,7 +315,7 @@ public class MainTest {
         inputPassword.click();
         inputPassword.setValue("12344321");
 
-        MobileElement buttonShowPassword = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView\n");
+        MobileElement buttonShowPassword = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.view.ViewGroup[1]");
         buttonShowPassword.click();
         Thread.sleep(5000, 30);
         buttonShowPassword.click();
@@ -342,13 +342,13 @@ public class MainTest {
     public void test08_signUpDoctor() throws InterruptedException {
         MobileElement linkSignUp = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_form_sign_up_text\"]/android.widget.TextView\n");
         linkSignUp.click();
+        Thread.sleep(5000, 30);
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"role_select_screen\"]/android.widget.TextView[1]\n").getText(), "I am");
-
         Thread.sleep(5000, 30);
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_role_plate_doctor\"]/android.widget.TextView[1]\n").isDisplayed(), true);
         MobileElement buttonContinue = (MobileElement) androidDriver.findElementById("role_select_submit_button");
         buttonContinue.click();
-
+        Thread.sleep(5000, 30);
         MobileElement inputEmail = (MobileElement) androidDriver.findElementById("sign_up_email");
         inputEmail.click();
         String email = newEmail();
@@ -391,7 +391,8 @@ public class MainTest {
         inputPassword.click();
         inputPassword.setValue("doctorAria34");
 
-        MobileElement buttonShowPassword = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView\n");
+
+        MobileElement buttonShowPassword = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.view.ViewGroup[1]");
         buttonShowPassword.click();
         Thread.sleep(5000, 30);
         buttonShowPassword.click();
@@ -403,13 +404,6 @@ public class MainTest {
         Thread.sleep(5000, 30);
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.widget.TextView\n").getText(), "Records history");
 
-        MobileElement buttonSettings = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[5]");
-        buttonSettings.click();
-        MobileElement linkSignOut = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_out_text\"]/android.widget.TextView\n");
-        linkSignOut.click();
-        Thread.sleep(5000, 30);
-        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(), true);
-
     }
 
     @Test
@@ -420,6 +414,7 @@ public class MainTest {
         linkSignOut.click();
         Thread.sleep(5000, 30);
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(), true);
+        Thread.sleep(5000, 30);
     }
 
     @Test
@@ -494,20 +489,34 @@ public class MainTest {
                 "Recording history");
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_history_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView[1]\n").getText(),
                 recordsHistoryDateMonth() + " " + recordsHistoryDateDay());
-
         Thread.sleep(2000, 30);
         androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+"Apr 1"+"\").instance(0))");
         Thread.sleep(2000, 30);
-        androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+"Apr 6"+"\").instance(0))");
-
+        androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+recordsHistoryDateMonth() + " " + recordsHistoryDateDay()+"\").instance(0))");
     }
 
     @Test
+    public  void test14_userDemoHistoryViewDay() throws InterruptedException {
+        MobileElement buttonHistoryForDay = (MobileElement) androidDriver.findElementByXPath("(//android.view.ViewGroup[@content-desc=\"patient_record_0\"])[1]");
+        buttonHistoryForDay.click();
+        //overallEdmondHalley = androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"overall_plate_78\"]/android.widget.TextView[3]\n").getText();
+        Thread.sleep(5000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.widget.TextView").getText(),
+                "Result");
+        Thread.sleep(5000, 30);
+        MobileElement buttonComeBack = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"back_button\"]/android.widget.ImageView");
+        buttonComeBack.click();
+        Thread.sleep(5000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_history_screen\"]/android.widget.TextView\n").getText(),
+                "Recording history");
+    }
+
+    /*@Test
     public void test14_userDemoHistoryNormalState() throws InterruptedException {
 
-        MobileElement buttonHistoryForNormalApr6 = (MobileElement) androidDriver.findElementByXPath("(//android.view.ViewGroup[@content-desc=\"patient_record_0\"])[1]");
-        buttonHistoryForNormalApr6.click();
-        overallEdmondHalley = androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"overall_plate_78\"]/android.widget.TextView[3]\n").getText();
+        MobileElement buttonHistoryForNormal = (MobileElement) androidDriver.findElementByXPath("(//android.view.ViewGroup[@content-desc=\"patient_record_0\"])[1]");
+        buttonHistoryForNormal.click();
+        //overallEdmondHalley = androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"overall_plate_78\"]/android.widget.TextView[3]\n").getText();
         Thread.sleep(5000, 30);
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_record_result_screen\"]/android.view.ViewGroup[1]/android.widget.TextView").getText(),
                 "Result");
@@ -573,9 +582,9 @@ public class MainTest {
         Thread.sleep(5000, 30);
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_history_screen\"]/android.widget.TextView\n").getText(),
                 "Recording history");
-    }
+    }*/
 
-    @Test
+    /*@Test
     public void test15_userDemoHistoryMildDisorderState() throws InterruptedException {
         androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+"Apr 5"+"\").instance(0))");
         MobileElement buttonHistoryForNormalApr5 = (MobileElement) androidDriver.findElementByXPath("(//android.view.ViewGroup[@content-desc=\"patient_record_0\"])[2]");
@@ -620,15 +629,15 @@ public class MainTest {
         actionWithTouch.tap(PointOption.point(100,100)).release().perform();
 
 
-        /*MobileElement buttonRiskOfHearDisordersInfo = (MobileElement) androidDriver.findElementById("heart_risk_plate_1");
-        buttonRiskOfHearDisordersInfo.click();
-        Assert.assertEquals(androidDriver.findElementByXPath("").getText(),
-                "");
-        Assert.assertEquals(androidDriver.findElementByXPath("").getText(),
-                "");
-        Assert.assertEquals(androidDriver.findElementByXPath("").getText(),
-                "");
-        actionWithTouch.tap(PointOption.point(100,100)).release().perform();*/
+        //MobileElement buttonRiskOfHearDisordersInfo = (MobileElement) androidDriver.findElementById("heart_risk_plate_1");
+        //buttonRiskOfHearDisordersInfo.click();
+        //Assert.assertEquals(androidDriver.findElementByXPath("").getText(),
+        //        "");
+        //Assert.assertEquals(androidDriver.findElementByXPath("").getText(),
+        //        "");
+        //Assert.assertEquals(androidDriver.findElementByXPath("").getText(),
+        //        "");
+        //actionWithTouch.tap(PointOption.point(100,100)).release().perform();
 
 
         MobileElement buttonEmotionScoreNormalInfo = (MobileElement) androidDriver.findElementById("emotional_plate_100");
@@ -670,7 +679,7 @@ public class MainTest {
         Thread.sleep(5000, 30);
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_history_screen\"]/android.widget.TextView\n").getText(),
                 "Recording history");
-    }
+    }*/
 
     @Test
     public void test16_userDemoGetStartedView() throws InterruptedException {
@@ -689,8 +698,10 @@ public class MainTest {
 
     @Test
     public void test17_userDemoGetStartedSignUp() throws InterruptedException {
+        Thread.sleep(2000, 30);
         MobileElement buttonSignUp = (MobileElement) androidDriver.findElementById("demo_modal_sign_up_button");
         buttonSignUp.click();
+        Thread.sleep(2000, 30);
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[1]\n").getText(),
                 "I agree to");
         MobileElement buttonComeBack = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"back_button\"]/android.widget.ImageView");
@@ -758,13 +769,6 @@ public class MainTest {
 
     @Test
     public void test22_doctorDemoHistoryView() throws InterruptedException {
-        //DELETE
-        MobileElement buttonLiveDemo = (MobileElement) androidDriver.findElementById("live_demo_button");
-        buttonLiveDemo.click();
-        MobileElement buttonDoctor = (MobileElement) androidDriver.findElementById("sign_up_role_plate_doctor");
-        buttonDoctor.click();
-        Thread.sleep(5000, 30);
-        //----------------------------------------------
         Assert.assertEquals(androidDriver.findElementByXPath("(//android.view.ViewGroup[@content-desc=\"history_record_0\"])[1]/android.widget.TextView").getText(),
                 "Edmond Halley");
         Assert.assertEquals(androidDriver.findElementByXPath("(//android.view.ViewGroup[@content-desc=\"history_record_1\"])[1]/android.widget.TextView").getText(),
@@ -772,13 +776,161 @@ public class MainTest {
         Assert.assertEquals(androidDriver.findElementByXPath("(//android.view.ViewGroup[@content-desc=\"history_record_2\"])[1]/android.widget.TextView").getText(),
                 "Sarah Boysen");
 
+        TouchAction actionWithTouch = new TouchAction(androidDriver);
+        Dimension size = androidDriver.manage().window().getSize();
+        int anchor = (int) (size.width / 2.0);
+        int startPoint = (int) (size.height * 0.8);
+        int endPoint = (int) (size.height * 0.2);
+        TouchAction verticalSwipe = actionWithTouch
+                .press(PointOption.point(anchor, startPoint))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+                .moveTo(PointOption.point(anchor, endPoint))
+                .release().perform();
         Thread.sleep(2000, 30);
-        androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+"Apr 6"+"\").instance(0))");
+        androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+recordsHistoryDateMonth() + " " + recordsHistoryDateDay()+"\").instance(0))");
+    }
+
+    @Test
+    public void test23_doctorDemoHistoryViewDayFirstPerson() throws InterruptedException {
+        MobileElement buttonViewDataFirstPerson = (MobileElement) androidDriver.findElementByXPath("(//android.view.ViewGroup[@content-desc=\"history_record_0\"])[1]");
+        buttonViewDataFirstPerson.click();
+        Thread.sleep(2000, 30);
+
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"average_qrs_chart\"]/android.widget.TextView\n").getText(),
+                "Average QRS complex");
 
     }
 
     @Test
-    public void test23_doctorDemoHistoryApr6(){
+    public void test24_doctorDemoHistoryViewDiagram() throws InterruptedException {
+
+        MobileElement buttonIncreaseSize = (MobileElement) androidDriver.findElementById("container");
+        buttonIncreaseSize.click();
+        Thread.sleep(2000, 30);
+        MobileElement buttonValueMMs = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"raw_ecg_screen\"]/android.view.ViewGroup[1]/android.widget.Spinner[1]\n");
+        buttonValueMMs.click();
+        MobileElement buttonValueMMs12 = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[2]");
+        buttonValueMMs12.click();
+        MobileElement buttonValueMMmv = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"raw_ecg_screen\"]/android.view.ViewGroup[1]/android.widget.Spinner[2]");
+        buttonValueMMmv.click();
+        MobileElement buttonValueMMs50 = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[5]");
+        buttonValueMMs50.click();
+        Thread.sleep(2000, 30);
+        TouchAction actionWithTouch = new TouchAction(androidDriver);
+        Dimension size = androidDriver.manage().window().getSize();
+        int anchor = (int) (size.height / 2.0);
+        int startPoint = (int) (size.width * 0.9);
+        int endPoint = (int) (size.width * 0.1);
+        TouchAction horizontalSwipe = actionWithTouch
+                .press(PointOption.point(startPoint, anchor))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+                .moveTo(PointOption.point(endPoint, anchor))
+                .release();
+        horizontalSwipe.perform();
+        Thread.sleep(2000, 30);
+        MobileElement buttonClose = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"compress_button\"]/android.widget.TextView");
+        buttonClose.click();
+        Thread.sleep(1000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"average_qrs_chart\"]/android.widget.TextView\n").getText(),
+                "Average QRS complex");
+    }
+
+    @Test
+    public void test25_doctorDemoHistoryViewDay() throws InterruptedException {
+        TouchAction actionWithTouch = new TouchAction(androidDriver);
+        Dimension size = androidDriver.manage().window().getSize();
+        int anchor = (int) (size.width / 2.0);
+        int startPoint = (int) (size.height * 0.8);
+        int endPoint = (int) (size.height * 0.2);
+        TouchAction verticalSwipe = actionWithTouch
+                .press(PointOption.point(anchor, startPoint))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+                .moveTo(PointOption.point(anchor, endPoint))
+                .release().perform();
+        anchor = (int) (size.height / 2.0);
+        startPoint = (int) (size.width * 0.8);
+        endPoint = (int) (size.width * 0.2);
+        TouchAction horizontalSwipe1 = actionWithTouch
+                .press(PointOption.point(startPoint, anchor))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+                .moveTo(PointOption.point(endPoint, anchor))
+                .release();
+
+        Thread.sleep(2000, 30);
+        horizontalSwipe1.perform();
+        Thread.sleep(2000, 30);
+
+        anchor = (int) (size.width / 2.0);
+        startPoint = (int) (size.height * 0.6);
+        endPoint = (int) (size.height * 0.2);
+        TouchAction verticalSwipe1 = actionWithTouch
+                .press(PointOption.point(anchor, startPoint))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+                .moveTo(PointOption.point(anchor, endPoint))
+                .release();
+        verticalSwipe1.perform();
+    }
+
+    @Test
+    public void test26_doctorDemoHistoryViewDetails() throws InterruptedException {
+
+        MobileElement buttonViewDetails = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"detailed_report_button\"]/android.widget.TextView\n");
+        buttonViewDetails.click();
+        Thread.sleep(2000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"detailed_report_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView\n").getText(),
+                "Detailed report");
+        //MobileElement buttonOpenOverall = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"detailed_report_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[4]/android.view.ViewGroup/android.widget.TextView[1]\n");
+        //buttonOpenOverall.click();
+
+        /*Thread.sleep(2000, 30);
+        MobileElement inputSearch = (MobileElement) androidDriver.findElementById("detailed_report_search_field");
+        inputSearch.click();
+        inputSearch.setValue("Emotional index");
+        androidDriver.hideKeyboard();
+        Thread.sleep(2000, 30);
+        TouchAction actionWithTouch = new TouchAction(androidDriver);
+        actionWithTouch
+                .tap(PointOption.point(110,510))
+                .release().perform();
+        //MobileElement buttonOpenSearch = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"detailed_report_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[4]/android.view.ViewGroup/android.widget.TextView[2]\n");
+        //buttonOpenSearch.click();
+        MobileElement buttonOpenEmotionalScore = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"detailed_report_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[5]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView[2]\n");
+        buttonOpenEmotionalScore.click();
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"detailed_report_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[5]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.widget.TextView").getText(),
+                "Emotional index");
+        Thread.sleep(2000, 30);
+        MobileElement buttonClearSearch = (MobileElement) androidDriver.findElementById("clear_search_field_button");
+        buttonClearSearch.click();*/
+
+        Thread.sleep(2000, 30);
+        MobileElement buttonOpenSearch = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"detailed_report_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[4]/android.view.ViewGroup/android.widget.TextView[2]\n");
+        buttonOpenSearch.click();
+        MobileElement buttonOpenStaminaScore = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"detailed_report_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[5]/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.widget.TextView[2]\n");
+        buttonOpenStaminaScore.click();
+
+        Thread.sleep(2000, 30);
+        TouchAction actionWithTouch = new TouchAction(androidDriver);
+        Dimension size = androidDriver.manage().window().getSize();
+        int anchor = (int) (size.width / 2.0);
+        int startPoint = (int) (size.height * 0.9);
+        int endPoint = (int) (size.height * 0.2);
+        TouchAction verticalSwipe = actionWithTouch
+                .press(PointOption.point(anchor, startPoint))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+                .moveTo(PointOption.point(anchor, endPoint))
+                .release().perform();
+
+        Thread.sleep(2000, 30);
+        androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+"Detailed report"+"\").instance(0))");
+
+        MobileElement buttonComeBack = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"back_button\"]/android.widget.ImageView\n");
+        buttonComeBack.click();
+        //MobileElement buttonBack = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"back_button\"]/android.widget.ImageView\n");
+        Thread.sleep(2000, 30);
+        buttonComeBack.click();
+        Thread.sleep(2000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.widget.TextView\n").getText(),
+                "Records history");
 
     }
 
