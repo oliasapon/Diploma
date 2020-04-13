@@ -115,7 +115,7 @@ public class MainTest {
         return faker.name().lastName();
     }
 
-    /*  @Test//(enabled = false, priority = 2)
+    @Test//(enabled = false, priority = 2)
       public void test02_signUpUserWithoutDiabetes() throws InterruptedException {
           MobileElement linkSignUp = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_form_sign_up_text\"]/android.widget.TextView\n");
           linkSignUp.click();
@@ -305,38 +305,7 @@ public class MainTest {
           buttonOk.click();
           Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(), true);
       }
-  */
-    @Test
-    public void test06_signInUser() throws InterruptedException {
-        MobileElement inputEmail = (MobileElement) androidDriver.findElementById("sign_in_form_email_field");
-        inputEmail.click();
-        inputEmail.setValue("olia.sapon@gmail.com");
-        MobileElement inputPassword = (MobileElement) androidDriver.findElementById("sign_in_form_password_field");
-        inputPassword.click();
-        inputPassword.setValue("12344321");
 
-        MobileElement buttonShowPassword = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.view.ViewGroup[1]");
-        buttonShowPassword.click();
-        Thread.sleep(5000, 30);
-        buttonShowPassword.click();
-
-        androidDriver.hideKeyboard();
-        MobileElement buttonSignIn = (MobileElement) androidDriver.findElementById("sign_in_form_submit_button");
-        buttonSignIn.click();
-
-        Thread.sleep(5000, 30);
-        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_pre_measurement_screen\"]/android.widget.TextView[1]").getText(), "Let's get started");
-    }
-
-    @Test
-    public void test07_signOutUser() throws InterruptedException {
-        MobileElement buttonSettings = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[5]");
-        buttonSettings.click();
-        MobileElement linkSignOut = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_out_text\"]/android.widget.TextView");
-        linkSignOut.click();
-        Thread.sleep(5000, 30);
-        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(), true);
-    }
 
     @Test
     public void test08_signUpDoctor() throws InterruptedException {
@@ -380,41 +349,6 @@ public class MainTest {
         MobileElement buttonOk = (MobileElement) androidDriver.findElementById("android:id/button1");
         buttonOk.click();
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(), true);
-    }
-
-    @Test
-    public void test09_signInDoctor() throws InterruptedException {
-        MobileElement inputEmail = (MobileElement) androidDriver.findElementById("sign_in_form_email_field");
-        inputEmail.click();
-        inputEmail.setValue("aria34@gmail.com");
-        MobileElement inputPassword = (MobileElement) androidDriver.findElementById("sign_in_form_password_field");
-        inputPassword.click();
-        inputPassword.setValue("doctorAria34");
-
-
-        MobileElement buttonShowPassword = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.view.ViewGroup[1]");
-        buttonShowPassword.click();
-        Thread.sleep(5000, 30);
-        buttonShowPassword.click();
-
-        androidDriver.hideKeyboard();
-        MobileElement buttonSignIn = (MobileElement) androidDriver.findElementById("sign_in_form_submit_button");
-        buttonSignIn.click();
-
-        Thread.sleep(5000, 30);
-        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.widget.TextView\n").getText(), "Records history");
-
-    }
-
-    @Test
-    public void test10_signOutDoctor() throws InterruptedException {
-        MobileElement buttonSettings = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[5]");
-        buttonSettings.click();
-        MobileElement linkSignOut = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_out_text\"]/android.widget.TextView\n");
-        linkSignOut.click();
-        Thread.sleep(5000, 30);
-        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(), true);
-        Thread.sleep(5000, 30);
     }
 
     @Test
@@ -1011,20 +945,10 @@ public class MainTest {
         inputGroupName.clear();
         androidDriver.hideKeyboard();
         Thread.sleep(2000, 30);*/
-
-        /* MobileElement button = (MobileElement) androidDriver.findElementByXPath("");
-        button.click(); */
     }
 
     @Test
     public void test30_doctorSetting() throws InterruptedException {
-        //DELETE
-        MobileElement buttonLiveDemo = (MobileElement) androidDriver.findElementById("live_demo_button");
-        buttonLiveDemo.click();
-        MobileElement buttonDoctor = (MobileElement) androidDriver.findElementById("sign_up_role_plate_doctor");
-        buttonDoctor.click();
-        Thread.sleep(5000, 30);
-        //--------------------------------------------------------------
         MobileElement buttonSettings = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[5]\n");
         buttonSettings.click();
         MobileElement buttonChartLineColor = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"settings_screen\"]/android.view.ViewGroup/android.view.ViewGroup[4]/android.view.ViewGroup");
@@ -1058,4 +982,468 @@ public class MainTest {
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(), true);
 
     }
+
+
+    @Test
+    public void test31_signInUser() throws InterruptedException {
+        MobileElement inputEmail = (MobileElement) androidDriver.findElementById("sign_in_form_email_field");
+        inputEmail.click();
+        inputEmail.setValue("olia.sapon@gmail.com");
+        MobileElement inputPassword = (MobileElement) androidDriver.findElementById("sign_in_form_password_field");
+        inputPassword.click();
+        inputPassword.setValue("12344321");
+
+        MobileElement buttonShowPassword = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.view.ViewGroup[1]");
+        buttonShowPassword.click();
+        Thread.sleep(5000, 30);
+        buttonShowPassword.click();
+
+        androidDriver.hideKeyboard();
+        MobileElement buttonSignIn = (MobileElement) androidDriver.findElementById("sign_in_form_submit_button");
+        buttonSignIn.click();
+
+        Thread.sleep(5000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_pre_measurement_screen\"]/android.widget.TextView[1]").getText(),
+                "Let's get started");
+    }
+
+    @Test
+    public void test32_userViewFirstCentralPage() throws InterruptedException {
+        Assert.assertEquals(androidDriver.findElementById("base_line_with_0_record").isDisplayed(),
+                true);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_pre_measurement_screen\"]/android.widget.TextView[2]\n").getText(),
+                "If you have an ECG device, you can pair it with your phone here.");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_pre_measurement_screen\"]/android.view.ViewGroup[2]\n").isDisplayed(),
+                true);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_pre_measurement_screen\"]/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView").getText(),
+                "Start");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_pre_measurement_screen\"]/android.view.ViewGroup[3]/android.widget.TextView[2]\n").getText(),
+                "No connected device");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"connect_text_button\"]/android.widget.TextView\n").getText(),
+                "Connect");
+        MobileElement buttonVisitorMode = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_pre_measurement_screen\"]/android.widget.Switch");
+        buttonVisitorMode.click();
+        Thread.sleep(2000, 30);
+        buttonVisitorMode.click();
+
+        Thread.sleep(3000, 30);
+        MobileElement buttonConnect = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"connect_text_button\"]/android.widget.TextView\n");
+        buttonConnect.click();
+        Thread.sleep(3000, 30);
+        /*Assert.assertEquals(androidDriver.findElementByXPath("").getText(),
+                "");*/
+        MobileElement buttonAllow = (MobileElement) androidDriver.findElementById("com.android.packageinstaller:id/permission_allow_button");
+        buttonAllow.click();
+        Thread.sleep(3000, 30);
+        /*Assert.assertEquals(androidDriver.findElementByXPath("").getText(),
+                "");*/
+        buttonAllow.click();
+        Thread.sleep(2000, 30);
+    }
+
+    @Test
+    public void test33_userViewDashboard() throws InterruptedException {
+        MobileElement buttonDashboard = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[1]\n");
+        buttonDashboard.click();
+        Thread.sleep(3000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("\t//android.view.ViewGroup[@content-desc=\"patient_dashboard_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView").getText(),
+                "Dashboard");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_dashboard_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.widget.ImageView\n").isDisplayed(),
+                true);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_dashboard_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView").getText(),
+                "You still don't have any recording");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_dashboard_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[2]/android.widget.TextView\n").getText(),
+                "Let's get started!");
+        MobileElement buttonLetsStarted = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_dashboard_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[2]/android.widget.TextView\n");
+        buttonLetsStarted.click();
+        Thread.sleep(2000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_pre_measurement_screen\"]/android.widget.TextView[1]").getText(),
+                "Let's get started");
+    }
+
+    @Test
+    public void test34_userViewHistory() throws InterruptedException {
+        MobileElement buttonHistory = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[2]\n");
+        buttonHistory.click();
+        Thread.sleep(3000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_history_screen\"]/android.widget.TextView\n").getText(),
+                "Recording history");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_history_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.ImageView\n").isDisplayed(),
+                true);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_history_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView").getText(),
+                "You still don't have any recording");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_history_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView\n").getText(),
+                "Let's get started!");
+
+        MobileElement buttonLetsStarted2 = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_history_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView");
+        buttonLetsStarted2.click();
+        Thread.sleep(2000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_pre_measurement_screen\"]/android.widget.TextView[1]").getText(),
+                "Let's get started");
+    }
+
+    @Test
+    public void test35_userViewMyDoctor() throws InterruptedException {
+        MobileElement buttonMyDoctor = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[4]\n");
+        buttonMyDoctor.click();
+        Thread.sleep(3000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"my_doctor_screen\"]/android.widget.TextView").getText(),
+                "My doctor");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"my_doctor_screen\"]/android.view.ViewGroup/android.view.ViewGroup").isDisplayed(),
+                true);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"my_doctor_screen\"]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup\n").isDisplayed(),
+                true);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"my_doctor_screen\"]/android.view.ViewGroup/android.view.ViewGroup/android.widget.ImageView\n").isDisplayed(),
+                true);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"my_doctor_screen\"]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView[1]").getText(),
+                "My doctor");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"my_doctor_screen\"]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView[2]\n").getText(),
+                "This page is under construction");
+    }
+
+    @Test
+    public void test36_userViewSettings() throws InterruptedException {
+        MobileElement buttonSetting = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[5]\n");
+        buttonSetting.click();
+        Thread.sleep(3000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"settings_screen\"]/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.widget.ImageView\n").isDisplayed(),
+                true);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"settings_screen\"]/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView[1]\n").getText(),
+                "Olia Sapon");
+        Assert.assertEquals(androidDriver.findElementById("user_olia.sapon@gmail.com").getText(),
+                "olia.sapon@gmail.com");
+    }
+
+    @Test
+    public void test37_userEditInformationPatient() throws InterruptedException {
+        MobileElement buttonEdit = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"edit_user_text\"]/android.widget.TextView\n");
+        buttonEdit.click();
+        Thread.sleep(2000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"edit_user_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[3]/android.widget.TextView\n").isDisplayed(),
+                true);
+        MobileElement buttonFemale = (MobileElement) androidDriver.findElementById("female_pick");
+        buttonFemale.click();
+        MobileElement buttonOptionalFields = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"edit_user_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[7]/android.widget.TextView[1]\n");
+        buttonOptionalFields.click();
+        Thread.sleep(2000, 30);
+        TouchAction actionOne = new TouchAction(androidDriver);
+        actionOne.press(PointOption.point(500, 1700)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000))).moveTo(PointOption.point(500, 190)).release().perform();
+        Thread.sleep(2000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"edit_user_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[3]/android.widget.TextView[2]\n").getText(),
+                "Weight");
+        actionOne.press(PointOption.point(310, 1200)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000))).moveTo(PointOption.point(235, 1200)).release().perform();
+        Thread.sleep(2000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"edit_user_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[4]/android.widget.TextView[2]\n").getText(),
+                "Height");
+        actionOne.press(PointOption.point(700, 1450)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000))).moveTo(PointOption.point(688, 1450)).release().perform();
+        Thread.sleep(2000, 30);
+        MobileElement buttonUpdateInformation = (MobileElement) androidDriver.findElementById("create_patient_button");
+        buttonUpdateInformation.click();
+        Thread.sleep(2000, 30);
+    }
+
+    @Test
+    public void test38_userChangeRole() throws InterruptedException {
+        MobileElement buttonChangeRoleToDoctor = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"settings_screen\"]/android.view.ViewGroup/android.view.ViewGroup[4]/android.widget.TextView\n");
+        buttonChangeRoleToDoctor.click();
+        Thread.sleep(2000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.widget.TextView").getText(),
+                "Records history");
+        MobileElement buttonSetting = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[5]\n");
+        buttonSetting.click();
+        Thread.sleep(2000, 30);
+        MobileElement buttonChangeRoleToPatient = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"settings_screen\"]/android.view.ViewGroup/android.view.ViewGroup[6]/android.widget.TextView\n");
+        buttonChangeRoleToPatient.click();
+        Thread.sleep(2000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_pre_measurement_screen\"]/android.widget.TextView[1]").getText(),
+                "Let's get started");
+    }
+
+    @Test
+    public void test39_signOutUser() throws InterruptedException {
+        MobileElement buttonSettings = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[5]");
+        buttonSettings.click();
+        MobileElement linkSignOut = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_out_text\"]/android.widget.TextView");
+        linkSignOut.click();
+        Thread.sleep(5000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
+                true);
+    }
+
+
+    //Doctor without patients!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    @Test
+    public void test40_signInDoctor() throws InterruptedException {
+        MobileElement inputEmail = (MobileElement) androidDriver.findElementById("sign_in_form_email_field");
+        inputEmail.click();
+        inputEmail.setValue("aria34@gmail.com");
+        MobileElement inputPassword = (MobileElement) androidDriver.findElementById("sign_in_form_password_field");
+        inputPassword.click();
+        inputPassword.setValue("doctorAria34");
+
+
+        MobileElement buttonShowPassword = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.view.ViewGroup[1]");
+        buttonShowPassword.click();
+        Thread.sleep(5000, 30);
+        buttonShowPassword.click();
+
+        androidDriver.hideKeyboard();
+        MobileElement buttonSignIn = (MobileElement) androidDriver.findElementById("sign_in_form_submit_button");
+        buttonSignIn.click();
+
+        Thread.sleep(5000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.widget.TextView\n").getText(),
+                "Records history");
+
+
+        //TEST 41: View History
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView[1]\n").getText(),
+                "Looks like you don't have any records");
+        Assert.assertEquals(androidDriver.findElementByXPath("\t//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView[2]\n").getText(),
+                "You can go to ");
+        Assert.assertEquals(androidDriver.findElementByXPath("\t//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView\n").getText(),
+                "Record page");
+        MobileElement linkRecordPage = (MobileElement) androidDriver.findElementByXPath("\t//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView\n");
+        linkRecordPage.click();
+        Thread.sleep(2000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"record_patients_screen\"]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.TextView").getText(),
+                "Select patient");
+        //---------------------
+
+
+        //TEST 42: View Patients
+        /*MobileElement buttonPatients = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[2]\n");
+        buttonPatients.click();
+        Assert.assertEquals(androidDriver.findElementById("patients_filter_button").isDisplayed(),
+                true);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patients_screen\"]/android.view.ViewGroup[2]\n").isDisplayed(),
+                true);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patients_screen\"]/android.widget.TextView\n").getText(),
+                "Patients");
+        MobileElement buttonFilter = (MobileElement) androidDriver.findElementById("patients_filter_button");
+        buttonFilter.click();
+        Thread.sleep(2000, 30);
+        buttonFilter.click();*/
+        //Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patients_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView\n").getText(),
+         //       "to add your first patient");
+        //MobileElement buttonPress = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"add_patient_text\"]/android.widget.TextView\n");
+        //buttonPress.click();
+        //----------------------
+
+
+        //TEST 43: Create new patient with diabetes type 1
+        /*MobileElement buttonCreatePatient = (MobileElement) androidDriver.findElementById("open_create_patient_screen_button");
+        buttonCreatePatient.click();
+        Thread.sleep(2000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_creating_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView\n").getText(),
+                "Create new patient");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_creating_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[2]/android.widget.TextView\n").isDisplayed(),
+                true);
+        MobileElement buttonMale = (MobileElement) androidDriver.findElementById("male_pick");
+        buttonMale.click();
+        Thread.sleep(2000, 30);
+        MobileElement inputPhoneNumber = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_creating_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[5]/android.view.ViewGroup[2]/android.widget.EditText\n");
+        inputPhoneNumber.click();
+        inputPhoneNumber.setValue("377000478");
+        androidDriver.hideKeyboard();
+        Thread.sleep(2000, 30);
+        MobileElement inputName = (MobileElement) androidDriver.findElementById("create_patient_firstname_field");
+        inputName.click();
+        inputName.setValue("Mari");
+        androidDriver.hideKeyboard();
+        MobileElement inputSurname = (MobileElement) androidDriver.findElementById("create_patient_lastname_field");
+        inputSurname.click();
+        inputSurname.setValue("Anchuk");
+        androidDriver.hideKeyboard();
+        Thread.sleep(2000, 30);
+        TouchAction actionOne = new TouchAction(androidDriver);
+        actionOne.press(PointOption.point(700, 1450)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000))).moveTo(PointOption.point(688, 1450)).release().perform();
+        Thread.sleep(2000, 30);
+        actionOne.press(PointOption.point(400, 1500)).release().perform();
+        //MobileElement buttonOptionalFields = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_creating_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[6]\n");
+        //buttonOptionalFields.click();
+        //TouchAction actionOne = new TouchAction(androidDriver);
+
+
+        Thread.sleep(2000, 30);
+        actionOne.press(PointOption.point(700, 1450)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(500))).moveTo(PointOption.point(700, 400)).release().perform();
+        Thread.sleep(2000, 30);
+        MobileElement buttonSelectGroup = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_creating_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.Spinner[1]");
+        buttonSelectGroup.click();
+        MobileElement buttonChooseGroup = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[3]\n");
+        buttonChooseGroup.click();
+        Thread.sleep(2000, 30);
+        MobileElement buttonSelectChronicCondition = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_creating_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.Spinner[2]/android.widget.TextView");
+        buttonSelectChronicCondition.click();
+        MobileElement buttonSelectDiabetes = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[2]\n");
+        buttonSelectDiabetes.click();
+        Thread.sleep(2000, 30);
+        MobileElement buttonSelectType = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_creating_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.Spinner[3]/android.widget.TextView");
+        buttonSelectType.click();
+        MobileElement buttonChooseType1 = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[2]\n");
+        buttonChooseType1.click();
+
+        Thread.sleep(2000, 30);
+        //TouchAction actionOne = new TouchAction(androidDriver);
+        actionOne.press(PointOption.point(700, 1450)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(500))).moveTo(PointOption.point(700, 400)).release().perform();
+        MobileElement buttonAddNewPatient = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"create_patient_button\"]/android.widget.TextView\n");
+        buttonAddNewPatient.click();
+        Thread.sleep(5000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patients_screen\"]/android.widget.TextView\n").getText(),
+                "Patients");*/
+        //---------------------------
+
+
+        //TEST 44: Edit patient
+        /*androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"" + "Petro Denchik" + "\").instance(0))");
+        MobileElement buttonPatient = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_petro\"]/android.view.ViewGroup/android.widget.TextView\n");
+        buttonPatient.click();
+        Thread.sleep(3000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_profile_screen\"]/android.widget.TextView[1]\n").getText(),
+                "Mari Anchuk");
+        MobileElement buttonEdit = (MobileElement) androidDriver.findElementByXPath("\t//android.view.ViewGroup[@content-desc=\"patient_edit_button\"]/android.widget.TextView");
+        buttonEdit.click();
+        Thread.sleep(3000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"edit_user_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView\n").getText(),
+                "Edit information");
+        MobileElement buttonFields = (MobileElement) androidDriver.findElementByXPath("\t//android.view.ViewGroup[@content-desc=\"edit_user_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[7]");
+        buttonFields.click();
+        Thread.sleep(2000, 30);
+        TouchAction actionOne = new TouchAction(androidDriver);
+        actionOne.press(PointOption.point(700, 1450)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(500))).moveTo(PointOption.point(700, 400)).release().perform();
+        Thread.sleep(2000, 30);
+        MobileElement buttonGroup = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"edit_user_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.Spinner[1]\n");
+        buttonGroup.click();
+        MobileElement buttonSelect = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[3]");
+        buttonSelect.click();   //   /hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[3]
+        Thread.sleep(2000, 30);
+        MobileElement buttonUpdate = (MobileElement) androidDriver.findElementById("create_patient_button");
+        buttonUpdate.click();
+        Thread.sleep(3000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_profile_screen\"]/android.view.ViewGroup[4]/android.view.ViewGroup").isDisplayed(),
+                true);
+        MobileElement buttonBack = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc="back_button"]/android.widget.ImageView");
+        buttonBack.click();
+        */
+        //------------------------------------------------
+
+        //TEST 45: View central page
+        /*MobileElement buttonCentralPage = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[3]\n");
+        buttonCentralPage.click();
+        TouchAction actionOne = new TouchAction(androidDriver);
+        actionOne.tap(PointOption.point(700, 1000)).release().perform();
+        Thread.sleep(2000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("\t//android.view.ViewGroup[@content-desc=\"record_patients_screen\"]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView\n").getText(),
+                "Select patient");
+        MobileElement buttonAllPatient = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"record_patients_screen\"]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[5]/android.widget.TextView\n");
+        buttonAllPatient.click();
+        MobileElement buttonFilter = (MobileElement) androidDriver.findElementById("record_patient_filter_button");
+        buttonFilter.click();
+        Thread.sleep(2000, 30);
+        MobileElement buttonMale = (MobileElement) androidDriver.findElementById("male_pick");
+        buttonMale.click();
+        buttonFilter.click();
+        Thread.sleep(2000, 30);
+        MobileElement buttonSearch = (MobileElement) androidDriver.findElementById("record_patients_search_field");
+        buttonSearch.click();
+        buttonSearch.setValue("Vasy");
+        androidDriver.hideKeyboard();
+        MobileElement buttonClear = (MobileElement) androidDriver.findElementById("clear_search_field_button");
+        buttonClear.click();
+        Thread.sleep(2000, 30);
+        MobileElement buttonAdd = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"record_patients_screen\"]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]\n");
+        buttonAdd.click();
+        Thread.sleep(2000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_creating_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView\n").getText(),
+                "Create new patient");
+        MobileElement buttonBack = (MobileElement) androidDriver.findElementByXPath("\t//android.view.ViewGroup[@content-desc=\"back_button\"]/android.widget.ImageView\n");
+        buttonBack.click();*/
+        //-------------------------------
+
+        //TEST 46: View groups
+        /*MobileElement buttonGroup = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[4]\n");
+        buttonGroup.click();
+        Thread.sleep(2000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"groups_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView").getText(),
+                "Groups");
+        MobileElement buttonLookGroup1 = (MobileElement) androidDriver.findElementById("group_DT2");
+        buttonLookGroup1.click();
+        MobileElement buttonPatient = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_petro\"]/android.view.ViewGroup\n");
+        buttonPatient.click();
+        Thread.sleep(2000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_profile_screen\"]/android.widget.TextView[1]\n").getText(),
+                "Petro Denchik");
+        MobileElement buttonBack = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"back_button\"]/android.widget.ImageView\n");
+        buttonBack.click();
+        Thread.sleep(2000, 30);
+        MobileElement buttonLookGroup2 = (MobileElement) androidDriver.findElementById("group_DT1");
+        buttonLookGroup2.click();
+        MobileElement buttonCollapseAllGroup = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"groups_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[4]/android.widget.TextView\n");
+        buttonCollapseAllGroup.click();*/
+        //-------------------------------
+
+
+        //TEST 47: View groups
+        /*MobileElement buttonNewGroup = (MobileElement) androidDriver.findElementById("open_group_creating_button");
+        buttonNewGroup.click();
+        Thread.sleep(2000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"create_group_modal\"]/android.widget.TextView[1]\n").getText(),
+                "Create new group");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"create_group_modal\"]/android.widget.TextView[2]\n").getText(),
+                "Enter group name and add patients in new group");
+        MobileElement inputGroupName = (MobileElement) androidDriver.findElementById("create_group_field");
+        inputGroupName.click();
+        inputGroupName.setValue("WOD");
+        androidDriver.hideKeyboard();
+        Thread.sleep(2000, 30);
+        MobileElement buttonPlusPatientToNewGroup = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"create_group_modal\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup[2]/android.widget.TextView\n");
+        buttonPlusPatientToNewGroup.click();
+        Thread.sleep(2000, 30);
+        MobileElement buttonCreate = (MobileElement) androidDriver.findElementById("create_group_button");
+        buttonCreate.click();
+        Thread.sleep(2000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"groups_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView").getText(),
+                "Groups");*/
+        //-------------------------------
+
+
+        /*
+        MobileElement button = (MobileElement) androidDriver.findElementByXPath("");
+        button.click();
+        Assert.assertEquals(androidDriver.findElementByXPath("").getText(),
+        "");
+        Assert.assertEquals(androidDriver.findElementByXPath("").isDisplayed(),
+        true);
+         */
+    }
+
+    @Test
+    public void test48_signOutDoctor() throws InterruptedException {
+        MobileElement buttonSettings = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[5]");
+        buttonSettings.click();
+        Thread.sleep(2000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("\t//android.view.ViewGroup[@content-desc=\"settings_screen\"]/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView[1]").getText(),
+                "Aria Kilton");
+        Assert.assertEquals(androidDriver.findElementById("user_aria34@gmail.com").getText(),
+                "aria34@gmail.com");
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"settings_screen\"]/android.view.ViewGroup/android.view.ViewGroup[6]/android.widget.TextView\n").getText(),
+                "Change role to Patient");
+        MobileElement buttonEdit = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"edit_user_text\"]/android.widget.TextView\n");
+        buttonEdit.click();
+        Thread.sleep(2000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"edit_user_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView\n").getText(),
+                "Edit information");
+        MobileElement buttonBack = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"back_button\"]/android.widget.ImageView\n");
+        buttonBack.click();
+        Thread.sleep(2000, 30);
+        MobileElement linkSignOut = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_out_text\"]/android.widget.TextView\n");
+        linkSignOut.click();
+        Thread.sleep(5000, 30);
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
+                true);
+    }
+
+
+
+
 }
