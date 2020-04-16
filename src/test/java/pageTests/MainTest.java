@@ -1,4 +1,7 @@
+package pageTests;
+
 import com.github.javafaker.Faker;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
@@ -11,6 +14,9 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import pageSettings.ConnectionSettings;
+import pages.OpenPage;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -18,10 +24,12 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.*;
 
-public class MainTest {
-    private AndroidDriver<AndroidElement> androidDriver;
+public class MainTest extends ConnectionSettings {
 
-    @BeforeClass
+
+    //private AndroidDriver<AndroidElement> androidDriver;
+
+    /*@BeforeClass
     public void init() throws MalformedURLException, InterruptedException {
 
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
@@ -33,15 +41,44 @@ public class MainTest {
 
         androidDriver = new AndroidDriver<AndroidElement>(new URL("http://127.0.0.1:4723/wd/hub"), desiredCapabilities);
         Thread.sleep(10000, 30);
-    }
+    }*/
+
+    //OpenPage openPage = new OpenPage(androidDriver);
 
     @Test
     public void test01_openSignPage() {
-        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
-                true);
+        //CalculatorScreen cs = new CalculatorScreen(driver);
+        /*Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
+                true);*/
+       OpenPage openPage = new OpenPage(androidDriver);
+        Assert.assertTrue(openPage.mainPageIsDisplayed());
+        //Assert.assertEquals(openPage.mainPageIsDisplayed(), true);
     }
 
-    public String newEmail() {
+    @Test
+    public void test06_forgotPassword() throws InterruptedException {
+        /*MobileElement linkForgotPassword = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_form_forgot_password_text\"]/android.widget.TextView");
+        linkForgotPassword.click();
+        MobileElement inputEmail = (MobileElement) androidDriver.findElementById("reset_password_form_email_field");
+        inputEmail.click();
+        inputEmail.setValue("vasy_999@gmail.com");
+        MobileElement buttonSubmit = (MobileElement) androidDriver.findElementById("forgot_password_form_submit_button");
+        buttonSubmit.click();
+
+        Assert.assertEquals(androidDriver.findElementById("android:id/alertTitle").getText(), "Success");
+        Assert.assertEquals(androidDriver.findElementById("android:id/message").getText(), "Please check your email for a password change link.");
+        MobileElement buttonOk = (MobileElement) androidDriver.findElementById("android:id/button1");
+        buttonOk.click();
+        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
+                true);*/
+
+        OpenPage openPage = new OpenPage(androidDriver);
+        Assert.assertTrue(openPage.forgotPassword());
+    }
+
+
+
+    /*public String newEmail() {
         DateFormat pattern = new SimpleDateFormat("ddMMHHmm"); //y
         Date todayDate = Calendar.getInstance().getTime();
         String formatDate = pattern.format(todayDate);
@@ -734,25 +771,6 @@ public class MainTest {
         //MobileElement buttonOpenOverall = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"detailed_report_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[4]/android.view.ViewGroup/android.widget.TextView[1]\n");
         //buttonOpenOverall.click();
 
-        /*Thread.sleep(2000, 30);
-        MobileElement inputSearch = (MobileElement) androidDriver.findElementById("detailed_report_search_field");
-        inputSearch.click();
-        inputSearch.setValue("Emotional index");
-        androidDriver.hideKeyboard();
-        Thread.sleep(2000, 30);
-        TouchAction actionWithTouch = new TouchAction(androidDriver);
-        actionWithTouch
-                .tap(PointOption.point(110,510))
-                .release().perform();
-        //MobileElement buttonOpenSearch = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"detailed_report_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[4]/android.view.ViewGroup/android.widget.TextView[2]\n");
-        //buttonOpenSearch.click();
-        MobileElement buttonOpenEmotionalScore = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"detailed_report_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[5]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView[2]\n");
-        buttonOpenEmotionalScore.click();
-        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"detailed_report_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[5]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.widget.TextView").getText(),
-                "Emotional index");
-        Thread.sleep(2000, 30);
-        MobileElement buttonClearSearch = (MobileElement) androidDriver.findElementById("clear_search_field_button");
-        buttonClearSearch.click();*/
 
         Thread.sleep(2000, 30);
         MobileElement buttonOpenSearch = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"detailed_report_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[4]/android.view.ViewGroup/android.widget.TextView[2]\n");
@@ -941,13 +959,10 @@ public class MainTest {
         MobileElement buttonConnect = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"connect_text_button\"]/android.widget.TextView\n");
         buttonConnect.click();
         Thread.sleep(3000, 30);
-        /*Assert.assertEquals(androidDriver.findElementByXPath("").getText(),
-                "");*/
+
         MobileElement buttonAllow = (MobileElement) androidDriver.findElementById("com.android.packageinstaller:id/permission_allow_button");
         buttonAllow.click();
         Thread.sleep(3000, 30);
-        /*Assert.assertEquals(androidDriver.findElementByXPath("").getText(),
-                "");*/
         buttonAllow.click();
         Thread.sleep(2000, 30);
     }
@@ -1285,8 +1300,7 @@ public class MainTest {
         MobileElement buttonPatient = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_petro\"]/android.view.ViewGroup\n");
         buttonPatient.click();
         Thread.sleep(2000, 30);
-        /*Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_profile_screen\"]/android.widget.TextView[1]\n").getText(),
-               "Petro Denchik");*/
+
         MobileElement buttonBack = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"back_button\"]/android.widget.ImageView\n");
         buttonBack.click();
         Thread.sleep(2000, 30);
@@ -1450,10 +1464,10 @@ public class MainTest {
                 true);
         Assert.assertEquals(androidDriver.findElementById("groups_search_field").isDisplayed(),
                 true);
-        /*Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"add_patient_text\"]/android.widget.TextView\n").getText(),
-                "Press ");
-        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"groups_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[2]\n").getText(),
-                "to create your first group");*/
+        //Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"add_patient_text\"]/android.widget.TextView\n").getText(),
+        //        "Press ");
+        //Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"groups_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[2]\n").getText(),
+         //       "to create your first group");
     }
 
     @Test
@@ -1488,5 +1502,5 @@ public class MainTest {
         Thread.sleep(5000, 30);
         Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
                 true);
-    }
+    }*/
 }
