@@ -16,6 +16,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pageSettings.ConnectionSettings;
 import pages.OpenPage;
+import pages.RegistrationPage;
+import pages.SignInPage;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -26,9 +28,7 @@ import java.util.*;
 
 public class MainTest extends ConnectionSettings {
 
-
     //private AndroidDriver<AndroidElement> androidDriver;
-
     /*@BeforeClass
     public void init() throws MalformedURLException, InterruptedException {
 
@@ -43,383 +43,366 @@ public class MainTest extends ConnectionSettings {
         Thread.sleep(10000, 30);
     }*/
 
-    //OpenPage openPage = new OpenPage(androidDriver);
+    OpenPage openPage;
+    RegistrationPage registrationPage;
+    SignInPage signInPage;
 
     @Test
     public void test01_openSignPage() {
-        //CalculatorScreen cs = new CalculatorScreen(driver);
-        /*Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
-                true);*/
-       OpenPage openPage = new OpenPage(androidDriver);
+        //        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
+//                true);
+        openPage = new OpenPage(androidDriver);
         Assert.assertTrue(openPage.mainPageIsDisplayed());
-        //Assert.assertEquals(openPage.mainPageIsDisplayed(), true);
-    }
-
-    @Test
-    public void test06_forgotPassword() throws InterruptedException {
-        /*MobileElement linkForgotPassword = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_form_forgot_password_text\"]/android.widget.TextView");
-        linkForgotPassword.click();
-        MobileElement inputEmail = (MobileElement) androidDriver.findElementById("reset_password_form_email_field");
-        inputEmail.click();
-        inputEmail.setValue("vasy_999@gmail.com");
-        MobileElement buttonSubmit = (MobileElement) androidDriver.findElementById("forgot_password_form_submit_button");
-        buttonSubmit.click();
-
-        Assert.assertEquals(androidDriver.findElementById("android:id/alertTitle").getText(), "Success");
-        Assert.assertEquals(androidDriver.findElementById("android:id/message").getText(), "Please check your email for a password change link.");
-        MobileElement buttonOk = (MobileElement) androidDriver.findElementById("android:id/button1");
-        buttonOk.click();
-        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
-                true);*/
-
-        OpenPage openPage = new OpenPage(androidDriver);
-        Assert.assertTrue(openPage.forgotPassword());
-    }
-
-
-
-    /*public String newEmail() {
-        DateFormat pattern = new SimpleDateFormat("ddMMHHmm"); //y
-        Date todayDate = Calendar.getInstance().getTime();
-        String formatDate = pattern.format(todayDate);
-        String newMail = "mailForTest" + formatDate + "@gmail.com";
-        return newMail;
-    }
-
-    public String recordsHistoryDateDay() {
-        GregorianCalendar gCalendar = new GregorianCalendar();
-        String date = String.valueOf(gCalendar.get(Calendar.DATE));
-        return date;
-    }
-
-    public String recordsHistoryDateMonth() {
-        Calendar calendar = Calendar.getInstance();
-        String month = calendar.getDisplayName(Calendar.MONTH,
-                Calendar.LONG_FORMAT, new Locale("eng"));
-        return month;
-    }
-
-    public String newPassword() {
-        Random random = new Random();
-        final String symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
-        String newPassword = "";
-        int index = 0;
-        for (int i = 0; i < 8; i++) {
-            index = random.nextInt(symbols.length());
-            newPassword += symbols.charAt(index);
-        }
-        return newPassword;
-    }
-
-    public String newName() {
-        Faker faker = new Faker();
-        return faker.name().firstName();
-    }
-
-    public String newSurname() {
-        Faker faker = new Faker();
-        return faker.name().lastName();
     }
 
     @Test//(enabled = false, priority = 2)
     public void test02_signUpUserWithoutDiabetes() throws InterruptedException {
-        MobileElement linkSignUp = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_form_sign_up_text\"]/android.widget.TextView\n");
-        linkSignUp.click();
-        Thread.sleep(3000, 30);
-        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"role_select_screen\"]/android.widget.TextView[1]\n").getText(),
-                "I am");
-          Thread.sleep(5000, 30);
-          MobileElement buttonUser = (MobileElement) androidDriver.findElementById("sign_up_role_plate_patient");
-          buttonUser.click();
-        Thread.sleep(2000, 30);
-        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_role_plate_patient\"]/android.widget.TextView[1]\n").isDisplayed(),
-                true);
-          Thread.sleep(5000, 30);
-          MobileElement buttonContinue1 = (MobileElement) androidDriver.findElementById("role_select_submit_button");
-          buttonContinue1.click();
-          Thread.sleep(5000, 30);
-          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"chronic_condition_select_screen\"]/android.widget.TextView[1]\n").getText(),
-                  "Diabetes");
-          Thread.sleep(5000, 30);
-          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_chronic_condition_absent\"]/android.widget.TextView[1]\n").isDisplayed(),
-                  true);
+        //        MobileElement linkSignUp = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_form_sign_up_text\"]/android.widget.TextView\n");
+//        linkSignUp.click();
+//        Thread.sleep(3000, 30);
+//        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"role_select_screen\"]/android.widget.TextView[1]\n").getText(),
+//                "I am");
+//        Thread.sleep(5000, 30);
+//        MobileElement buttonUser = (MobileElement) androidDriver.findElementById("sign_up_role_plate_patient");
+//        buttonUser.click();
+//        Thread.sleep(2000, 30);
+//        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_role_plate_patient\"]/android.widget.TextView[1]\n").isDisplayed(),
+//                true);
+//        Thread.sleep(5000, 30);
+//        MobileElement buttonContinue1 = (MobileElement) androidDriver.findElementById("role_select_submit_button");
+//        buttonContinue1.click();
+//        Thread.sleep(5000, 30);
+//        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"chronic_condition_select_screen\"]/android.widget.TextView[1]\n").getText(),
+//                "Diabetes");
+//        Thread.sleep(5000, 30);
+//        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_chronic_condition_absent\"]/android.widget.TextView[1]\n").isDisplayed(),
+//                true);
+//        MobileElement buttonContinue2 = (MobileElement) androidDriver.findElementById("chronic_condition_select_screen_submit_button");
+//        buttonContinue2.click();
+//
+//        MobileElement inputEmail = (MobileElement) androidDriver.findElementById("sign_up_email");
+//        inputEmail.click();
+//        String email = newEmail();
+//        String name = newName();
+//        String surname = newSurname();
+//        inputEmail.setValue(name+"."+surname+"@gmail.com");
+//        inputEmail.setValue(email);
+//        MobileElement inputFirstName = (MobileElement) androidDriver.findElementById("sign_up_firstname");
+//        inputFirstName.click();
+//        inputFirstName.setValue(name);
+//        MobileElement inputLastName = (MobileElement) androidDriver.findElementById("sign_up_lastname");
+//        inputLastName.click();
+//        inputLastName.setValue(surname);
+//        MobileElement inputPassword = (MobileElement) androidDriver.findElementById("sign_up_password");
+//        inputPassword.click();
+//        String password = newPassword();
+//        inputPassword.setValue(password);
+//        MobileElement inputConfirmPassword = (MobileElement) androidDriver.findElementById("sign_up_confirm_password");
+//        inputConfirmPassword.click();
+//        inputConfirmPassword.setValue(password);
+//
+//        androidDriver.hideKeyboard();
+//        MobileElement buttonAgree = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.Switch");
+//        buttonAgree.click();
+//        MobileElement buttonSignUp = (MobileElement) androidDriver.findElementById("sign_up_button");
+//        buttonSignUp.click();
+//        Thread.sleep(2000, 30);
+//        Assert.assertEquals(androidDriver.findElementById("android:id/alertTitle").getText(), "Success");
+//        Assert.assertEquals(androidDriver.findElementById("android:id/message").getText(), "Your account has been created");
+//        MobileElement buttonOk = (MobileElement) androidDriver.findElementById("android:id/button1");
+//        buttonOk.click();
+//        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
+//                true);
+        registrationPage = new RegistrationPage(androidDriver);
+        Assert.assertTrue(registrationPage.registrationUserWithoutDiabetes());
+    }
 
-          MobileElement buttonContinue2 = (MobileElement) androidDriver.findElementById("chronic_condition_select_screen_submit_button");
-          buttonContinue2.click();
-
-          MobileElement inputEmail = (MobileElement) androidDriver.findElementById("sign_up_email");
-          inputEmail.click();
-          String email = newEmail();
-          String name = newName();
-          String surname = newSurname();
-          inputEmail.setValue(name+"."+surname+"@gmail.com");
-          //inputEmail.setValue(email);
-          MobileElement inputFirstName = (MobileElement) androidDriver.findElementById("sign_up_firstname");
-          inputFirstName.click();
-          inputFirstName.setValue(name);
-          MobileElement inputLastName = (MobileElement) androidDriver.findElementById("sign_up_lastname");
-          inputLastName.click();
-          inputLastName.setValue(surname);
-          MobileElement inputPassword = (MobileElement) androidDriver.findElementById("sign_up_password");
-          inputPassword.click();
-          String password = newPassword();
-          inputPassword.setValue(password);
-          MobileElement inputConfirmPassword = (MobileElement) androidDriver.findElementById("sign_up_confirm_password");
-          inputConfirmPassword.click();
-          inputConfirmPassword.setValue(password);
-
-          androidDriver.hideKeyboard();
-          MobileElement buttonAgree = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.Switch");
-          buttonAgree.click();
-          MobileElement buttonSignUp = (MobileElement) androidDriver.findElementById("sign_up_button");
-          buttonSignUp.click();
-        Thread.sleep(2000, 30);
-          Assert.assertEquals(androidDriver.findElementById("android:id/alertTitle").getText(), "Success");
-          Assert.assertEquals(androidDriver.findElementById("android:id/message").getText(), "Your account has been created");
-          MobileElement buttonOk = (MobileElement) androidDriver.findElementById("android:id/button1");
-          buttonOk.click();
-          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
-                  true);
-      }
-
-      @Test
-      public void test03_signUpUserWithDiabetesFirstType() throws InterruptedException {
-          MobileElement linkSignUp = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_form_sign_up_text\"]/android.widget.TextView\n");
-          linkSignUp.click();
-
-          Thread.sleep(5000, 30);
-          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"role_select_screen\"]/android.widget.TextView[1]\n").getText(),
-                  "I am");
-          MobileElement buttonUser = (MobileElement) androidDriver.findElementById("sign_up_role_plate_patient");
-          buttonUser.click();
-          Thread.sleep(2000, 30);
-          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_role_plate_patient\"]/android.widget.TextView[1]\n").isDisplayed(),
-                  true);
-          MobileElement buttonContinue1 = (MobileElement) androidDriver.findElementById("role_select_submit_button");
-          buttonContinue1.click();
-          Thread.sleep(5000, 30);
-          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"chronic_condition_select_screen\"]/android.widget.TextView[1]\n").getText(),
-                  "Diabetes");
-          MobileElement buttonDiabetes = (MobileElement) androidDriver.findElementById("sign_up_chronic_condition_exists");
-          buttonDiabetes.click();
-          Thread.sleep(2000, 30);
-          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_chronic_condition_exists\"]/android.widget.TextView[1]").isDisplayed(),
-                  true);
-          MobileElement buttonContinue2 = (MobileElement) androidDriver.findElementById("chronic_condition_select_screen_submit_button");
-          buttonContinue2.click();
-          Thread.sleep(5000, 30);
-          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"chronic_condition_type_select_screen\"]/android.widget.TextView[1]").getText(),
-                  "Type of diabetes");
-          MobileElement buttonTypeDiabetes = (MobileElement) androidDriver.findElementById("diabetes_type_one_plate");
-          buttonTypeDiabetes.click();
-          Thread.sleep(2000, 30);
-          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"diabetes_type_one_plate\"]/android.widget.TextView[1]").isDisplayed(),
-                  true);
-          MobileElement buttonContinue3 = (MobileElement) androidDriver.findElementById("chronic_condition_type_submit");
-          buttonContinue3.click();
-
-          MobileElement inputEmail = (MobileElement) androidDriver.findElementById("sign_up_email");
-          inputEmail.click();
-          String email = newEmail();
-          String name = newName();
-          String surname = newSurname();
-          inputEmail.setValue(name+"."+surname+"@gmail.com");
-          //inputEmail.setValue(email);
-          MobileElement inputFirstName = (MobileElement) androidDriver.findElementById("sign_up_firstname");
-          inputFirstName.click();
-          inputFirstName.setValue(name);
-          MobileElement inputLastName = (MobileElement) androidDriver.findElementById("sign_up_lastname");
-          inputLastName.click();
-          inputLastName.setValue(surname);
-          MobileElement inputPassword = (MobileElement) androidDriver.findElementById("sign_up_password");
-          inputPassword.click();
-          String password = newPassword();
-          inputPassword.setValue(password);
-          MobileElement inputConfirmPassword = (MobileElement) androidDriver.findElementById("sign_up_confirm_password");
-          inputConfirmPassword.click();
-          inputConfirmPassword.setValue(password);
-
-          androidDriver.hideKeyboard();
-          MobileElement buttonAgree = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.Switch");
-          buttonAgree.click();
-          MobileElement buttonSignUp = (MobileElement) androidDriver.findElementById("sign_up_button");
-          buttonSignUp.click();
-          Thread.sleep(2000, 30);
-          Assert.assertEquals(androidDriver.findElementById("android:id/alertTitle").getText(), "Success");
-          Assert.assertEquals(androidDriver.findElementById("android:id/message").getText(), "Your account has been created");
-          MobileElement buttonOk = (MobileElement) androidDriver.findElementById("android:id/button1");
-          buttonOk.click();
-          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
-                  true);
-      }
-
-      @Test
-      public void test04_signUpUserWithDiabetesSecondType() throws InterruptedException {
-          MobileElement linkSignUp = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_form_sign_up_text\"]/android.widget.TextView\n");
-          linkSignUp.click();
-
-          Thread.sleep(5000, 30);
-          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"role_select_screen\"]/android.widget.TextView[1]\n").getText(),
-                  "I am");
-          MobileElement buttonUser = (MobileElement) androidDriver.findElementById("sign_up_role_plate_patient");
-          buttonUser.click();
-          Thread.sleep(2000, 30);
-          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_role_plate_patient\"]/android.widget.TextView[1]\n").isDisplayed(),
-                  true);
-          MobileElement buttonContinue1 = (MobileElement) androidDriver.findElementById("role_select_submit_button");
-          buttonContinue1.click();
-          Thread.sleep(5000, 30);
-          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"chronic_condition_select_screen\"]/android.widget.TextView[1]\n").getText(),
-                  "Diabetes");
-          MobileElement buttonDiabetes = (MobileElement) androidDriver.findElementById("sign_up_chronic_condition_exists");
-          buttonDiabetes.click();
-          Thread.sleep(2000, 30);
-          Assert.assertEquals(androidDriver.findElementByXPath("\t//android.view.ViewGroup[@content-desc=\"sign_up_chronic_condition_exists\"]/android.widget.TextView[1]").isDisplayed(),
-                  true);
-          MobileElement buttonContinue2 = (MobileElement) androidDriver.findElementById("chronic_condition_select_screen_submit_button");
-          buttonContinue2.click();
-          Thread.sleep(5000, 30);
-          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"chronic_condition_type_select_screen\"]/android.widget.TextView[1]").getText(),
-                  "Type of diabetes");
-          MobileElement buttonTypeDiabetes = (MobileElement) androidDriver.findElementById("diabetes_type_two_plate");
-          buttonTypeDiabetes.click();
-          Thread.sleep(2000, 30);
-          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"diabetes_type_two_plate\"]/android.widget.TextView[1]\n").isDisplayed(),
-                  true);
-          MobileElement buttonContinue3 = (MobileElement) androidDriver.findElementById("chronic_condition_type_submit");
-          buttonContinue3.click();
-
-          MobileElement inputEmail = (MobileElement) androidDriver.findElementById("sign_up_email");
-          inputEmail.click();
-          String email = newEmail();
-          String name = newName();
-          String surname = newSurname();
-          inputEmail.setValue(name+"."+surname+"@gmail.com");
-          //inputEmail.setValue(email);
-          MobileElement inputFirstName = (MobileElement) androidDriver.findElementById("sign_up_firstname");
-          inputFirstName.click();
-          inputFirstName.setValue(name);
-          MobileElement inputLastName = (MobileElement) androidDriver.findElementById("sign_up_lastname");
-          inputLastName.click();
-          inputLastName.setValue(surname);
-          MobileElement inputPassword = (MobileElement) androidDriver.findElementById("sign_up_password");
-          inputPassword.click();
-          String password = newPassword();
-          inputPassword.setValue(password);
-          MobileElement inputConfirmPassword = (MobileElement) androidDriver.findElementById("sign_up_confirm_password");
-          inputConfirmPassword.click();
-          inputConfirmPassword.setValue(password);
-
-          androidDriver.hideKeyboard();
-          MobileElement buttonAgree = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.Switch");
-          buttonAgree.click();
-          MobileElement buttonSignUp = (MobileElement) androidDriver.findElementById("sign_up_button");
-          buttonSignUp.click();
-          Thread.sleep(2000, 30);
-          Assert.assertEquals(androidDriver.findElementById("android:id/alertTitle").getText(), "Success");
-          Assert.assertEquals(androidDriver.findElementById("android:id/message").getText(), "Your account has been created");
-          MobileElement buttonOk = (MobileElement) androidDriver.findElementById("android:id/button1");
-          buttonOk.click();
-          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
-                  true);
-      }
+    //    public String newEmail() {
+//        DateFormat pattern = new SimpleDateFormat("ddMMHHmm"); //y
+//        Date todayDate = Calendar.getInstance().getTime();
+//        String formatDate = pattern.format(todayDate);
+//        String newMail = "mailForTest" + formatDate + "@gmail.com";
+//        return newMail;
+//    }
+//
+//    public String recordsHistoryDateDay() {
+//        GregorianCalendar gCalendar = new GregorianCalendar();
+//        String date = String.valueOf(gCalendar.get(Calendar.DATE));
+//        return date;
+//    }
+//
+//    public String recordsHistoryDateMonth() {
+//        Calendar calendar = Calendar.getInstance();
+//        String month = calendar.getDisplayName(Calendar.MONTH,
+//                Calendar.LONG_FORMAT, new Locale("eng"));
+//        return month;
+//    }
+//
+//    public String newPassword() {
+//        Random random = new Random();
+//        final String symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
+//        String newPassword = "";
+//        int index = 0;
+//        for (int i = 0; i < 8; i++) {
+//            index = random.nextInt(symbols.length());
+//            newPassword += symbols.charAt(index);
+//        }
+//        return newPassword;
+//    }
+//
+//    public String newName() {
+//        Faker faker = new Faker();
+//        return faker.name().firstName();
+//    }
+//
+//    public String newSurname() {
+//        Faker faker = new Faker();
+//        return faker.name().lastName();
+//    }
 
     @Test
-    public void test05_signUpDoctor() throws InterruptedException {
-        MobileElement linkSignUp = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_form_sign_up_text\"]/android.widget.TextView\n");
-        linkSignUp.click();
-        Thread.sleep(5000, 30);
-        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"role_select_screen\"]/android.widget.TextView[1]\n").getText(),
-                "I am");
-        MobileElement buttonDoctor = (MobileElement) androidDriver.findElementById("sign_up_role_plate_doctor");
-        buttonDoctor.click();
-        Thread.sleep(5000, 30);
-        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_role_plate_doctor\"]/android.widget.TextView[1]\n").isDisplayed(),
-                true);
-        Thread.sleep(3000, 30);
-        MobileElement buttonContinue = (MobileElement) androidDriver.findElementById("role_select_submit_button");
-        buttonContinue.click();
-        Thread.sleep(5000, 30);
-        MobileElement inputEmail = (MobileElement) androidDriver.findElementById("sign_up_email");
-        inputEmail.click();
-        String email = newEmail();
-        String name = newName();
-        String surname = newSurname();
-        inputEmail.setValue(name+"."+surname+"@gmail.com");
-        //inputEmail.setValue(email);
-        MobileElement inputFirstName = (MobileElement) androidDriver.findElementById("sign_up_firstname");
-        inputFirstName.click();
-        inputFirstName.setValue(name);
-        MobileElement inputLastName = (MobileElement) androidDriver.findElementById("sign_up_lastname");
-        inputLastName.click();
-        inputLastName.setValue(surname);
-        MobileElement inputPassword = (MobileElement) androidDriver.findElementById("sign_up_password");
-        inputPassword.click();
-        String password = newPassword();
-        inputPassword.setValue(password);
-        MobileElement inputConfirmPassword = (MobileElement) androidDriver.findElementById("sign_up_confirm_password");
-        inputConfirmPassword.click();
-        inputConfirmPassword.setValue(password);
-
-        androidDriver.hideKeyboard();
-        MobileElement buttonAgree = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.Switch");
-        buttonAgree.click();
-        MobileElement buttonSignUp = (MobileElement) androidDriver.findElementById("sign_up_button");
-        buttonSignUp.click();
-        Thread.sleep(2000, 30);
-        Assert.assertEquals(androidDriver.findElementById("android:id/alertTitle").getText(),
-                "Success");
-        Assert.assertEquals(androidDriver.findElementById("android:id/message").getText(),
-                "Your account has been created");
-        MobileElement buttonOk = (MobileElement) androidDriver.findElementById("android:id/button1");
-        buttonOk.click();
-        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
-                true);
+    public void test03_signUpUserWithDiabetesFirstType() throws InterruptedException {
+        //        MobileElement linkSignUp = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_form_sign_up_text\"]/android.widget.TextView\n");
+//          linkSignUp.click();
+//
+//          Thread.sleep(5000, 30);
+//          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"role_select_screen\"]/android.widget.TextView[1]\n").getText(),
+//                  "I am");
+//          MobileElement buttonUser = (MobileElement) androidDriver.findElementById("sign_up_role_plate_patient");
+//          buttonUser.click();
+//          Thread.sleep(2000, 30);
+//          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_role_plate_patient\"]/android.widget.TextView[1]\n").isDisplayed(),
+//                  true);
+//          MobileElement buttonContinue1 = (MobileElement) androidDriver.findElementById("role_select_submit_button");
+//          buttonContinue1.click();
+//          Thread.sleep(5000, 30);
+//          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"chronic_condition_select_screen\"]/android.widget.TextView[1]\n").getText(),
+//                  "Diabetes");
+//          MobileElement buttonDiabetes = (MobileElement) androidDriver.findElementById("sign_up_chronic_condition_exists");
+//          buttonDiabetes.click();
+//          Thread.sleep(2000, 30);
+//          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_chronic_condition_exists\"]/android.widget.TextView[1]").isDisplayed(),
+//                  true);
+//          MobileElement buttonContinue2 = (MobileElement) androidDriver.findElementById("chronic_condition_select_screen_submit_button");
+//          buttonContinue2.click();
+//          Thread.sleep(5000, 30);
+//          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"chronic_condition_type_select_screen\"]/android.widget.TextView[1]").getText(),
+//                  "Type of diabetes");
+//          MobileElement buttonTypeDiabetes = (MobileElement) androidDriver.findElementById("diabetes_type_one_plate");
+//          buttonTypeDiabetes.click();
+//          Thread.sleep(2000, 30);
+//          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"diabetes_type_one_plate\"]/android.widget.TextView[1]").isDisplayed(),
+//                  true);
+//          MobileElement buttonContinue3 = (MobileElement) androidDriver.findElementById("chronic_condition_type_submit");
+//          buttonContinue3.click();
+//
+//          MobileElement inputEmail = (MobileElement) androidDriver.findElementById("sign_up_email");
+//          inputEmail.click();
+//          String email = newEmail();
+//          String name = newName();
+//          String surname = newSurname();
+//          inputEmail.setValue(name+"."+surname+"@gmail.com");
+//          inputEmail.setValue(email);
+//          MobileElement inputFirstName = (MobileElement) androidDriver.findElementById("sign_up_firstname");
+//          inputFirstName.click();
+//          inputFirstName.setValue(name);
+//          MobileElement inputLastName = (MobileElement) androidDriver.findElementById("sign_up_lastname");
+//          inputLastName.click();
+//          inputLastName.setValue(surname);
+//          MobileElement inputPassword = (MobileElement) androidDriver.findElementById("sign_up_password");
+//          inputPassword.click();
+//          String password = newPassword();
+//          inputPassword.setValue(password);
+//          MobileElement inputConfirmPassword = (MobileElement) androidDriver.findElementById("sign_up_confirm_password");
+//          inputConfirmPassword.click();
+//          inputConfirmPassword.setValue(password);
+//
+//          androidDriver.hideKeyboard();
+//          MobileElement buttonAgree = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.Switch");
+//          buttonAgree.click();
+//          MobileElement buttonSignUp = (MobileElement) androidDriver.findElementById("sign_up_button");
+//          buttonSignUp.click();
+//          Thread.sleep(2000, 30);
+//          Assert.assertEquals(androidDriver.findElementById("android:id/alertTitle").getText(), "Success");
+//          Assert.assertEquals(androidDriver.findElementById("android:id/message").getText(), "Your account has been created");
+//          MobileElement buttonOk = (MobileElement) androidDriver.findElementById("android:id/button1");
+//          buttonOk.click();
+//          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
+//                  true);
+        Assert.assertTrue(registrationPage.registrationUserWithDiabetesFirstType());
     }
 
     @Test
-    public void test06_forgotPassword() {
-          MobileElement linkForgotPassword = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_form_forgot_password_text\"]/android.widget.TextView");
-          linkForgotPassword.click();
+    public void test04_signUpUserWithDiabetesSecondType() throws InterruptedException {
+        //        MobileElement linkSignUp = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_form_sign_up_text\"]/android.widget.TextView\n");
+//          linkSignUp.click();
+//
+//          Thread.sleep(5000, 30);
+//          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"role_select_screen\"]/android.widget.TextView[1]\n").getText(),
+//                  "I am");
+//          MobileElement buttonUser = (MobileElement) androidDriver.findElementById("sign_up_role_plate_patient");
+//          buttonUser.click();
+//          Thread.sleep(2000, 30);
+//          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_role_plate_patient\"]/android.widget.TextView[1]\n").isDisplayed(),
+//                  true);
+//          MobileElement buttonContinue1 = (MobileElement) androidDriver.findElementById("role_select_submit_button");
+//          buttonContinue1.click();
+//          Thread.sleep(5000, 30);
+//          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"chronic_condition_select_screen\"]/android.widget.TextView[1]\n").getText(),
+//                  "Diabetes");
+//          MobileElement buttonDiabetes = (MobileElement) androidDriver.findElementById("sign_up_chronic_condition_exists");
+//          buttonDiabetes.click();
+//          Thread.sleep(2000, 30);
+//          Assert.assertEquals(androidDriver.findElementByXPath("\t//android.view.ViewGroup[@content-desc=\"sign_up_chronic_condition_exists\"]/android.widget.TextView[1]").isDisplayed(),
+//                  true);
+//          MobileElement buttonContinue2 = (MobileElement) androidDriver.findElementById("chronic_condition_select_screen_submit_button");
+//          buttonContinue2.click();
+//          Thread.sleep(5000, 30);
+//          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"chronic_condition_type_select_screen\"]/android.widget.TextView[1]").getText(),
+//                  "Type of diabetes");
+//          MobileElement buttonTypeDiabetes = (MobileElement) androidDriver.findElementById("diabetes_type_two_plate");
+//          buttonTypeDiabetes.click();
+//          Thread.sleep(2000, 30);
+//          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"diabetes_type_two_plate\"]/android.widget.TextView[1]\n").isDisplayed(),
+//                  true);
+//          MobileElement buttonContinue3 = (MobileElement) androidDriver.findElementById("chronic_condition_type_submit");
+//          buttonContinue3.click();
+//
+//          MobileElement inputEmail = (MobileElement) androidDriver.findElementById("sign_up_email");
+//          inputEmail.click();
+//          String email = newEmail();
+//          String name = newName();
+//          String surname = newSurname();
+//          inputEmail.setValue(name+"."+surname+"@gmail.com");
+//          inputEmail.setValue(email);
+//          MobileElement inputFirstName = (MobileElement) androidDriver.findElementById("sign_up_firstname");
+//          inputFirstName.click();
+//          inputFirstName.setValue(name);
+//          MobileElement inputLastName = (MobileElement) androidDriver.findElementById("sign_up_lastname");
+//          inputLastName.click();
+//          inputLastName.setValue(surname);
+//          MobileElement inputPassword = (MobileElement) androidDriver.findElementById("sign_up_password");
+//          inputPassword.click();
+//          String password = newPassword();
+//          inputPassword.setValue(password);
+//          MobileElement inputConfirmPassword = (MobileElement) androidDriver.findElementById("sign_up_confirm_password");
+//          inputConfirmPassword.click();
+//          inputConfirmPassword.setValue(password);
+//
+//          androidDriver.hideKeyboard();
+//          MobileElement buttonAgree = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.Switch");
+//          buttonAgree.click();
+//          MobileElement buttonSignUp = (MobileElement) androidDriver.findElementById("sign_up_button");
+//          buttonSignUp.click();
+//          Thread.sleep(2000, 30);
+//          Assert.assertEquals(androidDriver.findElementById("android:id/alertTitle").getText(), "Success");
+//          Assert.assertEquals(androidDriver.findElementById("android:id/message").getText(), "Your account has been created");
+//          MobileElement buttonOk = (MobileElement) androidDriver.findElementById("android:id/button1");
+//          buttonOk.click();
+//          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
+//                  true);
+        Assert.assertTrue(registrationPage.registrationUserWithDiabetesSecondType());
+    }
 
-          MobileElement inputEmail = (MobileElement) androidDriver.findElementById("reset_password_form_email_field");
-          inputEmail.click();
-          inputEmail.setValue("vasy_999@gmail.com");
-          MobileElement buttonSubmit = (MobileElement) androidDriver.findElementById("forgot_password_form_submit_button");
-          buttonSubmit.click();
+    @Test
+    public void test05_signUpDoctor() throws InterruptedException {
+        //        MobileElement linkSignUp = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_form_sign_up_text\"]/android.widget.TextView\n");
+//        linkSignUp.click();
+//        Thread.sleep(5000, 30);
+//        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"role_select_screen\"]/android.widget.TextView[1]\n").getText(),
+//                "I am");
+//        MobileElement buttonDoctor = (MobileElement) androidDriver.findElementById("sign_up_role_plate_doctor");
+//        buttonDoctor.click();
+//        Thread.sleep(5000, 30);
+//        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_role_plate_doctor\"]/android.widget.TextView[1]\n").isDisplayed(),
+//                true);
+//        Thread.sleep(3000, 30);
+//        MobileElement buttonContinue = (MobileElement) androidDriver.findElementById("role_select_submit_button");
+//        buttonContinue.click();
+//        Thread.sleep(5000, 30);
+//        MobileElement inputEmail = (MobileElement) androidDriver.findElementById("sign_up_email");
+//        inputEmail.click();
+//        String email = newEmail();
+//        String name = newName();
+//        String surname = newSurname();
+//        inputEmail.setValue(name+"."+surname+"@gmail.com");
+//        inputEmail.setValue(email);
+//        MobileElement inputFirstName = (MobileElement) androidDriver.findElementById("sign_up_firstname");
+//        inputFirstName.click();
+//        inputFirstName.setValue(name);
+//        MobileElement inputLastName = (MobileElement) androidDriver.findElementById("sign_up_lastname");
+//        inputLastName.click();
+//        inputLastName.setValue(surname);
+//        MobileElement inputPassword = (MobileElement) androidDriver.findElementById("sign_up_password");
+//        inputPassword.click();
+//        String password = newPassword();
+//        inputPassword.setValue(password);
+//        MobileElement inputConfirmPassword = (MobileElement) androidDriver.findElementById("sign_up_confirm_password");
+//        inputConfirmPassword.click();
+//        inputConfirmPassword.setValue(password);
+//
+//        androidDriver.hideKeyboard();
+//        MobileElement buttonAgree = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_up_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.Switch");
+//        buttonAgree.click();
+//        MobileElement buttonSignUp = (MobileElement) androidDriver.findElementById("sign_up_button");
+//        buttonSignUp.click();
+//        Thread.sleep(2000, 30);
+//        Assert.assertEquals(androidDriver.findElementById("android:id/alertTitle").getText(),
+//                "Success");
+//        Assert.assertEquals(androidDriver.findElementById("android:id/message").getText(),
+//                "Your account has been created");
+//        MobileElement buttonOk = (MobileElement) androidDriver.findElementById("android:id/button1");
+//        buttonOk.click();
+//        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
+//                true);
+        Assert.assertTrue(registrationPage.registrationDoctor());
+    }
 
-          Assert.assertEquals(androidDriver.findElementById("android:id/alertTitle").getText(), "Success");
-          Assert.assertEquals(androidDriver.findElementById("android:id/message").getText(), "Please check your email for a password change link.");
-          MobileElement buttonOk = (MobileElement) androidDriver.findElementById("android:id/button1");
-          buttonOk.click();
-          Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
-                  true);
+    @Test
+    public void test06_forgotPassword() throws InterruptedException {
+        //        MobileElement linkForgotPassword = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_form_forgot_password_text\"]/android.widget.TextView");
+//        linkForgotPassword.click();
+//        MobileElement inputEmail = (MobileElement) androidDriver.findElementById("reset_password_form_email_field");
+//        inputEmail.click();
+//        inputEmail.setValue("vasy_999@gmail.com");
+//        MobileElement buttonSubmit = (MobileElement) androidDriver.findElementById("forgot_password_form_submit_button");
+//        buttonSubmit.click();
+//
+//        Assert.assertEquals(androidDriver.findElementById("android:id/alertTitle").getText(), "Success");
+//        Assert.assertEquals(androidDriver.findElementById("android:id/message").getText(), "Please check your email for a password change link.");
+//        MobileElement buttonOk = (MobileElement) androidDriver.findElementById("android:id/button1");
+//        buttonOk.click();
+//        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
+//                true);
+        Assert.assertTrue(registrationPage.forgotPassword());
     }
 
     @Test
     public void test07_userSignInWithDT1() throws InterruptedException {
-        MobileElement inputEmail = (MobileElement) androidDriver.findElementById("sign_in_form_email_field");
-        inputEmail.click();
-        inputEmail.setValue("homka6745@gmail.com");
-        MobileElement inputPassword = (MobileElement) androidDriver.findElementById("sign_in_form_password_field");
-        inputPassword.click();
-        inputPassword.setValue("lovesport");
-
-        MobileElement buttonShowPassword = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.view.ViewGroup[1]");
-        buttonShowPassword.click();
-        Thread.sleep(5000, 30);
-        buttonShowPassword.click();
-
-        androidDriver.hideKeyboard();
-        MobileElement buttonSignIn = (MobileElement) androidDriver.findElementById("sign_in_form_submit_button");
-        buttonSignIn.click();
-
-        Thread.sleep(5000, 30);
-        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_pre_measurement_screen\"]/android.widget.TextView[1]").getText(),
-                "Let's get started");
+        //        MobileElement inputEmail = (MobileElement) androidDriver.findElementById("sign_in_form_email_field");
+//        inputEmail.click();
+//        inputEmail.setValue("homka6745@gmail.com");
+//        MobileElement inputPassword = (MobileElement) androidDriver.findElementById("sign_in_form_password_field");
+//        inputPassword.click();
+//        inputPassword.setValue("lovesport");
+//
+//        MobileElement buttonShowPassword = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.view.ViewGroup[1]");
+//        buttonShowPassword.click();
+//        Thread.sleep(5000, 30);
+//        buttonShowPassword.click();
+//
+//        androidDriver.hideKeyboard();
+//        MobileElement buttonSignIn = (MobileElement) androidDriver.findElementById("sign_in_form_submit_button");
+//        buttonSignIn.click();
+//
+//        Thread.sleep(5000, 30);
+//        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_pre_measurement_screen\"]/android.widget.TextView[1]").getText(),
+//                "Let's get started");
+        signInPage = new SignInPage(androidDriver);
+        Assert.assertTrue(signInPage.signInUserWithDiabetesFirstType());
     }
 
-    @Test
+    /*@Test
     public void test08_userViewHistoryWithDT1() throws InterruptedException {
         MobileElement buttonHistory = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[2]\n");
         buttonHistory.click();
@@ -440,32 +423,33 @@ public class MainTest extends ConnectionSettings {
         buttonSettings.click();
         MobileElement buttonSignOut = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_out_text\"]/android.widget.TextView\n");
         buttonSignOut.click();
-    }
+    }*/
 
     @Test
     public void test09_userSignInWithDT2() throws InterruptedException {
-        MobileElement inputEmail = (MobileElement) androidDriver.findElementById("sign_in_form_email_field");
-        inputEmail.click();
-        inputEmail.setValue("jin.tok@gmail.com");
-        MobileElement inputPassword = (MobileElement) androidDriver.findElementById("sign_in_form_password_field");
-        inputPassword.click();
-        inputPassword.setValue("jinnn888");
-
-        MobileElement buttonShowPassword = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.view.ViewGroup[1]");
-        buttonShowPassword.click();
-        Thread.sleep(5000, 30);
-        buttonShowPassword.click();
-
-        androidDriver.hideKeyboard();
-        MobileElement buttonSignIn = (MobileElement) androidDriver.findElementById("sign_in_form_submit_button");
-        buttonSignIn.click();
-
-        Thread.sleep(5000, 30);
-        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_pre_measurement_screen\"]/android.widget.TextView[1]").getText(),
-                "Let's get started");
+        //        MobileElement inputEmail = (MobileElement) androidDriver.findElementById("sign_in_form_email_field");
+//        inputEmail.click();
+//        inputEmail.setValue("jin.tok@gmail.com");
+//        MobileElement inputPassword = (MobileElement) androidDriver.findElementById("sign_in_form_password_field");
+//        inputPassword.click();
+//        inputPassword.setValue("jinnn888");
+//
+//        MobileElement buttonShowPassword = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.view.ViewGroup[1]");
+//        buttonShowPassword.click();
+//        Thread.sleep(5000, 30);
+//        buttonShowPassword.click();
+//
+//        androidDriver.hideKeyboard();
+//        MobileElement buttonSignIn = (MobileElement) androidDriver.findElementById("sign_in_form_submit_button");
+//        buttonSignIn.click();
+//
+//        Thread.sleep(5000, 30);
+//        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_pre_measurement_screen\"]/android.widget.TextView[1]").getText(),
+//                "Let's get started");
+        Assert.assertTrue(signInPage.signInUserWithDiabetesSecondType());
     }
 
-    @Test
+    /*@Test
     public void test10_userViewHistoryWithDT2() throws InterruptedException {
         MobileElement buttonHistory = (MobileElement) androidDriver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button[2]\n");
         buttonHistory.click();
