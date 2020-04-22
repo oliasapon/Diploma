@@ -2,11 +2,12 @@ package pages;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.testng.Assert;
 
-public class SignInPage extends DriverPage{
+public class SignInPage extends OpenPage{
 
     @AndroidFindBy(id = "sign_in_form_email_field")
     private AndroidElement inputEmail;
@@ -23,18 +24,13 @@ public class SignInPage extends DriverPage{
     @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"patient_pre_measurement_screen\"]/android.widget.TextView[1]")
     private AndroidElement titleFirstPageUser;
 
-    /*@AndroidFindBy(xpath = "")
-    private AndroidElement;
-    @AndroidFindBy(id = "")
-    private AndroidElement;*/
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.widget.TextView\n")
+    private AndroidElement titleFirstPageDoctor;
 
-    public SignInPage(AppiumDriver<MobileElement> androidDriver) {
+    public SignInPage(AndroidDriver<AndroidElement> androidDriver) {
         super(androidDriver);
     }
 
-    public void sleepTime(int time) throws InterruptedException {
-        Thread.sleep(time, 30);
-    }
 
     public void clickInputEmail(){
         inputEmail.click();
@@ -68,6 +64,10 @@ public class SignInPage extends DriverPage{
         return titleFirstPageUser.getText();
     }
 
+    public String getTextTitleFirstPageDoctor(){
+        return titleFirstPageDoctor.getText();
+    }
+
     public void signIn(String email, String password) throws InterruptedException {
         clickInputEmail();
         setValueEmail(email);
@@ -86,6 +86,11 @@ public class SignInPage extends DriverPage{
         return true;
     }
 
+    public boolean messagePageDoctor(){
+        Assert.assertEquals(getTextTitleFirstPageDoctor(), "Records history");
+        return true;
+    }
+
     public boolean signInUserWithDiabetesFirstType() throws InterruptedException {
         boolean status = false;
         signIn("homka6745@gmail.com", "lovesport");
@@ -98,13 +103,38 @@ public class SignInPage extends DriverPage{
     public boolean signInUserWithDiabetesSecondType() throws InterruptedException {
         boolean status = false;
         signIn("jin.tok@gmail.com", "jinnn888");
+        sleepTime(3000);
         if(messagePageUser()){
             status = true;
         }
         return status;
     }
 
-    /*
+    public boolean signInUserWithout() throws InterruptedException {
+        boolean status = false;
+        signIn("olia.sapon@gmail.com", "12344321");
+        if(messagePageUser()){
+            status = true;
+        }
+        return status;
+    }
 
-    */
+    public boolean signInDoctorWithPatients() throws InterruptedException {
+        boolean status = false;
+        signIn("aria34@gmail.com", "doctorAria34");
+        if(messagePageDoctor()){
+            status = true;
+        }
+        return status;
+    }
+
+    public boolean signInDoctorWithoutPatients() throws InterruptedException {
+        boolean status = false;
+        signIn("nick.dobr87@gmail.com", "dobr1987");
+        if(messagePageDoctor()){
+            status = true;
+        }
+        return status;
+    }
+
 }

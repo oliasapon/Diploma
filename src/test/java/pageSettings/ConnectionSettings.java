@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class ConnectionSettings {
-    /*public static AndroidDriver<AndroidElement> androidDriver;
+    public static AndroidDriver<AndroidElement> androidDriver;
     @BeforeClass
     public void init() throws MalformedURLException, InterruptedException {
 
@@ -26,9 +26,9 @@ public class ConnectionSettings {
 
         androidDriver = new AndroidDriver<AndroidElement>(new URL("http://127.0.0.1:4723/wd/hub"), desiredCapabilities);
         Thread.sleep(10000, 30);
-    }*/
+    }
 
-    public static AppiumDriver<MobileElement> androidDriver;
+    /*public static AppiumDriver<MobileElement> androidDriver;
     @BeforeClass
     public void init() throws MalformedURLException, InterruptedException {
 
@@ -42,7 +42,7 @@ public class ConnectionSettings {
         androidDriver = new AppiumDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), desiredCapabilities);
         androidDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         Thread.sleep(10000, 30);
-    }
+    }*/
 
 
 

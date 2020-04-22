@@ -3,6 +3,7 @@ package pages;
 import com.github.javafaker.Faker;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.testng.Assert;
@@ -108,9 +109,7 @@ public class RegistrationPage extends OpenPage{
     @AndroidFindBy(id = "forgot_password_form_submit_button")
     private AndroidElement buttonSubmit;
 
-
-
-    public RegistrationPage(AppiumDriver<MobileElement> androidDriver) {
+    public RegistrationPage(AndroidDriver<AndroidElement> androidDriver) {
         super(androidDriver);
     }
 
@@ -443,35 +442,6 @@ public class RegistrationPage extends OpenPage{
         return status;
     }
 
-    public String newEmail() {
-        DateFormat pattern = new SimpleDateFormat("ddMMHHmm"); //y
-        Date todayDate = Calendar.getInstance().getTime();
-        String formatDate = pattern.format(todayDate);
-        String newMail = "mailForTest" + formatDate + "@gmail.com";
-        return newMail;
-    }
-
-    public String newPassword() {
-        Random random = new Random();
-        final String symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
-        String newPassword = "";
-        int index = 0;
-        for (int i = 0; i < 8; i++) {
-            index = random.nextInt(symbols.length());
-            newPassword += symbols.charAt(index);
-        }
-        return newPassword;
-    }
-
-    public String newName() {
-        Faker faker = new Faker();
-        return faker.name().firstName();
-    }
-
-    public String newSurname() {
-        Faker faker = new Faker();
-        return faker.name().lastName();
-    }
 
 
     public void clickForgotPassword() {
