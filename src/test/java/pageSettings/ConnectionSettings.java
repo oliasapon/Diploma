@@ -6,6 +6,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 import java.net.MalformedURLException;
@@ -15,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class ConnectionSettings {
     public static AndroidDriver<AndroidElement> androidDriver;
     @BeforeClass
-    public void init() throws MalformedURLException, InterruptedException {
+    public void connection/*init*/() throws MalformedURLException, InterruptedException {
 
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 
@@ -25,8 +26,14 @@ public class ConnectionSettings {
         desiredCapabilities.setCapability("appActivity", ".MainActivity");
 
         androidDriver = new AndroidDriver<AndroidElement>(new URL("http://127.0.0.1:4723/wd/hub"), desiredCapabilities);
-        Thread.sleep(10000, 30);
+        Thread.sleep(3000, 30);
     }
+
+    @AfterClass
+    public void close(){
+        androidDriver.quit();
+    }
+
 
     /*public static AppiumDriver<MobileElement> androidDriver;
     @BeforeClass

@@ -506,4 +506,98 @@ public class RegistrationPage extends OpenPage{
         }
         return status;
     }
+
+    @AndroidFindBy(xpath = "(//android.widget.TextView[@content-desc=\"error_text_label\"])[1]\n")
+    private AndroidElement labelIncorrectName;
+
+    @AndroidFindBy(xpath = "(//android.widget.TextView[@content-desc=\"error_text_label\"])[2]\n")
+    private AndroidElement labelIncorrectSurname;
+
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"sign_up_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[1]\n")
+    private AndroidElement iconIncorrectName;
+
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"sign_up_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[2]\n")
+    private AndroidElement iconIncorrectSurname;
+
+    @AndroidFindBy(xpath = "(//android.widget.TextView[@content-desc=\"error_text_label\"])[3]\n")
+    private AndroidElement labelDontMatchPassword;
+
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"sign_up_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[6]\n")
+    private AndroidElement iconDontMatchPassword;
+
+
+     /*@AndroidFindBy(xpath = "")
+    private AndroidElement;
+    @AndroidFindBy(id = "")
+    private AndroidElement;*/
+
+    public String getTextLabelIncorrectName(){
+        return labelIncorrectName.getText();
+    }
+
+    public boolean labelIncorrectName(){
+        Assert.assertEquals(getTextLabelIncorrectName(), "Enter valid name");
+        return true;
+    }
+
+    public String getTextLabelIncorrectSurname(){
+        return labelIncorrectSurname.getText();
+    }
+
+    public boolean labelIncorrectSurname(){
+        Assert.assertEquals(getTextLabelIncorrectSurname(), "Enter valid surname");
+        return true;
+    }
+
+    public String getTextLabelDontMatchPassword(){
+        return labelDontMatchPassword.getText();
+    }
+
+    public boolean labelDontMatchPassword(){
+        Assert.assertEquals(getTextLabelDontMatchPassword(), "Passwords do not match");
+        return true;
+    }
+
+    public boolean iconIncorrectNameIsDisplayed() {
+        return iconIncorrectName.isDisplayed();
+    }
+
+    public boolean iconIncorrectSurnameIsDisplayed() {
+        return iconIncorrectSurname.isDisplayed();
+    }
+
+    public boolean iconDontMatchPasswordIsDisplayed() {
+        return iconDontMatchPassword.isDisplayed();
+    }
+
+    public boolean invalidNameAndSurnameRegistration(){
+        clickLinkSignUp();
+        Assert.assertEquals(getTextTitleChooseRole(), "I am");
+        clickButtonDoctor();
+        if(checkMarkDoctorIsDisplayed()) {
+            clickButtonContinue1();
+            clickInputName();
+            setValueName("Tom34");
+            clickInputSurname();
+            setValueSurname("Nelson34");
+            clickInputPassword();
+            hideKeyboard();
+            if(labelIncorrectName() && labelIncorrectSurname() && iconIncorrectNameIsDisplayed() &&iconIncorrectSurnameIsDisplayed()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean dontMatchPasswordRegistration(){
+        setValuePassword("12345678");
+        clickInputConfirmPassword();
+        setValueConfirmPassword("12345677");
+        hideKeyboard();
+        clickButtonAgree();
+        if(iconDontMatchPasswordIsDisplayed() && labelDontMatchPassword()){
+            return true;
+        }
+        return false;
+    }
 }

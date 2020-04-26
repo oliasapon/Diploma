@@ -5,6 +5,8 @@ import org.testng.annotations.Test;
 import pageSettings.ConnectionSettings;
 import pages.*;
 
+import java.net.MalformedURLException;
+
 public class MainTest extends ConnectionSettings {
 
     //private AndroidDriver<AndroidElement> androidDriver;
@@ -34,13 +36,13 @@ public class MainTest extends ConnectionSettings {
     PatientsPage patientsPage;
     GroupsPage groupsPage;
 
-    @Test
-    public void test01_openSignPage() {
+   /* @Test
+    public void test01_openSignPage() throws MalformedURLException, InterruptedException {
         //        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
 //                true);
         openPage = new OpenPage(androidDriver);
         Assert.assertTrue(openPage.mainPageIsDisplayed());
-    }
+    }*/
 
     /*@Test//(enabled = false, priority = 2)
     public void test02_signUpUserWithoutDiabetes() throws InterruptedException {
@@ -1452,7 +1454,7 @@ public class MainTest extends ConnectionSettings {
 //                true);
         settingsPage = new SettingsPage(androidDriver);
         Assert.assertTrue(settingsPage.signOutDoctor());
-    }*/
+    }
 
     //Doctor without patients!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     @Test
@@ -1610,5 +1612,38 @@ public class MainTest extends ConnectionSettings {
 //                true);
         settingsPage = new SettingsPage(androidDriver);
         Assert.assertTrue(settingsPage.signOutDoctor());
+    }*/
+
+    @Test
+    public void test60_requiredEmailAndPasswordSignIn() throws InterruptedException {
+        signInPage = new SignInPage(androidDriver);
+        Assert.assertTrue(signInPage.signInRequiredEmailAndPassword());
     }
+
+    @Test
+    public void test61_invalidEmailSignIn() throws InterruptedException {
+        Assert.assertTrue(signInPage.signInInvalidEmail());
+    }
+
+    @Test
+    public void test62_shortPasswordSignIn() throws InterruptedException {
+        Assert.assertTrue(signInPage.signInShortPassword());
+    }
+
+    @Test
+    public void test63_incorrectPasswordOrEmailSignIn() throws InterruptedException {
+        Assert.assertTrue(signInPage.signInIncorrectPasswordOrEmail());
+    }
+
+    @Test
+    public void test64_invalidNameAndSurnameSignUp() throws InterruptedException {
+        registrationPage = new RegistrationPage(androidDriver);
+        Assert.assertTrue(registrationPage.invalidNameAndSurnameRegistration());
+    }
+
+    @Test
+    public void test65_dontMatchPasswordSignUp() throws InterruptedException {
+        Assert.assertTrue(registrationPage.dontMatchPasswordRegistration());
+    }
+
 }
