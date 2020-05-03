@@ -18,6 +18,9 @@ public class Action extends DriverPage {
 
     TouchAction actionWithTouch = new TouchAction(androidDriver);
 
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"back_button\"]/android.widget.ImageView")
+    private AndroidElement buttonComeBack;
+
     public Action(AndroidDriver<AndroidElement> androidDriver) {
         super(androidDriver);
     }
@@ -55,9 +58,6 @@ public class Action extends DriverPage {
     public void sleepTime(int time) throws InterruptedException {
         Thread.sleep(time, 30);
     }
-
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"back_button\"]/android.widget.ImageView")
-    private AndroidElement buttonComeBack;
 
     public void clickComeBack(){
         buttonComeBack.click();

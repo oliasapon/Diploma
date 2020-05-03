@@ -1,7 +1,5 @@
 package pages;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
@@ -54,15 +52,15 @@ public class SettingsPage extends PatientsPage{
     @AndroidFindBy(id = "create_patient_button")
     private AndroidElement buttonUpdateInformation;
 
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"settings_screen\"]/android.view.ViewGroup/android.view.ViewGroup[4]/android.widget.TextView\n")
+    private AndroidElement buttonChangeRoleToDoctor;
+
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"settings_screen\"]/android.view.ViewGroup/android.view.ViewGroup[6]/android.widget.TextView\n")
+    private AndroidElement buttonChangeRoleToPatient;
+
     public SettingsPage(AndroidDriver<AndroidElement> androidDriver) {
         super(androidDriver);
     }
-
-     /*@AndroidFindBy(xpath = "")
-    private AndroidElement;
-    @AndroidFindBy(id = "")
-    private AndroidElement;*/
-
 
     public void clickButtonSettings(){
         buttonSettings.click();
@@ -70,16 +68,6 @@ public class SettingsPage extends PatientsPage{
 
     public void clickButtonSignOut(){
         buttonSignOut.click();
-    }
-
-    public boolean signOut() throws InterruptedException {
-        clickButtonSettings();
-        clickButtonSignOut();
-        //sleepTime(2000);
-        if(mainPageIsDisplayed()){
-            return true;
-        }
-        return false;
     }
 
     public void clickButtonChartLineColor(){
@@ -102,31 +90,6 @@ public class SettingsPage extends PatientsPage{
         buttonChooseChartGridColor.click();
     }
 
-    public boolean settingsDoctorDemo() throws InterruptedException {
-        clickButtonSettings();
-        clickButtonChartLineColor();
-        //sleepTime(2000);
-        clickButtonChooseChartLineColor();
-        clickButtonSave();
-        clickChartGridColor();
-        //sleepTime(2000);
-        clickChooseChartGridColor();
-        clickButtonSave();
-        clickButtonHistoryDoctor();
-        clickButtonViewDataFirstPatient();
-        sleepTime(2000);
-        clickComeBack();
-        clickButtonSettings();
-        clickButtonSignOut();
-        //sleepTime(2000);
-        if(mainPageIsDisplayed()){
-            return true;
-        }
-        return false;
-    }
-
-
-
     public boolean iconUserFotoIsDisplayed() {
         return iconUserFoto.isDisplayed();
     }
@@ -139,17 +102,6 @@ public class SettingsPage extends PatientsPage{
         Assert.assertEquals(getTextTitleEmail(), "olia.sapon@gmail.com");
         return true;
     }
-
-    public boolean viewSettingsUser() throws InterruptedException {
-        clickButtonSettings();
-        //sleepTime(2000);
-        if(iconUserFotoIsDisplayed() && titleEmail()){
-            return true;
-        }
-        return false;
-    }
-
-
 
     public void clickButtonEdit(){
         buttonEdit.click();
@@ -185,6 +137,65 @@ public class SettingsPage extends PatientsPage{
         buttonUpdateInformation.click();
     }
 
+    public void clickButtonChangeRoleToDoctor(){
+        buttonChangeRoleToDoctor.click();
+    }
+
+    public void clickButtonChangeRoleToPatient(){
+        buttonChangeRoleToPatient.click();
+    }
+
+    public String getTextButtonChangeRoleToPatient(){
+        return buttonChangeRoleToPatient.getText();
+    }
+
+    public boolean buttonChangeRoleToPatient(){
+        Assert.assertEquals(getTextButtonChangeRoleToPatient(), "Change role to Patient");
+        return true;
+    }
+
+    public boolean signOut() throws InterruptedException {
+        clickButtonSettings();
+        clickButtonSignOut();
+        //sleepTime(2000);
+        if(mainPageIsDisplayed()){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean settingsDoctorDemo() throws InterruptedException {
+        clickButtonSettings();
+        clickButtonChartLineColor();
+        //sleepTime(2000);
+        clickButtonChooseChartLineColor();
+        clickButtonSave();
+        clickChartGridColor();
+        //sleepTime(2000);
+        clickChooseChartGridColor();
+        clickButtonSave();
+        clickButtonHistoryDoctor();
+        clickButtonViewDataFirstPatient();
+        sleepTime(2000);
+        clickComeBack();
+        clickButtonSettings();
+        clickButtonSignOut();
+        //sleepTime(2000);
+        if(mainPageIsDisplayed()){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean viewSettingsUser() throws InterruptedException {
+        clickButtonSettings();
+        //sleepTime(2000);
+        if(iconUserFotoIsDisplayed() && titleEmail()){
+            return true;
+        }
+        return false;
+    }
+
     public boolean editInformationPatientUser() throws InterruptedException {
         clickButtonEdit();
         //sleepTime(2000);
@@ -205,25 +216,6 @@ public class SettingsPage extends PatientsPage{
         return false;
     }
 
-     /*@AndroidFindBy(xpath = "")
-    private AndroidElement;
-    @AndroidFindBy(id = "")
-    private AndroidElement;*/
-
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"settings_screen\"]/android.view.ViewGroup/android.view.ViewGroup[4]/android.widget.TextView\n")
-    private AndroidElement buttonChangeRoleToDoctor;
-
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"settings_screen\"]/android.view.ViewGroup/android.view.ViewGroup[6]/android.widget.TextView\n")
-    private AndroidElement buttonChangeRoleToPatient;
-
-    public void clickButtonChangeRoleToDoctor(){
-        buttonChangeRoleToDoctor.click();
-    }
-
-    public void clickButtonChangeRoleToPatient(){
-        buttonChangeRoleToPatient.click();
-    }
-
     public boolean changeRolePatientUser() throws InterruptedException {
         clickButtonChangeRoleToDoctor();
         //sleepTime(2000);
@@ -239,18 +231,9 @@ public class SettingsPage extends PatientsPage{
         return false;
     }
 
-    public String getTextButtonChangeRoleToPatient(){
-        return buttonChangeRoleToPatient.getText();
-    }
-
-    public boolean buttonChangeRoleToPatient(){
-        Assert.assertEquals(getTextButtonChangeRoleToPatient(), "Change role to Patient");
-        return true;
-    }
-
     public boolean signOutDoctor() throws InterruptedException {
         clickButtonSettings();
-        //sleepTime(2000);
+        sleepTime(2000);
         if(buttonChangeRoleToPatient()){
             clickButtonEdit();
             if(titleEditInformation()){

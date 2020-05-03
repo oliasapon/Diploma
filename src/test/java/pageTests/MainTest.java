@@ -5,24 +5,7 @@ import org.testng.annotations.Test;
 import pageSettings.ConnectionSettings;
 import pages.*;
 
-import java.net.MalformedURLException;
-
 public class MainTest extends ConnectionSettings {
-
-    //private AndroidDriver<AndroidElement> androidDriver;
-    /*@BeforeClass
-    public void init() throws MalformedURLException, InterruptedException {
-
-        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-
-        desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "emulator-5554");
-        desiredCapabilities.setCapability("platformName", "android");
-        desiredCapabilities.setCapability("appPackage", "com.cardiolyse");
-        desiredCapabilities.setCapability("appActivity", ".MainActivity");
-
-        androidDriver = new AndroidDriver<AndroidElement>(new URL("http://127.0.0.1:4723/wd/hub"), desiredCapabilities);
-        Thread.sleep(10000, 30);
-    }*/
 
     OpenPage openPage;
     RegistrationPage registrationPage;
@@ -36,15 +19,15 @@ public class MainTest extends ConnectionSettings {
     PatientsPage patientsPage;
     GroupsPage groupsPage;
 
-   /* @Test
-    public void test01_openSignPage() throws MalformedURLException, InterruptedException {
+    @Test
+    public void test01_openSignPage() throws InterruptedException {
         //        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
 //                true);
         openPage = new OpenPage(androidDriver);
         Assert.assertTrue(openPage.mainPageIsDisplayed());
-    }*/
+    }
 
-    /*@Test//(enabled = false, priority = 2)
+    @Test//(enabled = false, priority = 2)
     public void test02_signUpUserWithoutDiabetes() throws InterruptedException {
         //        MobileElement linkSignUp = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_form_sign_up_text\"]/android.widget.TextView\n");
 //        linkSignUp.click();
@@ -105,49 +88,6 @@ public class MainTest extends ConnectionSettings {
         registrationPage = new RegistrationPage(androidDriver);
         Assert.assertTrue(registrationPage.registrationUserWithoutDiabetes());
     }
-
-    //    public String newEmail() {
-//        DateFormat pattern = new SimpleDateFormat("ddMMHHmm"); //y
-//        Date todayDate = Calendar.getInstance().getTime();
-//        String formatDate = pattern.format(todayDate);
-//        String newMail = "mailForTest" + formatDate + "@gmail.com";
-//        return newMail;
-//    }
-//
-//    public String recordsHistoryDateDay() {
-//        GregorianCalendar gCalendar = new GregorianCalendar();
-//        String date = String.valueOf(gCalendar.get(Calendar.DATE));
-//        return date;
-//    }
-//
-//    public String recordsHistoryDateMonth() {
-//        Calendar calendar = Calendar.getInstance();
-//        String month = calendar.getDisplayName(Calendar.MONTH,
-//                Calendar.LONG_FORMAT, new Locale("eng"));
-//        return month;
-//    }
-//
-//    public String newPassword() {
-//        Random random = new Random();
-//        final String symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
-//        String newPassword = "";
-//        int index = 0;
-//        for (int i = 0; i < 8; i++) {
-//            index = random.nextInt(symbols.length());
-//            newPassword += symbols.charAt(index);
-//        }
-//        return newPassword;
-//    }
-//
-//    public String newName() {
-//        Faker faker = new Faker();
-//        return faker.name().firstName();
-//    }
-//
-//    public String newSurname() {
-//        Faker faker = new Faker();
-//        return faker.name().lastName();
-//    }
 
     @Test
     public void test03_signUpUserWithDiabetesFirstType() throws InterruptedException {
@@ -412,9 +352,9 @@ public class MainTest extends ConnectionSettings {
 //        buttonSettings.click();
 //        MobileElement buttonSignOut = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_out_text\"]/android.widget.TextView\n");
 //        buttonSignOut.click();
-        historyPage = new HistoryPage(androidDriver);
+        historyPageUser = new HistoryPageUser(androidDriver);
         settingsPage = new SettingsPage(androidDriver);
-        Assert.assertTrue(historyPage.viewHistoryUserWithDT1());
+        Assert.assertTrue(historyPageUser.viewHistoryUserWithDT1());
         Assert.assertTrue(settingsPage.signOut());
     }
 
@@ -463,7 +403,7 @@ public class MainTest extends ConnectionSettings {
 //        buttonSettings.click();
 //        MobileElement buttonSignOut = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_out_text\"]/android.widget.TextView\n");
 //        buttonSignOut.click();
-        Assert.assertTrue(historyPage.viewHistoryUserWithDT2());
+        Assert.assertTrue(historyPageUser.viewHistoryUserWithDT2());
         Assert.assertTrue(settingsPage.signOut());
     }
 
@@ -535,7 +475,6 @@ public class MainTest extends ConnectionSettings {
 //        androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"" + "Apr 1" + "\").instance(0))");
 //        Thread.sleep(2000, 30);
 //        androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"" + recordsHistoryDateMonth() + " " + recordsHistoryDateDay() + "\").instance(0))");
-        historyPageUser = new HistoryPageUser(androidDriver);
         Assert.assertTrue(historyPageUser.viewHistoryUserDemo());
     }
 
@@ -631,7 +570,6 @@ public class MainTest extends ConnectionSettings {
 //        Thread.sleep(5000, 30);
 //        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
 //                true);
-        settingsPage = new SettingsPage(androidDriver);
         Assert.assertTrue(settingsPage.signOut());
     }
 
@@ -648,7 +586,6 @@ public class MainTest extends ConnectionSettings {
 //                "Records history");
 //        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView\n").getText(),
 //                recordsHistoryDateMonth() + " " + recordsHistoryDateDay());
-        liveDemoPage = new LiveDemoPage(androidDriver);
         Assert.assertTrue(liveDemoPage.openDemoDoctor());
     }
 
@@ -860,7 +797,6 @@ public class MainTest extends ConnectionSettings {
 //                "Let's register your account as a doctor or patient");
 //        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"demo_modal_sign_up_button\"]/android.widget.TextView\n").getText(),
 //                "Sign up");
-        getStartedPage = new GetStartedPage(androidDriver);
         groupsPage = new GroupsPage(androidDriver);
         Assert.assertTrue(groupsPage.viewGroupDoctorDemoForCreatGroup());
         Assert.assertTrue(getStartedPage.viewNewGroupDoctorDemo());
@@ -970,7 +906,6 @@ public class MainTest extends ConnectionSettings {
 //        Thread.sleep(2000, 30);
 //        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
 //                true);
-        settingsPage = new SettingsPage(androidDriver);
         Assert.assertTrue(settingsPage.settingsDoctorDemo());
 
     }
@@ -996,7 +931,6 @@ public class MainTest extends ConnectionSettings {
 //        Thread.sleep(5000, 30);
 //        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_pre_measurement_screen\"]/android.widget.TextView[1]").getText(),
 //                "Let's get started");
-        signInPage = new SignInPage(androidDriver);
         Assert.assertTrue(signInPage.signInUserWithout());
     }
 
@@ -1029,7 +963,6 @@ public class MainTest extends ConnectionSettings {
 //        Thread.sleep(3000, 30);
 //        buttonAllow.click();
 //        Thread.sleep(2000, 30);
-        getStartedPage = new GetStartedPage(androidDriver);
         Assert.assertTrue(getStartedPage.viewFirstCentralPageUser());
     }
 
@@ -1051,7 +984,6 @@ public class MainTest extends ConnectionSettings {
 //        Thread.sleep(2000, 30);
 //        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patient_pre_measurement_screen\"]/android.widget.TextView[1]").getText(),
 //                "Let's get started");
-        historyPageUser = new HistoryPageUser(androidDriver);
         Assert.assertTrue(historyPageUser.viewDashboardUser());
     }
 
@@ -1094,7 +1026,6 @@ public class MainTest extends ConnectionSettings {
 //                "My doctor");
 //        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"my_doctor_screen\"]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView[2]\n").getText(),
 //                "This page is under construction");
-        myDoctorPage = new MyDoctorPage(androidDriver);
         Assert.assertTrue(myDoctorPage.viewMyDoctorUserDemo());
     }
 
@@ -1109,7 +1040,6 @@ public class MainTest extends ConnectionSettings {
 //                "Olia Sapon");
 //        Assert.assertEquals(androidDriver.findElementById("user_olia.sapon@gmail.com").getText(),
 //                "olia.sapon@gmail.com");
-        settingsPage = new SettingsPage(androidDriver);
         Assert.assertTrue(settingsPage.viewSettingsUser());
     }
 
@@ -1196,8 +1126,6 @@ public class MainTest extends ConnectionSettings {
 //        Thread.sleep(5000, 30);
 //        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.widget.TextView\n").getText(),
 //                "Records history");
-        //signInPage = new SignInPage(androidDriver);
-        signInPage = new SignInPage(androidDriver);
         Assert.assertTrue(signInPage.signInDoctorWithPatients());
     }
 
@@ -1214,7 +1142,6 @@ public class MainTest extends ConnectionSettings {
 //        Thread.sleep(2000, 30);
 //        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"record_patients_screen\"]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.TextView").getText(),
 //                "Select patient");
-        historyPageDoctor = new HistoryPageDoctor(androidDriver);
         Assert.assertTrue(historyPageDoctor.viewHistoryDoctor());
     }
 
@@ -1232,7 +1159,6 @@ public class MainTest extends ConnectionSettings {
 //        buttonFilter.click();
 //        Thread.sleep(2000, 30);
 //        buttonFilter.click();
-        patientsPage = new PatientsPage(androidDriver);
         Assert.assertTrue(patientsPage.viewPatientsDoctor());
     }
 
@@ -1367,7 +1293,6 @@ public class MainTest extends ConnectionSettings {
 //        MobileElement buttonBack = (MobileElement) androidDriver.findElementByXPath("\t//android.view.ViewGroup[@content-desc=\"back_button\"]/android.widget.ImageView\n");
 //        buttonBack.click();
 //        Thread.sleep(2000, 30);
-        getStartedPage = new GetStartedPage(androidDriver);
         Assert.assertTrue(getStartedPage.viewCentralPageDoctor());
     }
 
@@ -1399,7 +1324,6 @@ public class MainTest extends ConnectionSettings {
 //        MobileElement buttonCollapseAllGroup = (MobileElement) androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"groups_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[4]/android.widget.TextView\n");
 //        buttonCollapseAllGroup.click();
 //        Thread.sleep(2000, 30);
-        groupsPage = new GroupsPage(androidDriver);
         Assert.assertTrue(groupsPage.viewGroupDoctor());
     }
 
@@ -1452,7 +1376,6 @@ public class MainTest extends ConnectionSettings {
 //        Thread.sleep(5000, 30);
 //        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
 //                true);
-        settingsPage = new SettingsPage(androidDriver);
         Assert.assertTrue(settingsPage.signOutDoctor());
     }
 
@@ -1478,8 +1401,6 @@ public class MainTest extends ConnectionSettings {
 //        Thread.sleep(5000, 30);
 //        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.widget.TextView\n").getText(),
 //                "Records history");
-        //signInPage = new SignInPage(androidDriver);
-        signInPage = new SignInPage(androidDriver);
         Assert.assertTrue(signInPage.signInDoctorWithoutPatients());
     }
 
@@ -1496,7 +1417,6 @@ public class MainTest extends ConnectionSettings {
 //        Thread.sleep(2000, 30);
 //        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"record_patients_screen\"]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.TextView").getText(),
 //                "Select patient");
-        historyPageDoctor = new HistoryPageDoctor(androidDriver);
         Assert.assertTrue(historyPageDoctor.viewHistoryDoctor());
     }
 
@@ -1517,7 +1437,6 @@ public class MainTest extends ConnectionSettings {
 //                "Press ");
 //        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"patients_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView\n").getText(),
 //                "to add your first patient");
-        patientsPage = new PatientsPage(androidDriver);
         Assert.assertTrue(patientsPage.viewPatientsWOPDoctor());
     }
 
@@ -1549,7 +1468,6 @@ public class MainTest extends ConnectionSettings {
 //                true);
 //        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"record_patients_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup[2]/android.widget.TextView").getText(),
 //                "Quick record");
-        getStartedPage = new GetStartedPage(androidDriver);
         Assert.assertTrue(getStartedPage.viewCentralPageWOPDoctor());
     }
 
@@ -1573,7 +1491,6 @@ public class MainTest extends ConnectionSettings {
 //                "Press ");
 //        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"groups_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[2]\n").getText(),
 //                "to create your first group");
-        groupsPage = new GroupsPage(androidDriver);
         Assert.assertTrue(groupsPage.viewGroupsWOPDoctor());
     }
 
@@ -1610,13 +1527,11 @@ public class MainTest extends ConnectionSettings {
 //        Thread.sleep(5000, 30);
 //        Assert.assertEquals(androidDriver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.ImageView").isDisplayed(),
 //                true);
-        settingsPage = new SettingsPage(androidDriver);
         Assert.assertTrue(settingsPage.signOutDoctor());
-    }*/
+    }
 
     @Test
     public void test60_requiredEmailAndPasswordSignIn() throws InterruptedException {
-        signInPage = new SignInPage(androidDriver);
         Assert.assertTrue(signInPage.signInRequiredEmailAndPassword());
     }
 
@@ -1637,7 +1552,6 @@ public class MainTest extends ConnectionSettings {
 
     @Test
     public void test64_invalidNameAndSurnameSignUp() throws InterruptedException {
-        registrationPage = new RegistrationPage(androidDriver);
         Assert.assertTrue(registrationPage.invalidNameAndSurnameRegistration());
     }
 

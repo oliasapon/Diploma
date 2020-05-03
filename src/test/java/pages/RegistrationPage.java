@@ -1,18 +1,9 @@
 package pages;
 
-import com.github.javafaker.Faker;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.testng.Assert;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Random;
 
 public class RegistrationPage extends OpenPage{
 
@@ -109,6 +100,24 @@ public class RegistrationPage extends OpenPage{
     @AndroidFindBy(id = "forgot_password_form_submit_button")
     private AndroidElement buttonSubmit;
 
+    @AndroidFindBy(xpath = "(//android.widget.TextView[@content-desc=\"error_text_label\"])[1]\n")
+    private AndroidElement labelIncorrectName;
+
+    @AndroidFindBy(xpath = "(//android.widget.TextView[@content-desc=\"error_text_label\"])[2]\n")
+    private AndroidElement labelIncorrectSurname;
+
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"sign_up_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[1]\n")
+    private AndroidElement iconIncorrectName;
+
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"sign_up_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[2]\n")
+    private AndroidElement iconIncorrectSurname;
+
+    @AndroidFindBy(xpath = "(//android.widget.TextView[@content-desc=\"error_text_label\"])[3]\n")
+    private AndroidElement labelDontMatchPassword;
+
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"sign_up_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[6]\n")
+    private AndroidElement iconDontMatchPassword;
+
     public RegistrationPage(AndroidDriver<AndroidElement> androidDriver) {
         super(androidDriver);
     }
@@ -119,6 +128,11 @@ public class RegistrationPage extends OpenPage{
 
     public String getTextTitleChooseRole(){
         return titleChooseRole.getText();
+    }
+
+    public boolean titleChooseRole(){
+        Assert.assertEquals(getTextTitleChooseRole(), "I am");
+        return true;
     }
 
     public void clickButtonUser(){
@@ -135,6 +149,11 @@ public class RegistrationPage extends OpenPage{
 
     public String getTextTitleDiabetes(){
         return titleDiabetes.getText();
+    }
+
+    public boolean titleDiabetes(){
+        Assert.assertEquals(getTextTitleDiabetes(), "Diabetes");
+        return true;
     }
 
     public boolean checkMarkWithoutDiabetesIsDisplayed(){
@@ -201,8 +220,23 @@ public class RegistrationPage extends OpenPage{
         return message1.getText();
     }
 
+    public boolean textMessage1(){
+        Assert.assertEquals(getTextMessage1(), "Success");
+        return true;
+    }
+
     public String getTextMessage2(){
         return message2.getText();
+    }
+
+    public boolean textMessage2(){
+        Assert.assertEquals(getTextMessage2(), "Your account has been created");
+        return true;
+    }
+
+    public boolean textMessage2ForgotPassword(){
+        Assert.assertEquals(getTextMessage2(), "Please check your email for a password change link.");
+        return true;
     }
 
     public void clickOk(){
@@ -219,6 +253,11 @@ public class RegistrationPage extends OpenPage{
 
     public String getTextTitleTypeDiabetes(){
         return titleTypeDiabetes.getText();
+    }
+
+    public boolean titleTypeDiabetes(){
+        Assert.assertEquals(getTextTitleTypeDiabetes(), "Type of diabetes");
+        return true;
     }
 
     public void clickButtonFirstTypeDiabetes(){
@@ -249,201 +288,6 @@ public class RegistrationPage extends OpenPage{
         return checkMarkDoctor.isDisplayed();
     }
 
-    public boolean registrationUserWithoutDiabetes() throws InterruptedException {
-        boolean status = false;
-        String email = newEmail();
-        String name = newName();
-        String surname = newSurname();
-        String password = newPassword();
-        //sleepTime(2000);
-        clickLinkSignUp();
-        //sleepTime(2000);
-        Assert.assertEquals(getTextTitleChooseRole(), "I am");
-        //sleepTime(2000);
-        clickButtonUser();
-        //sleepTime(2000);
-        if(checkMarkUserIsDisplayed()){
-            clickButtonContinue1();
-            //sleepTime(2000);
-            Assert.assertEquals(getTextTitleDiabetes(), "Diabetes");
-            //sleepTime(2000);
-            if(checkMarkWithoutDiabetesIsDisplayed()){
-                clickButtonContinue2();
-                clickInputEmail();
-                setValueEmail(name, surname);
-                clickInputName();
-                setValueName(name);
-                clickInputSurname();
-                setValueSurname(surname);
-                clickInputPassword();
-                setValuePassword(password);
-                clickInputConfirmPassword();
-                setValueConfirmPassword(password);
-                hideKeyboard();
-                clickButtonAgree();
-                clickButtonSignUp();
-                //sleepTime(2000);
-                Assert.assertEquals(getTextMessage1(), "Success");
-                Assert.assertEquals(getTextMessage2(), "Your account has been created");
-                clickOk();
-                if(mainPageIsDisplayed()) {
-                    status = true;
-                }
-            }
-        }
-        return status;
-    }
-
-    public boolean registrationUserWithDiabetesFirstType() throws InterruptedException {
-        boolean status = false;
-        String email = newEmail();
-        String name = newName();
-        String surname = newSurname();
-        String password = newPassword();
-        //sleepTime(2000);
-        clickLinkSignUp();
-        //sleepTime(2000);
-        Assert.assertEquals(getTextTitleChooseRole(), "I am");
-        //sleepTime(2000);
-        clickButtonUser();
-        //sleepTime(2000);
-        if(checkMarkUserIsDisplayed()){
-            clickButtonContinue1();
-            //sleepTime(2000);
-            Assert.assertEquals(getTextTitleDiabetes(), "Diabetes");
-            //sleepTime(2000);
-            clickButtonDiabetes();
-            //sleepTime(2000);
-            if(checkMarkWithDiabetesIsDisplayed()){
-                clickButtonContinue2();
-                //sleepTime(3000);
-                Assert.assertEquals(getTextTitleTypeDiabetes(), "Type of diabetes");
-                clickButtonFirstTypeDiabetes();
-                //sleepTime(2000);
-                if(checkMarkDiabetesFirstTypeIsDisplayed()) {
-                    clickButtonContinue3();
-                    clickInputEmail();
-                    setValueEmail(name, surname);
-                    clickInputName();
-                    setValueName(name);
-                    clickInputSurname();
-                    setValueSurname(surname);
-                    clickInputPassword();
-                    setValuePassword(password);
-                    clickInputConfirmPassword();
-                    setValueConfirmPassword(password);
-                    hideKeyboard();
-                    clickButtonAgree();
-                    clickButtonSignUp();
-                    //sleepTime(2000);
-                    Assert.assertEquals(getTextMessage1(), "Success");
-                    Assert.assertEquals(getTextMessage2(), "Your account has been created");
-                    clickOk();
-                    if (mainPageIsDisplayed()) {
-                        status = true;
-                    }
-                }
-            }
-        }
-        return status;
-    }
-
-    public boolean registrationUserWithDiabetesSecondType() throws InterruptedException {
-        boolean status = false;
-        String email = newEmail();
-        String name = newName();
-        String surname = newSurname();
-        String password = newPassword();
-        //sleepTime(2000);
-        clickLinkSignUp();
-        //sleepTime(2000);
-        Assert.assertEquals(getTextTitleChooseRole(), "I am");
-        //sleepTime(2000);
-        clickButtonUser();
-        //sleepTime(2000);
-        if(checkMarkUserIsDisplayed()){
-            clickButtonContinue1();
-            //sleepTime(2000);
-            Assert.assertEquals(getTextTitleDiabetes(), "Diabetes");
-            //sleepTime(2000);
-            clickButtonDiabetes();
-            //sleepTime(2000);
-            if(checkMarkWithDiabetesIsDisplayed()){
-                clickButtonContinue2();
-                //sleepTime(3000);
-                Assert.assertEquals(getTextTitleTypeDiabetes(), "Type of diabetes");
-                clickButtonSecondTypeDiabetes();
-                //sleepTime(2000);
-                if(checkMarkDiabetesSecondTypeIsDisplayed()) {
-                    clickButtonContinue3();
-                    clickInputEmail();
-                    setValueEmail(name, surname);
-                    clickInputName();
-                    setValueName(name);
-                    clickInputSurname();
-                    setValueSurname(surname);
-                    clickInputPassword();
-                    setValuePassword(password);
-                    clickInputConfirmPassword();
-                    setValueConfirmPassword(password);
-                    hideKeyboard();
-                    clickButtonAgree();
-                    clickButtonSignUp();
-                    //sleepTime(2000);
-                    Assert.assertEquals(getTextMessage1(), "Success");
-                    Assert.assertEquals(getTextMessage2(), "Your account has been created");
-                    clickOk();
-                    if (mainPageIsDisplayed()) {
-                        status = true;
-                    }
-                }
-            }
-        }
-        return status;
-    }
-
-    public boolean registrationDoctor() throws InterruptedException {
-        boolean status = false;
-        String email = newEmail();
-        String name = newName();
-        String surname = newSurname();
-        String password = newPassword();
-        //sleepTime(2000);
-        clickLinkSignUp();
-        //sleepTime(2000);
-        Assert.assertEquals(getTextTitleChooseRole(), "I am");
-        //sleepTime(2000);
-        clickButtonDoctor();
-        //sleepTime(2000);
-        if(checkMarkDoctorIsDisplayed()){
-            clickButtonContinue1();
-            //sleepTime(2000);
-            clickInputEmail();
-            setValueEmail(name, surname);
-            clickInputName();
-            setValueName(name);
-            clickInputSurname();
-            setValueSurname(surname);
-            clickInputPassword();
-            setValuePassword(password);
-            clickInputConfirmPassword();
-            setValueConfirmPassword(password);
-            hideKeyboard();
-            clickButtonAgree();
-            clickButtonSignUp();
-            //sleepTime(2000);
-            Assert.assertEquals(getTextMessage1(), "Success");
-            Assert.assertEquals(getTextMessage2(), "Your account has been created");
-            clickOk();
-            if(mainPageIsDisplayed()) {
-                status = true;
-            }
-        }
-        return status;
-    }
-
-
-
     public void clickForgotPassword() {
         linkForgotPassword.click();
     }
@@ -459,77 +303,6 @@ public class RegistrationPage extends OpenPage{
     public void clickSubmit() {
         buttonSubmit.click();
     }
-
-    /*public boolean getTextMessage1(){
-        if(message1.getText() == "Success") {
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
-    public boolean getTextMessage2(){
-        if(message2.getText() == "Please check your email for a password change link.") {
-            return true;
-        }
-        else{
-            return false;
-        }
-    }*/
-
-    /*public String getTextMessage1(){
-        return message1.getText();
-    }
-
-    public String getTextMessage2(){
-        return message2.getText();
-    }
-
-    public void clickOk(){
-        buttonOk.click();
-    }*/
-
-    public boolean forgotPassword() throws InterruptedException {
-        boolean status = false;
-        clickForgotPassword();
-        clickEmail();
-        setValueEmailForForgotPassword();
-        clickSubmit();
-        Assert.assertEquals(getTextMessage1(), "Success");
-        Assert.assertEquals(getTextMessage2(), "Please check your email for a password change link.");
-        //sleepTime(3000);
-        clickOk();
-        //sleepTime(2000);
-        if(mainPageIsDisplayed()){
-            status = true;
-        }
-        return status;
-    }
-
-    @AndroidFindBy(xpath = "(//android.widget.TextView[@content-desc=\"error_text_label\"])[1]\n")
-    private AndroidElement labelIncorrectName;
-
-    @AndroidFindBy(xpath = "(//android.widget.TextView[@content-desc=\"error_text_label\"])[2]\n")
-    private AndroidElement labelIncorrectSurname;
-
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"sign_up_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[1]\n")
-    private AndroidElement iconIncorrectName;
-
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"sign_up_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[2]\n")
-    private AndroidElement iconIncorrectSurname;
-
-    @AndroidFindBy(xpath = "(//android.widget.TextView[@content-desc=\"error_text_label\"])[3]\n")
-    private AndroidElement labelDontMatchPassword;
-
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"sign_up_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[6]\n")
-    private AndroidElement iconDontMatchPassword;
-
-
-     /*@AndroidFindBy(xpath = "")
-    private AndroidElement;
-    @AndroidFindBy(id = "")
-    private AndroidElement;*/
 
     public String getTextLabelIncorrectName(){
         return labelIncorrectName.getText();
@@ -570,22 +343,178 @@ public class RegistrationPage extends OpenPage{
         return iconDontMatchPassword.isDisplayed();
     }
 
-    public boolean invalidNameAndSurnameRegistration(){
-        clickLinkSignUp();
-        Assert.assertEquals(getTextTitleChooseRole(), "I am");
-        clickButtonDoctor();
-        if(checkMarkDoctorIsDisplayed()) {
-            clickButtonContinue1();
-            clickInputName();
-            setValueName("Tom34");
-            clickInputSurname();
-            setValueSurname("Nelson34");
-            clickInputPassword();
-            hideKeyboard();
-            if(labelIncorrectName() && labelIncorrectSurname() && iconIncorrectNameIsDisplayed() &&iconIncorrectSurnameIsDisplayed()){
+    public boolean inputDataForRegistration(){
+        String email = newEmail();
+        String name = newName();
+        String surname = newSurname();
+        String password = newPassword();
+
+        clickInputEmail();
+        setValueEmail(name, surname);
+        clickInputName();
+        setValueName(name);
+        clickInputSurname();
+        setValueSurname(surname);
+        clickInputPassword();
+        setValuePassword(password);
+        clickInputConfirmPassword();
+        setValueConfirmPassword(password);
+        hideKeyboard();
+        clickButtonAgree();
+        clickButtonSignUp();
+        //sleepTime(2000);
+        if(textMessage1() && textMessage2()){
+            clickOk();
+            if (mainPageIsDisplayed()) {
                 return true;
             }
         }
+        return false;
+    }
+
+    public boolean registrationUserWithoutDiabetes() throws InterruptedException {
+        clickLinkSignUp();
+        //sleepTime(2000);
+        if(titleChooseRole()){
+            //sleepTime(2000);
+            clickButtonUser();
+            //sleepTime(2000);
+            if(checkMarkUserIsDisplayed()) {
+                clickButtonContinue1();
+                //sleepTime(2000);
+                if(titleDiabetes() && checkMarkWithoutDiabetesIsDisplayed()){
+                    //sleepTime(2000);
+                    clickButtonContinue2();
+                    if(inputDataForRegistration()){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean registrationUserWithDiabetesFirstType() throws InterruptedException {
+        clickLinkSignUp();
+        //sleepTime(2000);
+        if(titleChooseRole()){
+            //sleepTime(2000);
+            clickButtonUser();
+            //sleepTime(2000);
+            if(checkMarkUserIsDisplayed()){
+                clickButtonContinue1();
+                //sleepTime(2000);
+               if(titleDiabetes()){
+                   clickButtonDiabetes();
+                   //sleepTime(2000);
+                   if(checkMarkWithDiabetesIsDisplayed()){
+                       clickButtonContinue2();
+                       //sleepTime(3000);
+                       if(titleTypeDiabetes()){
+                           clickButtonFirstTypeDiabetes();
+                           //sleepTime(2000);
+                           if(checkMarkDiabetesFirstTypeIsDisplayed()) {
+                               clickButtonContinue3();
+                               if(inputDataForRegistration()){
+                                   return true;
+                               }
+                           }
+                       }
+                   }
+               }
+            }
+        }
+        return false;
+    }
+
+    public boolean registrationUserWithDiabetesSecondType() throws InterruptedException {
+        clickLinkSignUp();
+        //sleepTime(2000);
+        if(titleChooseRole()){
+            //sleepTime(2000);
+            clickButtonUser();
+            //sleepTime(2000);
+            if(checkMarkUserIsDisplayed()) {
+                clickButtonContinue1();
+                //sleepTime(2000);
+                if(titleDiabetes()){
+                    //sleepTime(2000);
+                    clickButtonDiabetes();
+                    //sleepTime(2000);
+                    if (checkMarkWithDiabetesIsDisplayed()) {
+                        clickButtonContinue2();
+                        //sleepTime(3000);
+                        if(titleTypeDiabetes()){
+                            clickButtonSecondTypeDiabetes();
+                            //sleepTime(2000);
+                            if (checkMarkDiabetesSecondTypeIsDisplayed()) {
+                                clickButtonContinue3();
+                                if(inputDataForRegistration()){
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean registrationDoctor() throws InterruptedException {
+        clickLinkSignUp();
+        //sleepTime(2000);
+        if(titleChooseRole()){
+            //sleepTime(2000);
+            clickButtonDoctor();
+            //sleepTime(2000);
+            if(checkMarkDoctorIsDisplayed()){
+                clickButtonContinue1();
+                //sleepTime(2000);
+                if(inputDataForRegistration()){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean forgotPassword() throws InterruptedException {
+        clickForgotPassword();
+        clickEmail();
+        setValueEmailForForgotPassword();
+        clickSubmit();
+        if(textMessage1()){
+            if(textMessage2ForgotPassword()){
+                //sleepTime(3000);
+                clickOk();
+                //sleepTime(2000);
+                if(mainPageIsDisplayed()){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean invalidNameAndSurnameRegistration(){
+        clickLinkSignUp();
+        if(titleChooseRole()){
+            clickButtonDoctor();
+            if(checkMarkDoctorIsDisplayed()) {
+                clickButtonContinue1();
+                clickInputName();
+                setValueName("Tom34");
+                clickInputSurname();
+                setValueSurname("Nelson34");
+                clickInputPassword();
+                hideKeyboard();
+                if(labelIncorrectName() && labelIncorrectSurname() && iconIncorrectNameIsDisplayed() &&iconIncorrectSurnameIsDisplayed()){
+                    return true;
+                }
+            }
+        }
+
         return false;
     }
 

@@ -52,23 +52,24 @@ public class HistoryPageDoctor extends LiveDemoPage{
     @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"detailed_report_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[5]/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.widget.TextView[2]\n")
     private AndroidElement buttonOpenStaminaScore;
 
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView[1]\n")
+    private AndroidElement titleNotRecords;
+
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView[2]\n")
+    private AndroidElement titleCanGo;
+
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView\n")
+    private AndroidElement linkRecordPage;
+
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"record_patients_screen\"]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.TextView")
+    private AndroidElement titleSelectPatient;
+
     public HistoryPageDoctor(AndroidDriver<AndroidElement> androidDriver) {
         super(androidDriver);
     }
 
     public void clickButtonHistoryDoctor(){
         buttonHistoryDoctor.click();
-    }
-
-    public boolean viewHistoryDoctorDemo() throws InterruptedException {
-        //Dimension size = androidDriver.manage().window().getSize();
-        verticalSwipe((int) (size.width / 2.0), (int) (size.height * 0.8), (int) (size.height * 0.2), 500);
-        sleepTime(2000);
-        if(scroll(recordsHistoryDateMonth() + " " + recordsHistoryDateDay())) {
-            //androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"" + recordsHistoryDateMonth() + " " + recordsHistoryDateDay() + "\").instance(0))");
-            return true;
-        }
-        return false;
     }
 
     public void clickButtonViewDataFirstPatient() throws InterruptedException {
@@ -82,16 +83,6 @@ public class HistoryPageDoctor extends LiveDemoPage{
     public boolean titlePatientFirstPage(){
         Assert.assertEquals(getTextTitlePatientFirstPage(), "Average QRS complex");
         return true;
-    }
-
-
-    public boolean viewHistoryDayFirstPatientDoctorDemo() throws InterruptedException {
-        clickButtonViewDataFirstPatient();
-        sleepTime(2000);
-        if(titlePatientFirstPage()){
-            return true;
-        }
-        return false;
     }
 
     public void clickButtonIncreaseSizeDiagram(){
@@ -118,38 +109,6 @@ public class HistoryPageDoctor extends LiveDemoPage{
         buttonClose.click();
     }
 
-    public boolean viewHistoryDiagramDoctorDemo() throws InterruptedException {
-        clickButtonIncreaseSizeDiagram();
-        sleepTime(2000);
-        clickButtonValueMMs();
-        clickButtonValueMMs12();
-        //sleepTime(2000);
-        clickButtonValueMMmv();
-        clickButtonValueMMmv50();
-        sleepTime(2000);
-        //Dimension size = androidDriver.manage().window().getSize();
-        horizontalSwipe((int) (size.width * 0.9), (int) (size.width * 0.1), (int) (size.height / 2.0), 500);
-        //sleepTime(2000);
-        clickButtonClose();
-        //sleepTime(2000);
-        if(titlePatientFirstPage()){
-            return true;
-        }
-        return false;
-    }
-
-    public boolean viewHistoryDayDoctorDemo() throws InterruptedException {
-        //Dimension size = androidDriver.manage().window().getSize();
-        verticalSwipe((int) (size.width / 2.0), (int) (size.height * 0.8), (int) (size.height * 0.2), 500);
-        sleepTime(3000);
-        horizontalSwipe((int) (size.width * 0.8), (int) (size.width * 0.2), (int) (size.height / 2.0), 500);
-        sleepTime(3000);
-        horizontalSwipe((int) (size.width * 0.8), (int) (size.width * 0.2), (int) (size.height / 2.0), 500);
-        sleepTime(3000);
-        verticalSwipe((int) (size.width / 2.0), (int) (size.height * 0.7), (int) (size.height * 0.2), 500);
-        return true;
-    }
-
     public void clickButtonViewDetails(){
         buttonViewDetails.click();
     }
@@ -174,47 +133,6 @@ public class HistoryPageDoctor extends LiveDemoPage{
     public void clickButtonOpenStaminaScore(){
         buttonOpenStaminaScore.click();
     }
-
-    public boolean viewHistoryDetailsDoctorDemo() throws InterruptedException {
-        clickButtonViewDetails();
-        //sleepTime(2000);
-        if(titleDetail()){
-            clickButtonOpenOverall();
-            //sleepTime(2000);
-            clickButtonOpenStaminaScore();
-            //sleepTime(2000);
-            verticalSwipe((int) (size.width / 2.0), (int) (size.height * 0.9), (int) (size.height * 0.2), 500);
-            //sleepTime(2000);
-            if(scroll("Detailed report")){
-                //sleepTime(2000);
-                clickComeBack();
-                //sleepTime(2000);
-                clickComeBack();
-                //sleepTime(2000);
-                if(titleHistoryDoctor()){
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-     /*@AndroidFindBy(xpath = "")
-    private AndroidElement;
-    @AndroidFindBy(id = "")
-    private AndroidElement;*/
-
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView[1]\n")
-    private AndroidElement titleNotRecords;
-
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView[2]\n")
-    private AndroidElement titleCanGo;
-
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView\n")
-    private AndroidElement linkRecordPage;
-
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"record_patients_screen\"]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.TextView")
-    private AndroidElement titleSelectPatient;
 
     public String getTextTitleNotRecords(){
         return titleNotRecords.getText();
@@ -254,6 +172,82 @@ public class HistoryPageDoctor extends LiveDemoPage{
     public boolean titleSelectPatient(){
         Assert.assertEquals(getTextTitleSelectPatient(), "Select patient");
         return true;
+    }
+
+    public boolean viewHistoryDoctorDemo() throws InterruptedException {
+        //Dimension size = androidDriver.manage().window().getSize();
+        verticalSwipe((int) (size.width / 2.0), (int) (size.height * 0.8), (int) (size.height * 0.2), 500);
+        sleepTime(2000);
+        if(scroll(recordsHistoryDateMonth() + " " + recordsHistoryDateDay())) {
+            //androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"" + recordsHistoryDateMonth() + " " + recordsHistoryDateDay() + "\").instance(0))");
+            return true;
+        }
+        return false;
+    }
+
+    public boolean viewHistoryDayFirstPatientDoctorDemo() throws InterruptedException {
+        clickButtonViewDataFirstPatient();
+        sleepTime(2000);
+        if(titlePatientFirstPage()){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean viewHistoryDiagramDoctorDemo() throws InterruptedException {
+        clickButtonIncreaseSizeDiagram();
+        sleepTime(2000);
+        clickButtonValueMMs();
+        clickButtonValueMMs12();
+        //sleepTime(2000);
+        clickButtonValueMMmv();
+        clickButtonValueMMmv50();
+        sleepTime(2000);
+        //Dimension size = androidDriver.manage().window().getSize();
+        horizontalSwipe((int) (size.width * 0.9), (int) (size.width * 0.1), (int) (size.height / 2.0), 500);
+        //sleepTime(2000);
+        clickButtonClose();
+        //sleepTime(2000);
+        if(titlePatientFirstPage()){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean viewHistoryDayDoctorDemo() throws InterruptedException {
+        //Dimension size = androidDriver.manage().window().getSize();
+        verticalSwipe((int) (size.width / 2.0), (int) (size.height * 0.8), (int) (size.height * 0.2), 500);
+        sleepTime(3000);
+        horizontalSwipe((int) (size.width * 0.8), (int) (size.width * 0.2), (int) (size.height / 2.0), 500);
+        sleepTime(3000);
+        horizontalSwipe((int) (size.width * 0.8), (int) (size.width * 0.2), (int) (size.height / 2.0), 500);
+        sleepTime(3000);
+        verticalSwipe((int) (size.width / 2.0), (int) (size.height * 0.7), (int) (size.height * 0.2), 500);
+        return true;
+    }
+
+    public boolean viewHistoryDetailsDoctorDemo() throws InterruptedException {
+        clickButtonViewDetails();
+        //sleepTime(2000);
+        if(titleDetail()){
+            clickButtonOpenOverall();
+            //sleepTime(2000);
+            clickButtonOpenStaminaScore();
+            //sleepTime(2000);
+            verticalSwipe((int) (size.width / 2.0), (int) (size.height * 0.9), (int) (size.height * 0.2), 500);
+            //sleepTime(2000);
+            if(scroll("Detailed report")){
+                //sleepTime(2000);
+                clickComeBack();
+                //sleepTime(2000);
+                clickComeBack();
+                //sleepTime(2000);
+                if(titleHistoryDoctor()){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public boolean viewHistoryDoctor() throws InterruptedException {

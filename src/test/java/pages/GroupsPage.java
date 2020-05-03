@@ -31,7 +31,26 @@ public class GroupsPage extends PatientsPage{
     @AndroidFindBy(id = "open_group_creating_button")
     private AndroidElement buttonCreateGroup;
 
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"expand_all_groups_button\"]/android.widget.TextView")
+    private AndroidElement buttonExpandAllGroup;
 
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"groups_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[4]/android.widget.TextView\n")
+    private AndroidElement buttonCollapseAllGroup;
+
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"create_group_modal\"]/android.widget.TextView[1]\n")
+    private AndroidElement titleNewGroup;
+
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"create_group_modal\"]/android.widget.TextView[2]\n")
+    private AndroidElement titleInstructionNewGroup;
+
+    @AndroidFindBy(id = "create_group_field")
+    private AndroidElement inputNewGroupName;
+
+    @AndroidFindBy(id = "create_group_button")
+    private AndroidElement buttonCreateNewGroup;
+
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"groups_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[2]\n")
+    private AndroidElement titleAddFirstGroup;
 
     public GroupsPage(AndroidDriver<AndroidElement> androidDriver) {
         super(androidDriver);
@@ -83,45 +102,6 @@ public class GroupsPage extends PatientsPage{
         buttonCreateGroup.click();
     }
 
-    public boolean viewGroupDoctorDemoForCreatGroup() throws InterruptedException {
-        clickButtonGroup();
-        if(titleGroup()) {
-            clickButtonCreateGroup();
-            //sleepTime(2000);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean viewGroupDoctorDemo() throws InterruptedException {
-        clickButtonGroup();
-        //sleepTime(2000);
-        if(titleGroup()){
-            clickButtonShowPatients();
-            sleepTime(2000);
-            tap(500, 900);
-            sleepTime(2000);
-            clickComeBack();
-            //sleepTime(2000);
-            clickButtonCollapseGroups();
-            clickInputGroupName();
-            setValueGroupName();
-            hideKeyboard();
-            if (iconNotFindGroupIsDisplayed() && titleNotFindGroup()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"expand_all_groups_button\"]/android.widget.TextView")
-    private AndroidElement buttonExpandAllGroup;
-
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"groups_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[4]/android.widget.TextView\n")
-    private AndroidElement buttonCollapseAllGroup;
-
     public void clickButtonExpandAllGroup(){
         buttonExpandAllGroup.click();
     }
@@ -129,39 +109,6 @@ public class GroupsPage extends PatientsPage{
     public void clickButtonCollapseAllGroup() {
         buttonCollapseAllGroup.click();
     }
-
-    public boolean viewGroupDoctor() throws InterruptedException {
-        clickButtonGroup();
-        //sleepTime(2000);
-        if(titleGroup()){
-            clickButtonExpandAllGroup();
-            verticalSwipe(700, 1450, 400, 500);
-            sleepTime(2000);
-            verticalSwipe(700, 300, 1450, 500);
-            sleepTime(2000);
-            clickButtonCollapseAllGroup();
-            return true;
-        }
-        return false;
-    }
-
-     /*@AndroidFindBy(xpath = "")
-    private AndroidElement;
-    @AndroidFindBy(id = "")
-    private AndroidElement;*/
-
-
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"create_group_modal\"]/android.widget.TextView[1]\n")
-    private AndroidElement titleNewGroup;
-
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"create_group_modal\"]/android.widget.TextView[2]\n")
-    private AndroidElement titleInstructionNewGroup;
-
-    @AndroidFindBy(id = "create_group_field")
-    private AndroidElement inputNewGroupName;
-
-    @AndroidFindBy(id = "create_group_button")
-    private AndroidElement buttonCreateNewGroup;
 
     public String getTextTitleNewGroup(){
         return titleNewGroup.getText();
@@ -193,9 +140,68 @@ public class GroupsPage extends PatientsPage{
         buttonCreateNewGroup.click();
     }
 
+    public boolean buttonCreateGroupIsDisplayed(){
+        return buttonCreateGroup.isDisplayed();
+    }
+
+    public String getTextTitleAddFirstGroup(){
+        return titleAddFirstGroup.getText();
+    }
+
+    public boolean titleAddFirstGroup(){
+        Assert.assertEquals(getTextTitleAddFirstGroup(), "to create your first group");
+        return true;
+    }
+
+    public boolean viewGroupDoctorDemoForCreatGroup() throws InterruptedException {
+        clickButtonGroup();
+        if(titleGroup()) {
+            clickButtonCreateGroup();
+            //sleepTime(2000);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean viewGroupDoctorDemo() throws InterruptedException {
+        clickButtonGroup();
+        //sleepTime(2000);
+        if(titleGroup()){
+            clickButtonShowPatients();
+            sleepTime(2000);
+            tap(500, 900);
+            sleepTime(2000);
+            clickComeBack();
+            //sleepTime(2000);
+            clickButtonCollapseGroups();
+            clickInputGroupName();
+            setValueGroupName();
+            hideKeyboard();
+            if (iconNotFindGroupIsDisplayed() && titleNotFindGroup()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean viewGroupDoctor() throws InterruptedException {
+        clickButtonGroup();
+        //sleepTime(2000);
+        if(titleGroup()){
+            clickButtonExpandAllGroup();
+            verticalSwipe(700, 1450, 400, 500);
+            sleepTime(2000);
+            verticalSwipe(700, 300, 1450, 500);
+            sleepTime(2000);
+            clickButtonCollapseAllGroup();
+            return true;
+        }
+        return false;
+    }
+
     public boolean createNewGroupDoctor() throws InterruptedException {
         clickButtonCreateGroup();
-        //sleepTime(2000);
+        sleepTime(2000);
         if(titleNewGroup() && titleInstructionNewGroup()){
             clickInputNewGroupName();
             setValueInputNewGroupName(newGroupName());
@@ -214,26 +220,10 @@ public class GroupsPage extends PatientsPage{
         return false;
     }
 
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"groups_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[2]\n")
-    private AndroidElement titleAddFirstGroup;
-
-    public boolean buttonCreateGroupIsDisplayed(){
-        return buttonCreateGroup.isDisplayed();
-    }
-
-    public String getTextTitleAddFirstGroup(){
-        return titleAddFirstGroup.getText();
-    }
-
-    public boolean titleAddFirstGroup(){
-        Assert.assertEquals(getTextTitleAddFirstGroup(), "to create your first group");
-        return true;
-    }
-
     public boolean viewGroupsWOPDoctor() throws InterruptedException {
         clickButtonGroup();
-        //sleepTime(2000);
-        if(titleGroup() && buttonCreateGroupIsDisplayed() && linkPress() && titleAddFirstGroup()){
+        sleepTime(5000);
+        if(titleGroup() && buttonCreateGroupIsDisplayed() /*&& linkPress() && titleAddFirstGroup()*/){
             return true;
         }
         return false;

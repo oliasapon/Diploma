@@ -52,6 +52,24 @@ public class PatientsPage extends HistoryPageDoctor{
     @AndroidFindBy(id = "create_patient_button")
     private AndroidElement buttonAddNewPatient;
 
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"patient_alan\"]/android.view.ViewGroup\n")
+    private AndroidElement buttonFirstPatient;
+
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"patient_edit_button\"]/android.widget.TextView")
+    private AndroidElement buttonEditPatient;
+
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"edit_user_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView\n")
+    private AndroidElement titleEditInformation;
+
+    @AndroidFindBy(id = "male_pick")
+    private AndroidElement buttonMale;
+
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"add_patient_text\"]/android.widget.TextView")
+    private AndroidElement linkPress;
+
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"patients_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView\n")
+    private AndroidElement titleAddFirstPatient;
+
     public PatientsPage(AndroidDriver<AndroidElement> androidDriver) {
         super(androidDriver);
     }
@@ -81,22 +99,6 @@ public class PatientsPage extends HistoryPageDoctor{
         return true;
     }
 
-    public boolean viewPatientsDoctorDemo() throws InterruptedException {
-        clickButtonPatients();
-        clickButtonFilter();
-        clickButtonFemale();
-        //sleepTime(2000);
-        horizontalSwipe(900, 600, 850, 1000);
-        clickButtonChooseGroup();
-        clickButtonFilter();
-        if(iconGroupT2DM()){
-            return true;
-        }
-        return false;
-    }
-
-
-
     public void clickButtonChoosePatient(){
         buttonChoosePatient.click();
     }
@@ -109,24 +111,6 @@ public class PatientsPage extends HistoryPageDoctor{
         buttonAbout.click();
     }
 
-    public boolean viewOnePatientDoctorDemo() throws InterruptedException {
-        clickButtonChoosePatient();
-        //sleepTime(2000);
-        verticalSwipe(500, 1700, 890, 1000);
-        clickButtonChart();
-        //sleepTime(2000);
-        horizontalSwipe(100, 900, 1200, 1000);
-        if(scroll("Flattening of T waves")){
-            clickButtonAbout();
-            clickComeBack();
-            //sleepTime(2000);
-            return true;
-        }
-        return false;
-    }
-
-
-
     public String getTextTitlePatients(){
         return titlePatients.getText();
     }
@@ -137,21 +121,8 @@ public class PatientsPage extends HistoryPageDoctor{
     }
 
     public boolean buttonFilterIsDisplayed(){
-       return buttonFilter.isDisplayed();
+        return buttonFilter.isDisplayed();
     }
-
-    public boolean viewPatientsDoctor() throws InterruptedException {
-        clickButtonPatients();
-        if(titlePatients() && buttonFilterIsDisplayed()){
-            clickButtonFilter();
-            sleepTime(2000);
-            clickButtonFilter();
-            return true;
-        }
-        return false;
-    }
-
-
 
     public void clickButtonCreatePatient(){
         buttonCreatePatient.click();
@@ -194,6 +165,90 @@ public class PatientsPage extends HistoryPageDoctor{
         buttonAddNewPatient.click();
     }
 
+    public void clickButtonFirstPatient(){
+        buttonFirstPatient.click();
+    }
+
+    public void clickButtonEditPatient(){
+        buttonEditPatient.click();
+    }
+
+    public String getTextTitleEditInformation(){
+        return titleEditInformation.getText();
+    }
+
+    public boolean titleEditInformation(){
+        Assert.assertEquals(getTextTitleEditInformation(), "Edit information");
+        return true;
+    }
+
+    public void clickButtonMale(){
+        buttonMale.click();
+    }
+
+    public String getTextLinkPress(){
+        return linkPress.getText();
+    }
+
+    public boolean linkPress(){
+        Assert.assertEquals(getTextLinkPress(), "Press ");
+        return true;
+    }
+
+    public String getTextTitleAddFirstPatient(){
+        return titleAddFirstPatient.getText();
+    }
+
+    public boolean titleAddFirstPatient(){
+        Assert.assertEquals(getTextTitleAddFirstPatient(), "to add your first patient");
+        return true;
+    }
+
+    public void clickLinkPress(){
+        linkPress.click();
+    }
+
+    public boolean viewPatientsDoctorDemo() throws InterruptedException {
+        clickButtonPatients();
+        clickButtonFilter();
+        clickButtonFemale();
+        //sleepTime(2000);
+        horizontalSwipe(900, 600, 850, 1000);
+        clickButtonChooseGroup();
+        clickButtonFilter();
+        if(iconGroupT2DM()){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean viewOnePatientDoctorDemo() throws InterruptedException {
+        clickButtonChoosePatient();
+        //sleepTime(2000);
+        verticalSwipe(500, 1700, 890, 1000);
+        clickButtonChart();
+        //sleepTime(2000);
+        horizontalSwipe(100, 900, 1200, 1000);
+        if(scroll("Flattening of T waves")){
+            clickButtonAbout();
+            clickComeBack();
+            //sleepTime(2000);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean viewPatientsDoctor() throws InterruptedException {
+        clickButtonPatients();
+        if(titlePatients() && buttonFilterIsDisplayed()){
+            clickButtonFilter();
+            sleepTime(2000);
+            clickButtonFilter();
+            return true;
+        }
+        return false;
+    }
+
     public boolean createNewPatientDoctor() throws InterruptedException {
         clickButtonCreatePatient();
         sleepTime(2000);
@@ -223,40 +278,6 @@ public class PatientsPage extends HistoryPageDoctor{
         return false;
     }
 
-
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"patient_alan\"]/android.view.ViewGroup\n")
-    private AndroidElement buttonFirstPatient;
-
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"patient_edit_button\"]/android.widget.TextView")
-    private AndroidElement buttonEditPatient;
-
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"edit_user_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView\n")
-    private AndroidElement titleEditInformation;
-
-    @AndroidFindBy(id = "male_pick")
-    private AndroidElement buttonMale;
-
-    public void clickButtonFirstPatient(){
-        buttonFirstPatient.click();
-    }
-
-    public void clickButtonEditPatient(){
-        buttonEditPatient.click();
-    }
-
-    public String getTextTitleEditInformation(){
-        return titleEditInformation.getText();
-    }
-
-    public boolean titleEditInformation(){
-        Assert.assertEquals(getTextTitleEditInformation(), "Edit information");
-        return true;
-    }
-
-    public void clickButtonMale(){
-        buttonMale.click();
-    }
-
     public boolean editPatientDoctor() throws InterruptedException {
         clickButtonFirstPatient();
         //sleepTime(2000);
@@ -266,43 +287,13 @@ public class PatientsPage extends HistoryPageDoctor{
             clickButtonMale();
             //sleepTime(2000);
             clickButtonAddNewPatient();
-            //sleepTime(2000);
+            sleepTime(2000);
             clickComeBack();
-            //sleepTime(2000);
+            sleepTime(2000);
             return true;
         }
         return false;
     }
-
-
-    /*@AndroidFindBy(xpath = "")
-  private AndroidElement;
-  @AndroidFindBy(id = "")
-  private AndroidElement;*/
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"add_patient_text\"]/android.widget.TextView\n")
-    private AndroidElement linkPress;
-
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"patients_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView\n")
-    private AndroidElement titleAddFirstPatient;
-
-    public String getTextLinkPress(){
-        return linkPress.getText();
-    }
-
-    public boolean linkPress(){
-        Assert.assertEquals(getTextLinkPress(), "Press ");
-        return true;
-    }
-
-    public String getTextTitleAddFirstPatient(){
-        return titleAddFirstPatient.getText();
-    }
-
-    public boolean titleAddFirstPatient(){
-        Assert.assertEquals(getTextTitleAddFirstPatient(), "to add your first patient");
-        return true;
-    }
-
 
     public boolean viewPatientsWOPDoctor() throws InterruptedException {
         clickButtonPatients();
@@ -311,10 +302,6 @@ public class PatientsPage extends HistoryPageDoctor{
             return true;
         }
         return false;
-    }
-
-    public void clickLinkPress(){
-        linkPress.click();
     }
 
     public boolean pressAddPatientWOPDoctor() throws InterruptedException {

@@ -1,13 +1,9 @@
 package pages;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.testng.Assert;
-
-import java.net.MalformedURLException;
 
 public class SignInPage extends OpenPage{
 
@@ -29,10 +25,24 @@ public class SignInPage extends OpenPage{
     @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.widget.TextView\n")
     private AndroidElement titleFirstPageDoctor;
 
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.TextView[1]\n")
+    private AndroidElement iconStatusEmail;
+
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.TextView[2]\n")
+    private AndroidElement iconErrorPassword;
+
+    @AndroidFindBy(id = "error_text_label")
+    private AndroidElement labelInvalidEmail;
+
+    @AndroidFindBy(xpath = "(//android.widget.TextView[@content-desc=\"error_text_label\"])[1]\n")
+    private AndroidElement labelRequiredEmail;
+
+    @AndroidFindBy(xpath = "(//android.widget.TextView[@content-desc=\"error_text_label\"])[2]\n")
+    private AndroidElement labelRequiredPassword;
+
     public SignInPage(AndroidDriver<AndroidElement> androidDriver) {
         super(androidDriver);
     }
-
 
     public void clickInputEmail(){
         inputEmail.click();
@@ -80,7 +90,7 @@ public class SignInPage extends OpenPage{
         clickShowPassword();
         hideKeyboard();
         clickButtonSignIn();
-        //sleepTime(2000);
+        sleepTime(4000);
     }
 
     public boolean messagePageUser(){
@@ -92,72 +102,6 @@ public class SignInPage extends OpenPage{
         Assert.assertEquals(getTextTitleFirstPageDoctor(), "Records history");
         return true;
     }
-
-    public boolean signInUserWithDiabetesFirstType() throws InterruptedException {
-        boolean status = false;
-        signIn("homka6745@gmail.com", "lovesport");
-        if(messagePageUser()){
-            status = true;
-        }
-        return status;
-    }
-
-    public boolean signInUserWithDiabetesSecondType() throws InterruptedException {
-        boolean status = false;
-        signIn("jin.tok@gmail.com", "jinnn888");
-        sleepTime(3000);
-        if(messagePageUser()){
-            status = true;
-        }
-        return status;
-    }
-
-    public boolean signInUserWithout() throws InterruptedException {
-        boolean status = false;
-        signIn("olia.sapon@gmail.com", "12344321");
-        if(messagePageUser()){
-            status = true;
-        }
-        return status;
-    }
-
-    public boolean signInDoctorWithPatients() throws InterruptedException {
-        boolean status = false;
-        signIn("aria34@gmail.com", "doctorAria34");
-        if(messagePageDoctor()){
-            status = true;
-        }
-        return status;
-    }
-
-    public boolean signInDoctorWithoutPatients() throws InterruptedException {
-        boolean status = false;
-        signIn("nick.dobr87@gmail.com", "dobr1987");
-        if(messagePageDoctor()){
-            status = true;
-        }
-        return status;
-    }
-
-     /*@AndroidFindBy(xpath = "")
-    private AndroidElement;
-    @AndroidFindBy(id = "")
-    private AndroidElement;*/
-
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.TextView[1]\n")
-    private AndroidElement iconStatusEmail;
-
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"sign_in_screen\"]/android.view.ViewGroup/android.widget.TextView[2]\n")
-    private AndroidElement iconErrorPassword;
-
-    @AndroidFindBy(id = "error_text_label")
-    private AndroidElement labelInvalidEmail;
-
-    @AndroidFindBy(xpath = "(//android.widget.TextView[@content-desc=\"error_text_label\"])[1]\n")
-    private AndroidElement labelRequiredEmail;
-
-    @AndroidFindBy(xpath = "(//android.widget.TextView[@content-desc=\"error_text_label\"])[2]\n")
-    private AndroidElement labelRequiredPassword;
 
     public boolean iconStatusEmailIsDisplayed() {
         return iconStatusEmail.isDisplayed();
@@ -198,6 +142,47 @@ public class SignInPage extends OpenPage{
     public boolean labelIncorrectPasswordOrEmail(){
         Assert.assertEquals(getTextLabelInvalidEmail(), "Email or password is incorrect");
         return true;
+    }
+
+    public boolean signInUserWithDiabetesFirstType() throws InterruptedException {
+        signIn("homka6745@gmail.com", "lovesport");
+        if(messagePageUser()){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean signInUserWithDiabetesSecondType() throws InterruptedException {
+        signIn("jin.tok@gmail.com", "jinnn888");
+        sleepTime(3000);
+        if(messagePageUser()){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean signInUserWithout() throws InterruptedException {
+        signIn("olia.sapon@gmail.com", "12344321");
+        if(messagePageUser()){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean signInDoctorWithPatients() throws InterruptedException {
+        signIn("aria34@gmail.com", "doctorAria34");
+        if(messagePageDoctor()){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean signInDoctorWithoutPatients() throws InterruptedException {
+        signIn("nick.dobr87@gmail.com", "dobr1987");
+        if(messagePageDoctor()){
+            return true;
+        }
+        return false;
     }
 
     public boolean signInRequiredEmailAndPassword() throws InterruptedException{

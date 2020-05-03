@@ -41,11 +41,6 @@ public class LiveDemoPage extends SignInPage{
     @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"records_history_screen\"]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView\n")
     private AndroidElement titleDayTodayDoctor;
 
-    /*@AndroidFindBy(xpath = "")
-    private AndroidElement;
-    @AndroidFindBy(id = "")
-    private AndroidElement;*/
-
     public LiveDemoPage(AndroidDriver<AndroidElement> androidDriver) {
         super(androidDriver);
     }
@@ -75,17 +70,6 @@ public class LiveDemoPage extends SignInPage{
         return iconDashboardWeek.isDisplayed();
     }
 
-    public boolean openDemoUser() throws InterruptedException {
-        boolean status = false;
-        clickButtonLiveDemo();
-        clickButtonUser();
-        sleepTime(3000);
-        if(iconLiveDemoIsDisplayed() && titleDashboard() && iconDashboardWeekIsDisplayed()){
-            status = true;
-        }
-        return status;
-    }
-
     public void scrollDashboardDemoUser() throws InterruptedException {
         androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"" + "Energy score" + "\").instance(0))");
         sleepTime(2000);
@@ -103,19 +87,6 @@ public class LiveDemoPage extends SignInPage{
 
     public void clickButtonYear(){
         buttonYear.click();
-    }
-
-    public boolean demoUserViewDashboard() throws InterruptedException {
-        scrollDashboardDemoUser();
-        clickButtonMonth();
-        sleepTime(3000);
-        scrollDashboardDemoUser();
-        horizontalSwipeForDashboardDemoUser();
-        clickButtonYear();
-        sleepTime(3000);
-        scrollDashboardDemoUser();
-        horizontalSwipeForDashboardDemoUser();
-        return true;
     }
 
     public void clickButtonDoctor(){
@@ -144,18 +115,37 @@ public class LiveDemoPage extends SignInPage{
         return true;
     }
 
+    public boolean openDemoUser() throws InterruptedException {
+        clickButtonLiveDemo();
+        clickButtonUser();
+        sleepTime(3000);
+        if(iconLiveDemoIsDisplayed() && titleDashboard() && iconDashboardWeekIsDisplayed()){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean demoUserViewDashboard() throws InterruptedException {
+        scrollDashboardDemoUser();
+        clickButtonMonth();
+        sleepTime(3000);
+        scrollDashboardDemoUser();
+        horizontalSwipeForDashboardDemoUser();
+        clickButtonYear();
+        sleepTime(3000);
+        scrollDashboardDemoUser();
+        horizontalSwipeForDashboardDemoUser();
+        return true;
+    }
+
     public boolean openDemoDoctor() throws InterruptedException {
-        boolean status = false;
         clickButtonLiveDemo();
         clickButtonDoctor();
         sleepTime(3000);
         if(iconLiveDemoDoctorIsDisplayed() && titleHistoryDoctor() && titleDayTodayDoctor()){
-            status = true;
+            return true;
         }
-        return status;
+        return false;
     }
-
-
-
 
 }

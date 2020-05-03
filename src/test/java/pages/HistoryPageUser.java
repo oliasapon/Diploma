@@ -1,17 +1,10 @@
 package pages;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.touch.offset.PointOption;
 import org.testng.Assert;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Locale;
 
 public class HistoryPageUser extends SignInPage{
 
@@ -38,10 +31,6 @@ public class HistoryPageUser extends SignInPage{
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.TextView\n")
     private AndroidElement messageD2;
-
-    public HistoryPageUser(AndroidDriver<AndroidElement> androidDriver) {
-        super(androidDriver);
-    }
 
     @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"patient_history_screen\"]/android.widget.TextView\n")
     private AndroidElement titleHistory;
@@ -70,12 +59,21 @@ public class HistoryPageUser extends SignInPage{
     @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"patient_dashboard_screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[2]/android.widget.TextView\n")
     private AndroidElement buttonLetsStarted;
 
-    /*@AndroidFindBy(xpath = "")
-    private AndroidElement;
-    @AndroidFindBy(id = "")
-    private AndroidElement;*/
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"patient_history_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.ImageView\n")
+    private AndroidElement iconHistoryWithoutRecords;
+
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"patient_history_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView")
+    private AndroidElement titleHistoryWithoutRecords;
+
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"patient_history_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView")
+    private AndroidElement buttonLetsStarted2;
 
 
+
+
+    public HistoryPageUser(AndroidDriver<AndroidElement> androidDriver) {
+        super(androidDriver);
+    }
 
     public void clickButtonHistory(){
         buttonHistory.click();
@@ -146,53 +144,6 @@ public class HistoryPageUser extends SignInPage{
         return true;
     }
 
-    public boolean viewHistoryUserWithDT1() throws InterruptedException {
-        boolean status = false;
-        clickButtonHistory();
-        //sleepTime(2000);
-        if(iconDiabetesFirstTypeIsDisplayed()) {
-            clickButtonIconD1();
-            //sleepTime(2000);
-            if(messageD1() && messageInfoWithD()){
-                action();
-                //sleepTime(2000);
-                status = true;
-            }
-        }
-        return status;
-    }
-
-    public boolean viewHistoryUserWithDT2() throws InterruptedException {
-        boolean status = false;
-        clickButtonHistory();
-        //sleepTime(2000);
-        if(iconDiabetesSecondTypeIsDisplayed()) {
-            clickButtonIconD2();
-            //sleepTime(2000);
-            if(messageD2() && messageInfoWithD()){
-                action();
-                //sleepTime(2000);
-                status = true;
-            }
-        }
-        return status;
-    }
-
-    public boolean  viewHistoryUserDemo() throws InterruptedException {
-        boolean status = false;
-        clickButtonHistory();
-        sleepTime(2000);
-        if(titleHistory() && titleDayToday()) {
-            sleepTime(2000);
-            verticalSwipe(400, 1200, 400, 500);
-            sleepTime(2000);
-            scroll(recordsHistoryDateMonth() + " " + recordsHistoryDateDay());
-            //verticalSwipe(400, 400, 1300, 500);
-            status = true;
-        }
-        return status;
-    }
-
     public void clickButtonDayToday(){
         buttonDayToday.click();
     }
@@ -204,21 +155,6 @@ public class HistoryPageUser extends SignInPage{
     public boolean titleViewDay(){
         Assert.assertEquals(getTextTitleViewDay(), "Result");
         return true;
-    }
-
-    public boolean  viewDayHistoryUserDemo() throws InterruptedException {
-        boolean status = false;
-        clickButtonDayToday();
-        sleepTime(2000);
-        if(titleViewDay()) {
-            sleepTime(2000);
-            clickComeBack();
-            sleepTime(2000);
-            if(titleHistory()) {
-                status = true;
-            }
-        }
-        return status;
     }
 
     public void clickButtonDashboard(){
@@ -251,35 +187,6 @@ public class HistoryPageUser extends SignInPage{
         buttonLetsStarted.click();
     }
 
-    public boolean  viewDashboardUser() throws InterruptedException {
-        clickButtonDashboard();
-        //sleepTime(2000);
-        if(titleDashboard() && iconDashboardWithoutRecordIsDisplayed() && titleDashboardWithoutRecord()){
-            clickButtonLetsStarted();
-            //sleepTime(2000);
-            if(messagePageUser()){
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"patient_history_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.ImageView\n")
-    private AndroidElement iconHistoryWithoutRecords;
-
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"patient_history_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView")
-    private AndroidElement titleHistoryWithoutRecords;
-
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"patient_history_screen\"]/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView")
-    private AndroidElement buttonLetsStarted2;
-
-
-    /*@AndroidFindBy(xpath = "")
-    private AndroidElement;
-    @AndroidFindBy(id = "")
-    private AndroidElement;*/
-
     public boolean iconHistoryWithoutRecordsIsDisplayed() {
         return iconHistoryWithoutRecords.isDisplayed();
     }
@@ -295,6 +202,77 @@ public class HistoryPageUser extends SignInPage{
 
     public void clickButtonLetsStarted2(){
         buttonLetsStarted2.click();
+    }
+
+    public boolean viewHistoryUserWithDT1() throws InterruptedException {
+        clickButtonHistory();
+        //sleepTime(2000);
+        if(iconDiabetesFirstTypeIsDisplayed()) {
+            clickButtonIconD1();
+            //sleepTime(2000);
+            if(messageD1() && messageInfoWithD()){
+                action();
+                //sleepTime(2000);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean viewHistoryUserWithDT2() throws InterruptedException {
+        clickButtonHistory();
+        //sleepTime(2000);
+        if(iconDiabetesSecondTypeIsDisplayed()) {
+            clickButtonIconD2();
+            //sleepTime(2000);
+            if(messageD2() && messageInfoWithD()){
+                action();
+                //sleepTime(2000);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean  viewHistoryUserDemo() throws InterruptedException {
+        clickButtonHistory();
+        sleepTime(2000);
+        if(titleHistory() && titleDayToday()) {
+            sleepTime(2000);
+            verticalSwipe(400, 1200, 400, 500);
+            sleepTime(2000);
+            scroll(recordsHistoryDateMonth() + " " + recordsHistoryDateDay());
+            //verticalSwipe(400, 400, 1300, 500);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean  viewDayHistoryUserDemo() throws InterruptedException {
+        clickButtonDayToday();
+        sleepTime(2000);
+        if(titleViewDay()) {
+            sleepTime(2000);
+            clickComeBack();
+            sleepTime(2000);
+            if(titleHistory()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean  viewDashboardUser() throws InterruptedException {
+        clickButtonDashboard();
+        //sleepTime(2000);
+        if(titleDashboard() && iconDashboardWithoutRecordIsDisplayed() && titleDashboardWithoutRecord()){
+            clickButtonLetsStarted();
+            //sleepTime(2000);
+            if(messagePageUser()){
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean  viewHistoryUser() throws InterruptedException {

@@ -23,11 +23,6 @@ public class MyDoctorPage extends DriverPage {
     @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"my_doctor_screen\"]/android.view.ViewGroup[1]/android.view.ViewGroup/android.widget.TextView[2]")
     private AndroidElement titleConstruction;
 
-     /*@AndroidFindBy(xpath = "")
-    private AndroidElement;
-    @AndroidFindBy(id = "")
-    private AndroidElement;*/
-
     public MyDoctorPage(AndroidDriver<AndroidElement> androidDriver) {
         super(androidDriver);
     }
@@ -63,12 +58,11 @@ public class MyDoctorPage extends DriverPage {
     }
 
     public boolean viewMyDoctorUserDemo(){
-        boolean status = false;
         clickButtonMyDoctor();
         if(titleComingSoonIsDisplayed() && iconDoctorIsDisplayed() && titleDoctor() && titleConstruction()) {
-            status = true;
+            return true;
         }
-        return status;
+        return false;
     }
 
 }
