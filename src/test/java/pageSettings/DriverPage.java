@@ -10,24 +10,5 @@ public class DriverPage {
     public DriverPage(AndroidDriver<AndroidElement> androidDriver){
         this.androidDriver = androidDriver;
         PageFactory.initElements(new AppiumFieldDecorator(androidDriver), this);
-    }
-
-
-
-    /*public AppiumDriver<MobileElement> androidDriver;
-
-    public DriverPage(AppiumDriver<MobileElement> androidDriver){
-        this.androidDriver = androidDriver;
-        PageFactory.initElements(new AppiumFieldDecorator(androidDriver), this);
-    }*/
-
-
-
-    /*public AppiumDriver<MobileElement> driver;
-
-    public BasePOMpage(AppiumDriver<MobileElement> driver) {
-        this.driver = driver;
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-    }*/
-
+    } 
 }
